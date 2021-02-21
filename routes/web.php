@@ -18,5 +18,10 @@ Route::get('/', function () {
 });
 
 
+route::get('/peminjamanadmin','ControllerPeminjaman@readPeminjaman')->name('ReadAllPeminjaman');
+route::get('/layananadmin','ControllerLayanan@readLayanan');
+route::get('/beritaadmin','ControllerBerita@readberita');
+route::get('/bidangadmin','ControllerBidang@readbidang');
+route::get('/laboratoriumadmin','ControllerLabolatorium@readLab');
 
-route::get('/admin','ControllerPeminjaman@readPeminjaman')->name('ReadAllPeminjaman');
+

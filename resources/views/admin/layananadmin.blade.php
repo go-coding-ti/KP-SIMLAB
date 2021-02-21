@@ -15,23 +15,20 @@
           <!-- Copy drisini -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Daftar Peminjaman</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Daftar Layanan</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
+              <a class= "btn btn-success text-white" href="xxx"><i class="fas fa-plus"></i> Tambah Layanan</a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>No.</th>
-                      <th>Nama</th>
-                      <th>Layanan</th>
-                      <th>Tanggal Peminjaman</th>
-                      <th>Tanggal Selesai</th>
-                      <th>Jumlah</th>
-                      <th>Harga Total</th>
-                      <th>Status</th>
+                      <th>Nama Layanan</th>
+                      <th>Satuan</th>
+                      <th>Harga</th>
+                      <th>Bidang</th>
                       <th>Keterangan</th>
-                      
                     </tr>
                   </thead>
                   <!-- <tfoot>
@@ -46,17 +43,14 @@
                     </tr>
                   </tfoot> -->
                   <tbody>
-                    @foreach($data as $d => $doto)
+                    @foreach($layanan as $layanan => $lay)
                         <tr>
-                            <td style="text-align:center;">{{$d + 1}}</td>
-                            <td>{{$doto->id_peminjam}}</td>
-                            <td>{{$doto->id_layanan}}</td>
-                            <td style="text-align:center;">{{$doto->tgl_pinjam}}</td>
-                            <td style="text-align:center;">{{$doto->tgl_selesai}}</td>
-                            <td style="text-align:center;">{{$doto->jumlah}}</td>
-                            <td> RP. {{$doto->total_harga}}</td>
-                            <td>{{$doto->keterangan}}</td>
-                            <td>{{$doto->alasan}}</td>
+                            <td>{{$layanan + 1}}</td>
+                            <td>{{$lay->nama_layanan}}</td>
+                            <td>{{$lay->satuan}}</td>
+                            <td> Rp. {{$lay->harga}}</td>
+                            <td>{{$lay->id_bidang}}</td>
+                            <td>{{$lay->keterangan}}</td>
                         </tr>
                     @endforeach
                   </tbody>
