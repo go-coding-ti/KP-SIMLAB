@@ -21,10 +21,10 @@ Route::get('/', function () {
 route::get('/peminjamanadmin','ControllerPeminjaman@readPeminjaman')->name('ReadAllPeminjaman');
 // layanan
 route::get('/layananadmin','ControllerLayanan@readLayanan');
-Route::post('/layananadmin/create','ControllerLayanan@create');
+Route::post('/layananadmin/create','ControllerLayanan@createLayanan');
 Route::get('/layananadmin/{id}/edit','ControllerLayanan@edit');
-Route::post('/layananadmin/{id}/update','ControllerLayanan@update');
-Route::get('/layananadmin/{id}/delete','ControllerLayanan@delete');
+Route::post('/layananadmin/update','ControllerLayanan@updateLayanan');
+Route::get('/layananadmin/{id}/delete','ControllerLayanan@deleteLayanan');
 // berita
 route::get('/beritaadmin','ControllerBerita@readberita');
 // bidang

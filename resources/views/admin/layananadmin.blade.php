@@ -51,44 +51,19 @@
                     </tr>
                   </tfoot> -->
                   <tbody>
-                    @foreach($layanan as $layanan => $lay)
+                    @foreach($layanan as $layanan1)
                         <tr>
-                            <td>{{$layanan + 1}}</td>
-                            <td>{{$lay->nama_layanan}}</td>
-                            <td>{{$lay->satuan}}</td>
-                            <td> Rp. {{$lay->harga}}</td>
-                            <td>{{$lay->id_bidang}}</td>
-                            <td>{{$lay->keterangan}}</td>
+                            <td>{{$layanan1->id_layanan}}</td>
+                            <td>{{$layanan1->nama_layanan}}</td>
+                            <td>{{$layanan1->satuan}}</td>
+                            <td> Rp. {{$layanan1->harga}}</td>
+                            <td>{{$layanan1->id_bidang}}</td>
+                            <td>{{$layanan1->keterangan}}</td>
                             <td>
                               <!-- Edit -->
-                              <a href="xx" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update{{$layanan1->id_layanan}}"><i class="fa fa-edit"></i></button>
                               <!--Delete -->
-                              <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
-                              <!-- Modal Delete -->
-                              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Edit Angkatan</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="" method="POST">
-                                      <div class="modal-body">
-                                      {{ csrf_field() }}
-                                      {{ method_field('delete') }}
-                                      Apakah Anda yakin menghapus pengumuman?</b>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
-                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- End Modal Delete -->
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{$layanan1->id_layanan}}"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -98,6 +73,71 @@
             </div>
           </div>
           <!-- smpe sini -->
+            @foreach($layanan as $layananModal)
+                <!-- Modal Delete -->
+                    <div class="modal fade" id="delete{{$layananModal->id_layanan}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Edit Angkatan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin menghapus pengumuman?</b>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+                                    <a href="layananadmin/{{$layananModal->id_layanan}}/delete"><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal Delete -->
+                    <div class="modal fade" id="update{{$layananModal->id_layanan}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Masukkan Data Layanan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/layananadmin/update" method="POST">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="id_layanan" value="{{$layananModal->id_layanan}}">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold text-dark">Nama Layanan</label>
+                                            <input type="text" class="form-control" id="nama_layanan" name="nama_layanan" value="{{$layananModal->nama_layanan}}" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold text-dark">Satuan</label>
+                                            <input type="text" class="form-control" id="satuan" name="satuan" value="{{$layananModal->satuan}}" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold text-dark">Harga</label>
+                                            <input type="text" class="form-control" id="harga" name= "harga" value="{{$layananModal->harga}}" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_bidang" class="font-weight-bold text-dark">Bidang</label>
+                                            <input type="text" class="form-control" id="id_bidang" name="id_bidang" value="{{$layananModal->id_bidang}}" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="keterangan" class="font-weight-bold text-dark">Keterangan</label>
+                                            <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{$layananModal->keterangan}}" placeholder="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-success">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            @endforeach
           <!-- Modal -->
 	        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	          <div class="modal-dialog" role="document">
@@ -109,38 +149,38 @@
 	                    </button>
 	                </div>
 	                <div class="modal-body">
-	      	          <form action="/layananadmin/create" method="POST" class="needs-validation" novalidate>
+	      	          <form action="/layananadmin/create" method="POST">
                       {{csrf_field()}}
                       <div class="form-group">
                         <label class="font-weight-bold text-dark">Nama Layanan</label>
-                        <input type="text" class="form-control" id="NamaLayanan" placeholder="">
+                        <input type="text" class="form-control" id="nama_layanan" name="nama_layanan" placeholder="">
                       </div>
                       <div class="form-group">
                         <label class="font-weight-bold text-dark">Satuan</label>
-                        <input type="text" class="form-control" id="Satuan" placeholder="">
+                        <input type="text" class="form-control" id="satuan" name="satuan" placeholder="">
                       </div>
                       <div class="form-group">
                         <label class="font-weight-bold text-dark">Harga</label>
-                        <input type="text" class="form-control" id="Harga" placeholder="">
+                        <input type="text" class="form-control" id="harga" name= "harga" placeholder="">
                       </div>
                       <div class="form-group">
-                        <label for="gelardepan" class="font-weight-bold text-dark">Bidang</label>
-                        <input type="text" class="form-control" id="Bidang" placeholder="">
+                        <label for="id_bidang" class="font-weight-bold text-dark">Bidang</label>
+                        <input type="text" class="form-control" id="id_bidang" name="id_bidang" placeholder="">
                       </div>
                       <div class="form-group">
-                        <label for="gelarbelakang" class="font-weight-bold text-dark">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" placeholder="">
+                        <label for="keterangan" class="font-weight-bold text-dark">Keterangan</label>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
                       </div>
 	      	            <div class="modal-footer">
 		                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 		                      <button type="submit" class="btn btn-success">Simpan</button>
-		                  </div>   
-			              </form>
+		                  </div>
+                      </form>
                   </div>
 	              </div>
 	            </div>
 	          </div>
-             
+
         <!-- Content Row -->
         <div class="row">
         <form method="POST" enctype="multipart/form-data" action="/admin/profile">
