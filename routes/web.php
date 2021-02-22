@@ -19,9 +19,17 @@ Route::get('/', function () {
 
 
 route::get('/peminjamanadmin','ControllerPeminjaman@readPeminjaman')->name('ReadAllPeminjaman');
+// layanan
 route::get('/layananadmin','ControllerLayanan@readLayanan');
+Route::post('/layananadmin/create','ControllerLayanan@create');
+Route::get('/layananadmin/{id}/edit','ControllerLayanan@edit');
+Route::post('/layananadmin/{id}/update','ControllerLayanan@update');
+Route::get('/layananadmin/{id}/delete','ControllerLayanan@delete');
+// berita
 route::get('/beritaadmin','ControllerBerita@readberita');
+// bidang
 route::get('/bidangadmin','ControllerBidang@readbidang');
+// lab
 route::get('/laboratoriumadmin','ControllerLabolatorium@readLab');
 
 

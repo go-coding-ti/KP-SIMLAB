@@ -13,13 +13,20 @@
 
           <!-- DataTales Example -->
           <!-- Copy drisini -->
+          @if(session('success'))
+			    <div class="alert alert-success col-md-6 offset-md-3" role="alert">
+				  <center>
+		  			{{session('success')}}
+		  		</center>
+			    </div>
+	      	@endif
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Daftar Layanan</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-              <a class= "btn btn-success text-white" href="xxx"><i class="fas fa-plus"></i> Tambah Layanan</a>
+              <a class= "btn btn-success text-white" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Tambah Layanan</a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -29,6 +36,7 @@
                       <th>Harga</th>
                       <th>Bidang</th>
                       <th>Keterangan</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <!-- <tfoot>
@@ -51,6 +59,37 @@
                             <td> Rp. {{$lay->harga}}</td>
                             <td>{{$lay->id_bidang}}</td>
                             <td>{{$lay->keterangan}}</td>
+                            <td>
+                              <!-- Edit -->
+                              <a href="xx" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <!--Delete -->
+                              <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
+                              <!-- Modal Delete -->
+                              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Edit Angkatan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="POST">
+                                      <div class="modal-body">
+                                      {{ csrf_field() }}
+                                      {{ method_field('delete') }}
+                                      Apakah Anda yakin menghapus pengumuman?</b>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- End Modal Delete -->
+                            </td>
                         </tr>
                     @endforeach
                   </tbody>
@@ -59,7 +98,49 @@
             </div>
           </div>
           <!-- smpe sini -->
-
+          <!-- Modal -->
+	        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	          <div class="modal-dialog" role="document">
+	             <div class="modal-content">
+	                <div class="modal-header">
+	                  <h5 class="modal-title" id="exampleModalLabel">Masukkan Data Layanan</h5>
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                      <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body">
+	      	          <form action="/layananadmin/create" method="POST" class="needs-validation" novalidate>
+                      {{csrf_field()}}
+                      <div class="form-group">
+                        <label class="font-weight-bold text-dark">Nama Layanan</label>
+                        <input type="text" class="form-control" id="NamaLayanan" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label class="font-weight-bold text-dark">Satuan</label>
+                        <input type="text" class="form-control" id="Satuan" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label class="font-weight-bold text-dark">Harga</label>
+                        <input type="text" class="form-control" id="Harga" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="gelardepan" class="font-weight-bold text-dark">Bidang</label>
+                        <input type="text" class="form-control" id="Bidang" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="gelarbelakang" class="font-weight-bold text-dark">Keterangan</label>
+                        <input type="text" class="form-control" id="keterangan" placeholder="">
+                      </div>
+	      	            <div class="modal-footer">
+		                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+		                      <button type="submit" class="btn btn-success">Simpan</button>
+		                  </div>   
+			              </form>
+                  </div>
+	              </div>
+	            </div>
+	          </div>
+             
         <!-- Content Row -->
         <div class="row">
         <form method="POST" enctype="multipart/form-data" action="/admin/profile">

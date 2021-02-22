@@ -27,6 +27,7 @@
                       <th>Nama Labolatorium</th>
                       <th>Judul</th>
                       <th>Pengumuman</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <!-- <tfoot>
@@ -47,6 +48,37 @@
                             <td>{{$peng->id_laboratorium}}</td>
                             <td>{{$peng->judul}}</td>
                             <td>{{$peng->isi}}</td>
+                            <td>
+                              <!-- Edit -->
+                              <a href="xx" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <!--Delete -->
+                              <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
+                              <!-- Modal Delete -->
+                              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Edit Angkatan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="xx" method="POST">
+                                      <div class="modal-body">
+                                      {{ csrf_field() }}
+                                      {{ method_field('delete') }}
+                                      Apakah Anda yakin menghapus pengumuman?</b>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- End Modal Delete -->
+                            </td>
                         </tr>
                     @endforeach
                   </tbody>

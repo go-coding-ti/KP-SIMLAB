@@ -30,7 +30,8 @@
                       <th>Jumlah</th>
                       <th>Harga Total</th>
                       <th>Status</th>
-                      <th>Keterangan</th>
+                      
+                      
                       
                     </tr>
                   </thead>
@@ -56,7 +57,7 @@
                             <td style="text-align:center;">{{$doto->jumlah}}</td>
                             <td> RP. {{$doto->total_harga}}</td>
                             <td>{{$doto->keterangan}}</td>
-                            <td>{{$doto->alasan}}</td>
+                            
                         </tr>
                     @endforeach
                   </tbody>

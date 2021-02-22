@@ -12,15 +12,9 @@ class ControllerLayanan extends Controller
     return view('admin\layananadmin',compact('layanan'));
     }
 
-    public function createLayanan(Request $request)
+    public function create(Request $request)
     {
-        $layanan = new tb_layanan;
-        $layanan->nama_layanan = $request->nama_layanan;
-        $layanan->unit_satuan = $request->unit_satuan;
-        $layanan->satuan = $request->satuan;
-        $layanan->id_bidang = $request->id_bidang;
-        $layanan->keterangan = $request->keterangan;
-        $couriers->save();
-        return Redirect::to('\layananadmin')->with(['success' => 'Berhasil Menambah Kurir']);
+    	\App\tb_layanan::create($request -> all());
+    	return redirect('/layananadmin') -> with('success','Data berhasil disimpan!');
     }
 }
