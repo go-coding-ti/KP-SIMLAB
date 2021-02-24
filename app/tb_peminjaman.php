@@ -12,4 +12,13 @@ class tb_peminjaman extends Model
         'id_peminjaman','id_peminjam','id_layanan','tgl_order','tgl_pinjam','tgl_selesai','jumlah','satuan','harga','total_harga','file','keterangan','alasan',
     ];
 
+    public function relasiPeminjamanToLayanan()
+    {
+        return $this->belongsTo('App\tb_layanan','id_layanan','id_layanan');
+    }
+
+    public function relasiPeminjamanToUser()
+    {
+        return $this->belongsTo('App\users','id_peminjam','id');
+    }
 }

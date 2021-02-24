@@ -14,7 +14,13 @@ class tb_layanan extends Model
         'id_layanan','nama_layanan','unit_satuan','satuan','harga','id_bidang','keterangan',
     ];
 
-    public function bidang(){
+    public function relasiLayananToBidang()
+    {
     	return $this->belongsTo('App\tb_bidang','id_bidang','id_bidang');
+    }
+
+    public function relasiLayananToPeminjaman()
+    {
+        return $this->hasMany('App\tb_peminjaman','id_layanan','id_layanan');
     }
 }

@@ -9,7 +9,7 @@ use App\tb_bidang;
 class ControllerLayanan extends Controller
 {
     public function readLayanan(){
-    $layanan = tb_layanan::with('bidang')->get();
+    $layanan = tb_layanan::with('relasiLayananToBidang')->get();
     $bidangs = tb_bidang::all();
     return view('admin\layananadmin',compact('layanan','bidangs'));
     }

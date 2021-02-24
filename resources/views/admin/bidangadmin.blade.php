@@ -45,7 +45,7 @@
                         <tr>
                             <td>{{$b + 1}}</td>
                             <td>{{$bidang->nama_bidang}}</td>
-                            <td>{{$bidang->id_laboratorium}}</td>
+                            <td>{{$bidang->relasiBidangToLaboratorium->nama_lab}}</td>
                             <td>
                               <!-- Edit -->
                               <a href="xx" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>

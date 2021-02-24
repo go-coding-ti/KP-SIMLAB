@@ -52,15 +52,14 @@
                     </tr>
                   </tfoot> -->
                   <tbody>
-                    @foreach($layanan as $lay=> $layanan1->bidang)
-                    
-                    
+                    @foreach($layanan as $lay=>$layanan1)
+
                         <tr>
                             <td></td>
                             <td>{{$layanan1->nama_layanan}}</td>
                             <td>{{$layanan1->satuan}}</td>
                             <td> Rp. {{$layanan1->harga}}</td>
-                            <td>{{$layanan1->bidang->nama_bidang}}</td>
+                            <td>{{$layanan1->relasiLayananToBidang->nama_bidang}}</td>
                             <td>{{$layanan1->keterangan}}</td>
                             <td>
                               <!-- Edit -->
@@ -125,7 +124,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="id_bidang" class="font-weight-bold text-dark">Bidang</label>
-                                            <input type="text" class="form-control" id="id_bidang" name="id_bidang" value="{{$layananModal->id_bidang}}" placeholder="">
+                                            <select name="id_bidang" id="bidang" class="custom-select" required>
+                                                <option>- Pilih Bidang -</option>
+                                                @foreach($bidangs as $bidang)
+
+                                                    <option value="{{$bidang->id_bidang}}">{{$bidang->nama_bidang}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="keterangan" class="font-weight-bold text-dark">Keterangan</label>
@@ -171,7 +176,7 @@
                                     <select name="id_bidang" id="bidang" class="custom-select" required>
                                         <option>- Pilih Bidang -</option>
                                         @foreach($bidangs as $bidang)
-                                       
+
                                         <option value="{{$bidang->id_bidang}}">{{$bidang->nama_bidang}}</option>
                                         @endforeach
                                     </select>

@@ -30,9 +30,9 @@
                       <th>Jumlah</th>
                       <th>Harga Total</th>
                       <th>Status</th>
-                      
-                      
-                      
+
+
+
                     </tr>
                   </thead>
                   <!-- <tfoot>
@@ -50,14 +50,21 @@
                     @foreach($data as $d => $doto)
                         <tr>
                             <td style="text-align:center;">{{$d + 1}}</td>
-                            <td>{{$doto->id_peminjam}}</td>
-                            <td>{{$doto->id_layanan}}</td>
+                            <td>{{$doto->relasiPeminjamanToUser->name}}</td>
+                            <td>{{$doto->relasiPeminjamanToLayanan->nama_layanan}}</td>
                             <td style="text-align:center;">{{$doto->tgl_pinjam}}</td>
                             <td style="text-align:center;">{{$doto->tgl_selesai}}</td>
                             <td style="text-align:center;">{{$doto->jumlah}}</td>
                             <td> RP. {{$doto->total_harga}}</td>
-                            <td>{{$doto->keterangan}}</td>
-                            
+                            <td>@if($doto->keterangan==1)
+                                    <a href="#" class="btn btn-primary text-white">Konfirmasi</a><br><a href="" class="btn btn-warning text-white">Tolak</a><br>
+                            @elseif($doto->keterangan==2)
+                                    <a href="#" class="btn btn-success text-white">Terkonfirmasi</a>
+                            @else
+                                    <a href="#" class="btn btn-danger text-white">Ditolak</a>
+                            @endif
+                            </td>
+
                         </tr>
                     @endforeach
                   </tbody>

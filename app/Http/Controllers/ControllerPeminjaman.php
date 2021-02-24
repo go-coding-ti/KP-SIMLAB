@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ControllerPeminjaman extends Controller
 {
     public function readPeminjaman(){
-        $data = tb_peminjaman::all();
+        $data = tb_peminjaman::with('relasiPeminjamanToLayanan','relasiPeminjamanToUser')->get();
         return view('admin\homeadmin',compact('data'));
     }
 }
