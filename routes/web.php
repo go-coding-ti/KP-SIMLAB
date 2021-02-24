@@ -27,6 +27,9 @@ Route::post('/layananadmin/update','ControllerLayanan@updateLayanan');
 Route::get('/layananadmin/{id}/delete','ControllerLayanan@deleteLayanan');
 // berita
 route::get('/beritaadmin','ControllerBerita@readberita');
+route::get('/beritaadmin/addberita','ControllerBerita@addberita');
+Route::post('/beritaadmin/create','ControllerBerita@createberita');
+
 // bidang
 route::get('/bidangadmin','ControllerBidang@readbidang');
 // lab

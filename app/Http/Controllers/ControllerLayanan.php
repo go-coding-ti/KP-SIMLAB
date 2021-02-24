@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tb_layanan;
+use App\tb_bidang;
 
 class ControllerLayanan extends Controller
 {
     public function readLayanan(){
-    $layanan = tb_layanan::all();
-    return view('admin\layananadmin',compact('layanan'));
+    $layanan = tb_layanan::with('bidang')->get();
+    $bidangs = tb_bidang::all();
+    return view('admin\layananadmin',compact('layanan','bidangs'));
     }
 
     public function createLayanan(Request $request)

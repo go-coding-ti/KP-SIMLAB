@@ -13,4 +13,8 @@ class tb_layanan extends Model
     protected $fillable = [
         'id_layanan','nama_layanan','unit_satuan','satuan','harga','id_bidang','keterangan',
     ];
+
+    public function bidang(){
+    	return $this->belongsTo('App\tb_bidang','id_bidang','id_bidang');
+    }
 }

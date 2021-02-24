@@ -13,13 +13,14 @@
 
           <!-- DataTales Example -->
           <!-- Copy drisini -->
-          @if(session('success'))
-			    <div class="alert alert-success col-md-6 offset-md-3" role="alert">
-				  <center>
-		  			{{session('success')}}
-		  		</center>
-			    </div>
-	      	@endif
+          @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="text-success fas fa-check mr-1"></i> {{Session::get('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Daftar Layanan</h6>
@@ -51,13 +52,15 @@
                     </tr>
                   </tfoot> -->
                   <tbody>
-                    @foreach($layanan as $layanan1)
+                    @foreach($layanan as $lay=> $layanan1->bidang)
+                    
+                    
                         <tr>
-                            <td>{{$layanan1->id_layanan}}</td>
+                            <td></td>
                             <td>{{$layanan1->nama_layanan}}</td>
                             <td>{{$layanan1->satuan}}</td>
                             <td> Rp. {{$layanan1->harga}}</td>
-                            <td>{{$layanan1->id_bidang}}</td>
+                            <td>{{$layanan1->bidang->nama_bidang}}</td>
                             <td>{{$layanan1->keterangan}}</td>
                             <td>
                               <!-- Edit -->
@@ -165,7 +168,13 @@
                       </div>
                       <div class="form-group">
                         <label for="id_bidang" class="font-weight-bold text-dark">Bidang</label>
-                        <input type="text" class="form-control" id="id_bidang" name="id_bidang" placeholder="">
+                                    <select name="id_bidang" id="bidang" class="custom-select" required>
+                                        <option>- Pilih Bidang -</option>
+                                        @foreach($bidangs as $bidang)
+                                       
+                                        <option value="{{$bidang->id_bidang}}">{{$bidang->nama_bidang}}</option>
+                                        @endforeach
+                                    </select>
                       </div>
                       <div class="form-group">
                         <label for="keterangan" class="font-weight-bold text-dark">Keterangan</label>

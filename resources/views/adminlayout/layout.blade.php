@@ -103,6 +103,9 @@
   <script src="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{ asset('assets/admin/js/demo/datatables-demo.js')}}"></script>
 
+  <!-- Custom Javascript -->
+  @yield('custom_javascript')
+
 </body>
 
 </html>
