@@ -42,7 +42,7 @@
           <a class="nav-link" href="/beritaadmin">
           <i class="fa fa-fw fa-bell"></i>
             <!-- <i class="fas fa-fw fa-briefcase"></i> -->
-            <span>Pengumuman</span>
+            <span>Berita</span>
           </a>
         </li>
 
