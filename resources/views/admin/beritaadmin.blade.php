@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-              <a class= "btn btn-success text-white" href="beritaadmin/addberita"><i class="fas fa-plus"></i> Tambah Pengumuman</a>
+              <a class= "btn btn-success text-white" href="beritaadmin/addberita"><i class="fas fa-plus"></i> Tambah Berita</a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -52,13 +52,13 @@
                   <tbody>
                     @foreach($pengumuman as $p => $peng)
                         <tr>
-                            <td>{{$p + 1}}</td>
-                            <td>{{$peng->id_laboratorium}}</td>
+                            <td>{{$peng->id_berita}}</td>
+                            <td>{{$peng->relasiBidangToLaboratorium->nama_lab}}</td>
                             <td>{{$peng->judul}}</td>
                             <td>{{$peng->isi}}</td>
                             <td>
                               <!-- Edit -->
-                              <a href="xx" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <a href="beritaadmin/{{$peng->id}}/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                               <!--Delete -->
                               <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
                               <!-- Modal Delete -->

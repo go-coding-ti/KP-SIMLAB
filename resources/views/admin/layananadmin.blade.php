@@ -55,7 +55,7 @@
                     @foreach($layanan as $lay=>$layanan1)
 
                         <tr>
-                            <td></td>
+                            <td>{{$lay + 1 }}</td>
                             <td>{{$layanan1->nama_layanan}}</td>
                             <td>{{$layanan1->satuan}}</td>
                             <td> Rp. {{$layanan1->harga}}</td>

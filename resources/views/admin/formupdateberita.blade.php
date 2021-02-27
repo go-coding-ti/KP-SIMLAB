@@ -15,18 +15,26 @@
           <!-- Copy drisini -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Tambah Pengumuman</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Perbaharui Berita</h6>
             </div>
             <div class="card-body">
-              <form action="/beritaadmin/create" method="post" enctype="multipart/form-data">
+              <form action="" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <table class="table table-borderless">
                         <tbody>
-                            
+                      
                             <tr>
                                 <td><label for="judul">Laboratorium</label></td>
                                 <td>
-                                    <textarea type="text" class="form-control" name="id_laboratorium" id="id_laboratorium" rows="1" placeholder="Laboratorium"></textarea>
+                                <div class="form-group">
+                                            <select name="id_laboratorium" id="id_laboratorium" class="custom-select" required>
+                                                <option>- Pilih Laboratorium -</option>
+                                                @foreach($labs as $lab)
+                                                    <option value="{{$lab->id_laboratorium}}">{{$lab->nama_lab}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    <!-- <textarea type="text" class="form-control" name="id_laboratorium" id="id_laboratorium" rows="1" placeholder="Laboratorium">{{$beritas -> id_laboratorium}}</textarea> -->
                                     <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
@@ -37,8 +45,7 @@
                             <tr>
                                 <td><label for="judul">Judul</label></td>
                                 <td>
-                                    <textarea type="text" class="form-control" name="judul" id="judul" rows="1" placeholder="Judul"></textarea>
-                                    <!-- @if($errors->has('judul'))
+                                    <textarea  type="text" class="form-control" name="judul" id="judul" rows="1" >{{$beritas -> judul}}</textarea>                                    <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
                                         </span> 
@@ -48,7 +55,7 @@
                             <tr>
                                 <td><label for="konten">Konten</label></td>
                                 <td>
-                                    <textarea class="form-control" name="isi" id="isi" rows="10" placeholder="Berita"></textarea>
+                                    <textarea class="form-control" name="isi" id="isi" rows="10" placeholder="Berita">{{$beritas -> isi}}</textarea>
                                     <!-- @if($errors->has('konten'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('konten') }}</strong>
@@ -56,12 +63,12 @@
                                     @endif -->
                                 </td>
                             </tr>
-                            
+                      
                         </tbody>
                         
                     </table>
                     <a href="" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Tambah Pengumuman</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Update Pengumuman</button>
                 </form>
             </div>
           </div>

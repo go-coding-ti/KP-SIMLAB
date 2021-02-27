@@ -57,7 +57,7 @@
                             <td style="text-align:center;">{{$doto->jumlah}}</td>
                             <td> RP. {{$doto->total_harga}}</td>
                             <td>@if($doto->keterangan==1)
-                                    <a href="#" class="btn btn-primary text-white">Konfirmasi</a><br><a href="" class="btn btn-warning text-white">Tolak</a><br>
+                                    <a href="#" class="btn btn-primary text-white">Menunggu Konfirmasi</a>
                             @elseif($doto->keterangan==2)
                                     <a href="#" class="btn btn-success text-white">Terkonfirmasi</a>
                             @else

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\tb_berita;
+use App\tb_laboratorium;
+
 use Illuminate\Http\Request;
 
 class ControllerBerita extends Controller
 {
     public function readberita(){
         $pengumuman = tb_berita::orderBy('id_berita','DESC')->get();
-        return view('admin\pengumumanadmin',compact('pengumuman'));
+        return view('admin\beritaadmin',compact('pengumuman'));
     }
     public function addberita(){
         return view('admin\formberita');
@@ -22,6 +24,20 @@ class ControllerBerita extends Controller
             'isi'=>$request->isi,
         ]);
     	return redirect('/beritaadmin')->with('success','Data berhasil disimpan!');
+    }
+
+    public function editberita($id){
+    	$beritas = tb_berita::find($id);
+        $labs = tb_laboratorium::all();
+    	return view('admin\formupdateberita',compact('beritas','labs'));
+    }
+
+    public function updateberita(Request $request){
+        $updateBerita = tb_berita::find($request->id_laboratorium);
+        $updateBerita->judul = $request->judul;
+        $updateBerita->isi = $request->isi;
+        $updateBerita->save();
+        return redirect('/beritaadmin')->with('success','Data berhasil diupdate!');
     }
 
 }
