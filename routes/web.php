@@ -30,10 +30,19 @@ route::get('/beritaadmin','ControllerBerita@readberita');
 route::get('/beritaadmin/addberita','ControllerBerita@addberita');
 Route::post('/beritaadmin/create','ControllerBerita@createberita');
 Route::get('/beritaadmin/{id}/edit','ControllerBerita@editberita');
+route::post('/beritaadmin/update','ControllerBerita@updateberita')->name('updateBerita');
+Route::delete('/beritaadmin/delete/{id}','ControllerBerita@deleteBerita');
 
 // bidang
 route::get('/bidangadmin','ControllerBidang@readbidang');
+route::post('/bidangadmin/create','ControllerBidang@createBidang')->name('createBidang');
+route::post('/bidangadmin/update','ControllerBidang@updateBidang')->name('updateBidang');
+route::delete('/bidangadmin/delete/{id}','ControllerBidang@deleteBidang')->name('deleteBidang');
+
 // lab
 route::get('/laboratoriumadmin','ControllerLabolatorium@readLab');
+route::post('/laboratoriumadmin/create','ControllerLabolatorium@createLab')->name('createLab');
+route::post('/laboratorioumadmin/update','ControllerLabolatorium@updateLab')->name('updateLab');
+route::delete('/laboratorium/delete/{id}','ControllerLabolatorium@deleteLab')->name('deleteLab');
 
 

@@ -27,17 +27,23 @@ class ControllerBerita extends Controller
     }
 
     public function editberita($id){
-    	$beritas = tb_berita::find($id);
+    	$beritas = tb_berita::with('relasiBeritaToLaboratorium')->find($id);
         $labs = tb_laboratorium::all();
     	return view('admin\formupdateberita',compact('beritas','labs'));
     }
 
     public function updateberita(Request $request){
-        $updateBerita = tb_berita::find($request->id_laboratorium);
+        $updateBerita = tb_berita::find($request->id_berita);
         $updateBerita->judul = $request->judul;
         $updateBerita->isi = $request->isi;
         $updateBerita->save();
         return redirect('/beritaadmin')->with('success','Data berhasil diupdate!');
+    }
+
+    public function deleteBerita($id){
+        $deleteBerita = tb_berita::find($id);
+        $deleteBerita->delete();
+        return redirect('/beritaadmin')->with('success','Data berhasil didelete!');
     }
 
 }

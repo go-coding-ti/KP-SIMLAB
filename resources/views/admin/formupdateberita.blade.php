@@ -18,17 +18,18 @@
               <h6 class="m-0 font-weight-bold text-primary">Perbaharui Berita</h6>
             </div>
             <div class="card-body">
-              <form action="" method="post" enctype="multipart/form-data">
+              <form action="{{route('updateBerita')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <table class="table table-borderless">
                         <tbody>
-                      
+
                             <tr>
                                 <td><label for="judul">Laboratorium</label></td>
                                 <td>
                                 <div class="form-group">
+                                    <input type="hidden" name="id_berita" value="{{$beritas->id_berita}}">
                                             <select name="id_laboratorium" id="id_laboratorium" class="custom-select" required>
-                                                <option>- Pilih Laboratorium -</option>
+                                                <option value="{{$beritas->relasiBeritaToLaboratorium->id_laboratorium}}">{{$beritas->relasiBeritaToLaboratorium->nama_lab}}</option>
                                                 @foreach($labs as $lab)
                                                     <option value="{{$lab->id_laboratorium}}">{{$lab->nama_lab}}</option>
                                                 @endforeach
@@ -38,7 +39,7 @@
                                     <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
@@ -48,7 +49,7 @@
                                     <textarea  type="text" class="form-control" name="judul" id="judul" rows="1" >{{$beritas -> judul}}</textarea>                                    <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
@@ -59,13 +60,13 @@
                                     <!-- @if($errors->has('konten'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('konten') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
-                      
+
                         </tbody>
-                        
+
                     </table>
                     <a href="" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Update Pengumuman</button>
@@ -73,7 +74,7 @@
             </div>
           </div>
           <!-- smpe sini -->
-            
+
 
         <!-- Content Row -->
         <div class="row">

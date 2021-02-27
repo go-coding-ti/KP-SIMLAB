@@ -22,7 +22,7 @@
                     {{ csrf_field() }}
                     <table class="table table-borderless">
                         <tbody>
-                            
+
                             <tr>
                                 <td><label for="judul">Laboratorium</label></td>
                                 <td>
@@ -30,7 +30,7 @@
                                     <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
@@ -41,7 +41,7 @@
                                     <!-- @if($errors->has('judul'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('judul') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
@@ -52,13 +52,13 @@
                                     <!-- @if($errors->has('konten'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('konten') }}</strong>
-                                        </span> 
+                                        </span>
                                     @endif -->
                                 </td>
                             </tr>
-                            
+
                         </tbody>
-                        
+
                     </table>
                     <a href="" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Tambah Pengumuman</button>
@@ -66,48 +66,6 @@
             </div>
           </div>
           <!-- smpe sini -->
-            
-
-        <!-- Content Row -->
-        <div class="row">
-        <form method="POST" enctype="multipart/form-data" action="/admin/profile">
-
-        </form>
-        </div>
-
-        <!-- Content Row -->
-
-        <div class="row">
-
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
-
-          <!-- Content Column -->
-          <div class="col-lg-6 mb-4">
-
-            <!-- Color System
-            <div class="row">
-              <div class="card mb-4">
-                <div class="card-header">
-                  Default Card Example
-                </div>
-                <div class="card-body">
-                  This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                </div>
-              </div>
-          </div> -->
-
-          </div>
-
-          <div class="col-lg-6 mb-4">
-
-          </div>
-        </div>
-
-      </div>
-      <!-- /.container-fluid -->
 @endsection
 
 

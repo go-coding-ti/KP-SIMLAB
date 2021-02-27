@@ -53,16 +53,16 @@
                     @foreach($pengumuman as $p => $peng)
                         <tr>
                             <td>{{$peng->id_berita}}</td>
-                            <td>{{$peng->relasiBidangToLaboratorium->nama_lab}}</td>
+                            <td>{{$peng->relasiBeritaToLaboratorium->nama_lab}}</td>
                             <td>{{$peng->judul}}</td>
                             <td>{{$peng->isi}}</td>
                             <td>
                               <!-- Edit -->
-                              <a href="beritaadmin/{{$peng->id}}/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <a href="beritaadmin/{{$peng->id_berita}}/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                               <!--Delete -->
-                              <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
+                              <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{$peng->id_berita}}"><i class="fa fa-trash"></i></button>
                               <!-- Modal Delete -->
-                              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal fade" id="delete{{$peng->id_berita}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -71,7 +71,7 @@
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="xx" method="POST">
+                                    <form action="/beritaadmin/delete/{{$peng->id_berita}}" method="POST">
                                       <div class="modal-body">
                                       {{ csrf_field() }}
                                       {{ method_field('delete') }}
@@ -94,46 +94,4 @@
               </div>
             </div>
           </div>
-          <!-- smpe sini -->
-
-        <!-- Content Row -->
-        <div class="row">
-        <form method="POST" enctype="multipart/form-data" action="/admin/profile">
-
-        </form>
-        </div>
-
-        <!-- Content Row -->
-
-        <div class="row">
-
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
-
-          <!-- Content Column -->
-          <div class="col-lg-6 mb-4">
-
-            <!-- Color System
-            <div class="row">
-              <div class="card mb-4">
-                <div class="card-header">
-                  Default Card Example
-                </div>
-                <div class="card-body">
-                  This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                </div>
-              </div>
-          </div> -->
-
-          </div>
-
-          <div class="col-lg-6 mb-4">
-
-          </div>
-        </div>
-
-      </div>
-      <!-- /.container-fluid -->
 @endsection
