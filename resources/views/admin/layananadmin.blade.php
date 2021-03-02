@@ -1,4 +1,13 @@
 @extends('adminlayout.layout')
+
+@section('collapse3')
+    collapse-item active
+@endsection
+
+@section('active3')
+      nav-item active
+@endsection
+
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -31,16 +40,17 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>No.</th>
-                      <th>Nama Layanan</th>
-                      <th>Satuan</th>
-                      <th>Harga</th>
-                      <th>Bidang</th>
-                      <th>Keterangan</th>
-                      <th>Aksi</th>
+                      <th style="text-align:center;">No.</th>
+                      <th style="text-align:center;">Nama Layanan</th>
+                      <th style="text-align:center;">Unit Satuan</th>
+                      <th style="text-align:center;">Satuan</th>
+                      <th style="text-align:center;">Harga</th>
+                      <th style="text-align:center;">Bidang</th>
+                      <th style="text-align:center;">Keterangan</th>
+                      <th style="text-align:center;">Aksi</th>
                     </tr>
                   </thead>
-                  <!-- <tfoot>
+                  {{-- <!-- <tfoot>
                   <tr>
                       <th>ID Peminjam</th>
                       <th>ID Layanan</th>
@@ -50,18 +60,26 @@
                       <th>Jumlah</th>
                       <th>File</th>
                     </tr>
-                  </tfoot> -->
+                  </tfoot> --> --}}
                   <tbody>
                     @foreach($layanan as $lay=>$layanan1)
 
                         <tr>
                             <td>{{$lay + 1 }}</td>
                             <td>{{$layanan1->nama_layanan}}</td>
+                            <td>
+                                @if ($layanan1->unit_satuan == null)
+                                    <p style="text-align:center;">-</p>
+                                @else
+                                    {{$layanan1->unit_satuan}}
+                                @endif
+                            </td>
                             <td>{{$layanan1->satuan}}</td>
                             <td> Rp. {{$layanan1->harga}}</td>
                             <td>{{$layanan1->relasiLayananToBidang->nama_bidang}}</td>
                             <td>{{$layanan1->keterangan}}</td>
                             <td>
+
                               <!-- Edit -->
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update{{$layanan1->id_layanan}}"><i class="fa fa-edit"></i></button>
                               <!--Delete -->
@@ -128,8 +146,8 @@
                                             <select name="id_bidang" id="bidang" class="custom-select" required>
                                                 <option>- Pilih Bidang -</option>
                                                 @foreach($bidangs as $bidang)
+                                                <option value="{{$bidang->id_bidang}}" @if($layananModal->id_bidang==$bidang->id_bidang) selected @endif>{{$bidang->nama_bidang}}</option>
 
-                                                    <option value="{{$bidang->id_bidang}}">{{$bidang->nama_bidang}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

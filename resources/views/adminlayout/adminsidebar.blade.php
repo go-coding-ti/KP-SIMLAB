@@ -20,54 +20,48 @@
           </div>
         </div>
         <!-- Divider -->
-        <hr style="margin-top: 20px" class="sidebar-divider my-0">
+        <hr style="margin-top: 20px" class="sidebar-divider my-1">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/peminjamanadmin">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Peminjaman</span></a>
-        </li>
+        <div class="nav-item">
+          <li class="@yield('active1')">
+            <a class="nav-link" href="/peminjamanadmin">
+              <i class="fas fa-fw fa-user"></i>
+              <span>Peminjaman</span></a>
+          </li>
+        </div>
 
-        <!-- Divider -->
-        <!--<hr class="sidebar-divider">-->
-
-        <!-- Heading -->
-        <!--<div class="sidebar-heading">
-          Interface
-        </div>-->
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-          <a class="nav-link" href="/beritaadmin">
-          <i class="fa fa-fw fa-bell"></i>
-            <!-- <i class="fas fa-fw fa-briefcase"></i> -->
-            <span>Berita</span>
-          </a>
-        </li>
-
-        <!-- Divider -->
-        <!--<hr class="sidebar-divider">-->
-
-        <!-- Heading -->
-        <!--<div class="sidebar-heading">
-          Addons
-        </div>-->
+        <!-- Nav Item - Dashboard -->
+        <div class="nav-item">
+          <li class="@yield('active2')">
+            <a class="nav-link" href="/beritaadmin">
+              <i class="fa fa-fw fa-bell"></i>
+              <span>Berita</span></a>
+          </li>
+        </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <div class="nav-item">
+        <li class="@yield('active3')">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRemu" aria-expanded="true" aria-controls="collapseRemu">
             <i class="fas fa-fw fa-money-check"></i>
             <span>Master Data</span>
           </a>
           <div id="collapseRemu" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/laboratoriumadmin">Laboratorium</a>
-              <a class="collapse-item" href="/bidangadmin">Bidang</a>
-              <a class="collapse-item" href="/layananadmin">Layanan</a>
+              <div class="collapse-item">
+                <a class="@yield('collapse1')" href="/laboratoriumadmin">Laboratorium</a>
+              </div>
+              <div class="collapse-item">
+              <a class="@yield('collapse2')" href="/bidangadmin">Bidang</a>
+              </div>
+              <div class="collapse-item">
+              <a class="@yield('collapse3')" href="/layananadmin">Layanan</a>
+              </div>
             </div>
           </div>
         </li>
+        </div>
 
         
         <!-- Nav Item - Charts -->

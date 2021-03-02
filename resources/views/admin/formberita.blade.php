@@ -15,23 +15,22 @@
           <!-- Copy drisini -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Tambah Pengumuman</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tambah Berita</h6>
             </div>
             <div class="card-body">
               <form action="/beritaadmin/create" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <table class="table table-borderless">
                         <tbody>
-
                             <tr>
-                                <td><label for="judul">Laboratorium</label></td>
-                                <td>
-                                    <textarea type="text" class="form-control" name="id_laboratorium" id="id_laboratorium" rows="1" placeholder="Laboratorium"></textarea>
-                                    <!-- @if($errors->has('judul'))
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $errors->first('judul') }}</strong>
-                                        </span>
-                                    @endif -->
+                                    <td><label for="id_laboratorium">Laboratorium</label></td>
+                                    <td>
+                                    <select name="id_laboratorium" id="id_laboratorium" class="custom-select" required>
+                                        <option>- Pilih Laboratorium -</option>
+                                        @foreach($laboratorium as $lab)
+                                        <option value="{{$lab->id_laboratorium}}">{{$lab->nama_lab}}</option>
+                                        @endforeach
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -60,7 +59,7 @@
                         </tbody>
 
                     </table>
-                    <a href="" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                    <a href="/beritaadmin" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Tambah Pengumuman</button>
                 </form>
             </div>

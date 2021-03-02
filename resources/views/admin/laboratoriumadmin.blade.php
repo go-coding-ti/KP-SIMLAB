@@ -1,4 +1,13 @@
 @extends('adminlayout.layout')
+
+@section('collapse1')
+    collapse-item active
+@endsection
+
+@section('active3')
+      nav-item active
+@endsection
+
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -12,21 +21,23 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Nama Laboratorium</th>
-                            <th>Alamat</th>
-                            <th>No Telp</th>
-                            <th>Aksi</th>
+                            <th style="text-align:center;">No.</th>
+                            <th style="text-align:center;">Nama Laboratorium</th>
+                            <th style="text-align:center;">Alamat</th>
+                            <th style="text-align:center;">No Telp</th>
+                            <th style="text-align:center;">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($lab as $l => $labs)
                             <tr>
                                 <td>{{$l + 1}}</td>
-                                <td>{{$labs->nama_lab}} <a href="/images/{{$labs->foto_lab}}" target="_blank"> Foto </a></td>
+                                <td>{{$labs->nama_lab}}</td>
                                 <td>{{$labs->alamat}}</td>
                                 <td>{{$labs->no_telp}}</td>
                                 <td>
+                                    <!-- Show -->
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#show{{$labs->id_laboratorium}}"><i class="fas fa-eye"></i></button>
                                     <!-- Edit -->
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update{{$labs->id_laboratorium}}"><i class="fa fa-edit"></i></button>
                                     <!--Delete -->
@@ -41,6 +52,39 @@
         </div>
           <!-- smpe sini -->
     @foreach($lab as $labz)
+
+        <!-- Modal Show -->
+        <div class="modal fade" id="show{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Data Laboratorium</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <img class="rounded mx-auto d-block" src="/images/{{$labz->foto_lab}}" alt="not found" style="width:400px; height:200px;">
+                            <input type="hidden" name="id_lab" value="{{$labz->id_laboratorium}}" >
+                            <div class="form-group">
+                                <label class="font-weight-bold text-dark">Nama Laboratorium</label>
+                                <input type="text" class="form-control" id="nama_lab" name="nama_lab" value="{{$labz->nama_lab}}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold text-dark">Alamat Laboratorium</label>
+                                <input type="text" class="form-control" id="alamat" name="alamat" value="{{$labz->alamat}}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold text-dark">Nomor Telepon</label>
+                                <input type="text" class="form-control" id="no_telp" name= "no_telp" value="{{$labz->no_telp}}" readonly>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Update -->
         <!-- Modal Update -->
             <div class="modal fade" id="update{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -81,6 +125,7 @@
                 </div>
             </div>
             <!-- End Modal Update -->
+
             <!-- Modal Delete -->
             <div class="modal fade" id="delete{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

@@ -68,7 +68,7 @@
                         </tbody>
 
                     </table>
-                    <a href="" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                    <a href="/beritaadmin" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Update Pengumuman</button>
                 </form>
             </div>

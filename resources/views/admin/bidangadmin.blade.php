@@ -1,4 +1,13 @@
 @extends('adminlayout.layout')
+
+@section('collapse2')
+    collapse-item active
+@endsection
+
+@section('active3')
+      nav-item active
+@endsection
+
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -12,10 +21,10 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Nama Bidang</th>
-                            <th>Nama Laboratorium</th>
-                            <th>Aksi</th>
+                            <th style="text-align:center;">No.</th>
+                            <th style="text-align:center;">Nama Bidang</th>
+                            <th style="text-align:center;">Nama Laboratorium</th>
+                            <th style="text-align:center;">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -24,12 +33,13 @@
                                 <td>{{$b + 1}}</td>
                                 <td>{{$bidangs->nama_bidang}}</td>
                                 <td>@if ($bidangs->id_laboratorium == null)
-                                    Tidak terdapat lab yang dihubungkan
+                                    Tidak terdapat laboratorium
                                     @else
                                     {{$bidangs->relasiBidangToLaboratorium->nama_lab}}
                                     @endif
                                 </td>
                                 <td>
+
                                     <!-- Edit -->
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update{{$bidangs->id_bidang}}"><i class="fa fa-edit"></i></button>
                                     <!--Delete -->
@@ -62,10 +72,10 @@
                                     <input type="text" class="form-control" id="nama_bidang" name="nama_bidang" value="{{$bidangz->nama_bidang}}" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="id_lab" class="font-weight-bold text-dark">Lab</label>
+                                    <label for="id_lab" class="font-weight-bold text-dark">Nama Laboratorium</label>
                                     <select name="id_lab" id="id_lab" class="custom-select" required>
                                         @if ($bidangz->id_laboratorium == null)
-                                            <option value=""> - Hubungkan Lab - </option>
+                                            <option value=""> - pilih Laboratorium - </option>
                                         @else
                                             <option value="{{$bidangz->id_laboratorium}}">{{$bidangz->relasiBidangToLaboratorium->nama_lab}}</option>
                                         @endif
@@ -84,6 +94,7 @@
                 </div>
             </div>
             <!-- End Modal Update -->
+
             <!-- Modal Delete -->
             <div class="modal fade" id="delete{{$bidangz->id_bidang}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -115,7 +126,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Isi Data Bidang</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Bidang</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -128,9 +139,9 @@
                                 <input type="text" class="form-control" id="nama_bidang" name="nama_bidang" value="" placeholder="" required>
                             </div>
                             <div class="form-group">
-                                <label for="id_lab" class="font-weight-bold text-dark">Bidang</label>
+                                <label for="id_lab" class="font-weight-bold text-dark">Nama Laboratorium</label>
                                 <select name="id_lab" id="id_lab" class="custom-select" required>
-                                    <option value=""> - Pilih Lab - </option>
+                                    <option value=""> - Pilih Laboratorium - </option>
                                     @foreach($allLab as $lab)
                                         <option value="{{$lab->id_laboratorium}}">{{$lab->nama_lab}}</option>
                                     @endforeach

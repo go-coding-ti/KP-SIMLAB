@@ -11,10 +11,12 @@ class ControllerBerita extends Controller
 {
     public function readberita(){
         $pengumuman = tb_berita::orderBy('id_berita','DESC')->get();
+
         return view('admin\beritaadmin',compact('pengumuman'));
     }
     public function addberita(){
-        return view('admin\formberita');
+        $laboratorium = tb_laboratorium::all();
+        return view('admin\formberita',compact('laboratorium'));
     }
     public function createberita(Request $request)
     {

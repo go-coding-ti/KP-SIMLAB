@@ -1,4 +1,9 @@
 @extends('adminlayout.layout')
+
+@section('active2')
+      nav-item active
+@endsection
+
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -32,13 +37,14 @@
                   <thead>
                     <tr>
                       <th>No.</th>
-                      <th>Nama Labolatorium</th>
-                      <th>Judul</th>
-                      <th>Berita</th>
-                      <th>Aksi</th>
+
+                      <th style="text-align:center;">Judul</th>
+                      <th style="text-align:center;">Berita</th>
+                      <th style="text-align:center;">Tanggal Dibuat</th>
+                      <th style="text-align:center;">Aksi</th>
                     </tr>
                   </thead>
-                  <!-- <tfoot>
+                  {{-- <!-- <tfoot>
                   <tr>
                       <th>ID Peminjam</th>
                       <th>ID Layanan</th>
@@ -48,15 +54,18 @@
                       <th>Jumlah</th>
                       <th>File</th>
                     </tr>
-                  </tfoot> -->
+                  </tfoot> --> --}}
                   <tbody>
                     @foreach($pengumuman as $p => $peng)
                         <tr>
-                            <td>{{$peng->id_berita}}</td>
-                            <td>{{$peng->relasiBeritaToLaboratorium->nama_lab}}</td>
+                            <td>{{$p +1 }}</td>
+
                             <td>{{$peng->judul}}</td>
-                            <td>{{$peng->isi}}</td>
+                            <td>{{ str_limit($peng->isi, 50) }}</td>
+                            <td>{{ date('d F Y', strtotime($peng->created_at)) }}</td>
                             <td>
+                              <!-- Show -->
+                              <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#show{{$peng->id_berita}}"><i class="fa fa-eye"></i></button>
                               <!-- Edit -->
                               <a href="beritaadmin/{{$peng->id_berita}}/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                               <!--Delete -->
@@ -94,4 +103,36 @@
               </div>
             </div>
           </div>
+            @foreach($pengumuman as $pengs)
+            <!-- Modal Show -->
+                <div class="modal fade" id="show{{$pengs->id_berita}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ $pengs->judul }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Nama Laboratorium</label>
+                                        <input type="text" class="form-control" id="no_telp" name= "no_telp" value="{{$pengs->relasiBeritaToLaboratorium->nama_lab}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Tanggal Dibuat</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang" value="{{ date('d F Y', strtotime($pengs->created_at)) }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="konten">Konten</label>
+                                        <textarea class="form-control" name="isi" id="isi" rows="5"readonly>{{$pengs->isi}}</textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Modal Update -->
+                @endforeach
 @endsection
