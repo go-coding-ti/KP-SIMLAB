@@ -61,7 +61,7 @@
                             <td>{{$p +1 }}</td>
 
                             <td>{{$peng->judul}}</td>
-                            <td>{{ str_limit($peng->isi, 50) }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($peng->isi, 50) }}</td>
                             <td>{{ date('d F Y', strtotime($peng->created_at)) }}</td>
                             <td>
                               <!-- Show -->
