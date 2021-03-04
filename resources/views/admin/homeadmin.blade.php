@@ -54,8 +54,8 @@
                     @foreach($data as $d => $doto)
                         <tr>
                             <td style="text-align:center;">{{$d + 1}}</td>
-                            <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToUser->name, 50) }}</td>
-                            <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToLayanan->nama_layanan, 50)}}</td>
+                            <td>{{ str_limit($doto->relasiPeminjamanToUser->name, 50) }}</td>
+                            <td>{{str_limit($doto->relasiPeminjamanToLayanan->nama_layanan, 50)}}</td>
                             <td >{{$doto->tgl_pinjam}}</td>
                             <td> RP. {{$doto->total_harga}}</td>
                             <td>@if($doto->keterangan==1)
