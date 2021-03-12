@@ -27,8 +27,7 @@ class LoginController extends Controller
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                     if($user->hak_akses == 2){
                         session(['laboran'=>true]);
-                        dd(Auth::user());
-                        return redirect('/laboran');
+                        return redirect('/kepala');
                     } elseif ($user->hak_akses == 3){
                         session(['admin'=>true]);
                         return redirect('/peminjamanadmin');

@@ -5,7 +5,7 @@
 @endsection
 
 @section('active3')
-      nav-item active
+    nav-item active
 @endsection
 
 @section('content')
@@ -17,7 +17,9 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#create"><i class="fas fa-plus"></i> Tambah Laboratorium</button>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#create"><i
+                            class="fas fa-plus"></i> Tambah Laboratorium
+                    </button>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
@@ -37,11 +39,17 @@
                                 <td>{{$labs->no_telp}}</td>
                                 <td>
                                     <!-- Show -->
-                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#show{{$labs->id_laboratorium}}"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#show{{$labs->id_laboratorium}}"><i class="fas fa-eye"></i>
+                                    </button>
                                     <!-- Edit -->
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#update{{$labs->id_laboratorium}}"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#update{{$labs->id_laboratorium}}"><i class="fa fa-edit"></i>
+                                    </button>
                                     <!--Delete -->
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{$labs->id_laboratorium}}"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target="#delete{{$labs->id_laboratorium}}"><i class="fa fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,43 +58,49 @@
                 </div>
             </div>
         </div>
-          <!-- smpe sini -->
+        <!-- smpe sini -->
     @foreach($lab as $labz)
 
         <!-- Modal Show -->
-        <div class="modal fade" id="show{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Data Laboratorium</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <img class="rounded mx-auto d-block" src="/images/{{$labz->foto_lab}}" alt="not found" style="width:400px; height:200px;">
-                            <input type="hidden" name="id_lab" value="{{$labz->id_laboratorium}}" >
-                            <div class="form-group">
-                                <label class="font-weight-bold text-dark">Nama Laboratorium</label>
-                                <input type="text" class="form-control" id="nama_lab" name="nama_lab" value="{{$labz->nama_lab}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold text-dark">Alamat Laboratorium</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="{{$labz->alamat}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold text-dark">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="no_telp" name= "no_telp" value="{{$labz->no_telp}}" readonly>
-                            </div>
-                        </form>
+            <div class="modal fade" id="show{{$labz->id_laboratorium}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Data Laboratorium</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <img class="rounded mx-auto d-block" src="/images/{{$labz->foto_lab}}" alt="not found"
+                                     style="width:400px; height:200px;">
+                                <input type="hidden" name="id_lab" value="{{$labz->id_laboratorium}}">
+                                <div class="form-group">
+                                    <label class="font-weight-bold text-dark">Nama Laboratorium</label>
+                                    <input type="text" class="form-control" id="nama_lab" name="nama_lab"
+                                           value="{{$labz->nama_lab}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-bold text-dark">Alamat Laboratorium</label>
+                                    <input type="text" class="form-control" id="alamat" name="alamat"
+                                           value="{{$labz->alamat}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-bold text-dark">Nomor Telepon</label>
+                                    <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                           value="{{$labz->no_telp}}" readonly>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Modal Update -->
-        <!-- Modal Update -->
-            <div class="modal fade" id="update{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- End Modal Update -->
+            <!-- Modal Update -->
+            <div class="modal fade" id="update{{$labz->id_laboratorium}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -101,15 +115,18 @@
                                 <input type="hidden" name="id_lab" value="{{$labz->id_laboratorium}}">
                                 <div class="form-group">
                                     <label class="font-weight-bold text-dark">Nama Laboratorium</label>
-                                    <input type="text" class="form-control" id="nama_lab" name="nama_lab" value="{{$labz->nama_lab}}" placeholder="">
+                                    <input type="text" class="form-control" id="nama_lab" name="nama_lab"
+                                           value="{{$labz->nama_lab}}" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label class="font-weight-bold text-dark">Alamat Laboratorium</label>
-                                    <input type="text" class="form-control" id="alamat" name="alamat" value="{{$labz->alamat}}" placeholder="">
+                                    <input type="text" class="form-control" id="alamat" name="alamat"
+                                           value="{{$labz->alamat}}" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label class="font-weight-bold text-dark">Nomor Telepon</label>
-                                    <input type="text" class="form-control" id="no_telp" name= "no_telp" value="{{$labz->no_telp}}" placeholder="">
+                                    <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                           value="{{$labz->no_telp}}" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar">Pilih Foto : </label>
@@ -127,11 +144,13 @@
             <!-- End Modal Update -->
 
             <!-- Modal Delete -->
-            <div class="modal fade" id="delete{{$labz->id_laboratorium}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="delete{{$labz->id_laboratorium}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Hapus Data Lab</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Hapus Data Lab
+                            </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -143,7 +162,9 @@
                                 Apakah Anda yakin menghapus Lab?</b>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                        class="fa fa-times"></i> Tidak
+                                </button>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
                             </div>
                         </form>
@@ -153,7 +174,8 @@
             <!-- End Modal Delete -->
     @endforeach
     <!-- Modal Create -->
-        <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -167,15 +189,18 @@
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label class="font-weight-bold text-dark">Nama Laboratorium</label>
-                                <input type="text" class="form-control" id="nama_lab" name="nama_lab" value="" placeholder="Nama Lab" required>
+                                <input type="text" class="form-control" id="nama_lab" name="nama_lab" value=""
+                                       placeholder="Nama Lab" required>
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold text-dark">Alamat Laboratorium</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="" placeholder="Alamat Lab" required>
+                                <input type="text" class="form-control" id="alamat" name="alamat" value=""
+                                       placeholder="Alamat Lab" required>
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold text-dark">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="no_telp" name= "no_telp" value="" placeholder="Nomor Telepon" required>
+                                <input type="text" class="form-control" id="no_telp" name="no_telp" value=""
+                                       placeholder="Nomor Telepon" required>
                             </div>
                             <div class="form-group">
                                 <label for="gambar">Pilih Foto : </label>

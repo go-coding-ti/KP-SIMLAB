@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 route::get('/','LoginController@index')->middleware('guest');
 
-route::post('/logins','LoginController@login')->name('logins');
+route::post('/logins','LoginController@login')->name('logins')->middleware('guest');
 route::get('/logouts','LoginController@logout')->name('logouts');
 
 Route::group(['middleware'=>'AdminMiddleware'],function(){
@@ -53,6 +53,21 @@ route::get('/laboran',function (){
     return view('welcome');
 });
 
+Route::group(['middleware'=>'LaboranMiddleware'],function (){
+    //Index
+    route::get('/kepala','KetuaLab\KetuaLabController@index')->name('ketua-lab-index');
+
+    //Peminjaman
+    route::get('/kepala/peminjaman/{id}','KetuaLab\KetuaLabPeminjamanController@index')->name('kepala-lab-peminjaman');
+    route::get('/kepala/peminjaman/approve/{id}','KetuaLab\KetuaLabPeminjamanController@approval')->name('kepala-lab-approval');
+    route::post('/kepala/peminjaman/refuse/','KetuaLab\KetuaLabPeminjamanController@refuse')->name('kepala-lab-refusal');
+
+    //Teknisi
+    route::get('/kepala/teknisi/{id}','KetuaLab\KetuaLabTeknisiController@index')->name('kepala-lab-teknisi');
+    route::post('/kepala/teknisi/tambah','KetuaLab\KetuaLabTeknisiController@insert')->name('kepala-lab-insert-teknisi');
+    route::post('/kepala/teknisi/update','KetuaLab\KetuaLabTeknisiController@update')->name('kepala-lab-update-teknisi');
+    route::delete('/kepala/teknisi/delete/{id_user}/{id_lab}','KetuaLab\KetuaLabTeknisiController@delete')->name('kepala-lab-delete-teknisi');
+});
 
 
 Auth::routes();

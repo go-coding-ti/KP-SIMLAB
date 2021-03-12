@@ -16,6 +16,7 @@ class tb_bidang extends Model
     ];
 
     public $timestamps = [ 'deleted_at', ];
+
     public function relasiBidangtoLayanan(){
     	return $this->hasMany('App\tb_layanan','id_bidang', 'id_bidang');
     }

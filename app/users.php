@@ -8,7 +8,7 @@ class users extends Model
 {
     protected $table = 'users';
     protected $fillable = [
-        'id','name','email_verified_at','password','remember_token','alamat','no_hp','hak_akses','foto_user',
+        'id','name','email','email_verified_at','password','remember_token','alamat','no_hp','hak_akses','foto_user',
     ];
 
     public function relasiUserToPeminjaman()

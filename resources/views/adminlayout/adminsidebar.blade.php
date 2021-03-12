@@ -13,10 +13,10 @@
         <hr class="sidebar-divider my-0">
         <div class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
           <div class="sidebar-brand-icon">
-            <img class="border" style="height:60px;width:50px;" src="{{asset('assets/admin/img/guest.png')}}">
+            <img class="border rounded-circle" style="height:50px;width:50px;" src="{{asset('assets/admin/img/guest.png')}}">
           </div>
           <div style="font-size: 10px !important;margin-left:10px;" class="sidebar-brand-text my-3">
-            I Kadek Dwi Yatna Priyoga
+            Admin <br>{{\Illuminate\Support\Facades\Auth::user()->name}}
           </div>
         </div>
         <!-- Divider -->
@@ -63,7 +63,7 @@
         </li>
         </div>
 
-        
+
         <!-- Nav Item - Charts -->
         <!--<li class="nav-item">
           <a class="nav-link" href="charts.html">
