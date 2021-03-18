@@ -55,7 +55,7 @@
                                 <td>
                                     @if($doto->keterangan==1)
                                         <a class="btn btn-outline-success btn-sm"
-                                           href="/ketualab/peminjaman/approve/{{$doto->id_peminjaman}}">
+                                           href="/kepala/peminjaman/approve/{{$doto->id_peminjaman}}">
                                             <i class="fa fa-check-circle"></i>
                                         </a>
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal"

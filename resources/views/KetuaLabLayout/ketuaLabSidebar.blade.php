@@ -27,9 +27,29 @@
     <!-- Nav Item - Dashboard -->
     <div class="nav-item">
         <li class="@yield('active2')">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/kepala">
                 <i class="fa fa-fw fa-bell"></i>
                 <span>Dashboard</span></a>
+        </li>
+    </div>
+
+    <div class="nav-item">
+        <li class="@yield('activeReport')">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRemu"
+               aria-expanded="true" aria-controls="collapseRemu">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Report</span>
+            </a>
+            <div id="collapseRemu" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Report Labs:</h6>
+                    @foreach($menuSidebar as $hA)
+                        <div class="collapse-item">
+                            <a class="@yield('collapse1')" href="/kepala/report/{{$hA->labRelation->id_laboratorium}}" title="{{$hA->labRelation->nama_lab}}">{{\Illuminate\Support\Str::limit($hA->labRelation->nama_lab, 20) }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </li>
     </div>
 
@@ -42,6 +62,7 @@
             </a>
             <div id="collapsePeminjaman" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">List Peminjaman :</h6>
                     @foreach($menuSidebar as $hA)
                         <div class="collapse-item">
                             <a href="/kepala/peminjaman/{{$hA->labRelation->id_laboratorium}}" title="{{$hA->labRelation->nama_lab}}">{{\Illuminate\Support\Str::limit($hA->labRelation->nama_lab, 20) }}</a>
@@ -51,8 +72,10 @@
             </div>
         </li>
     </div>
-
-
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Lain - lain
+    </div>
     <div class="nav-item">
         <li class="@yield('activeTeknisi')">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeknisi"
@@ -62,6 +85,7 @@
             </a>
             <div id="collapseTeknisi" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Teknisi Saya :</h6>
                     @foreach($menuSidebar as $hA)
                         <div class="collapse-item">
                             <a href="/kepala/teknisi/{{$hA->labRelation->id_laboratorium}}" title="{{$hA->labRelation->nama_lab}}">{{\Illuminate\Support\Str::limit($hA->labRelation->nama_lab, 20) }}</a>
@@ -73,32 +97,29 @@
     </div>
 
     <div class="nav-item">
-        <li class="@yield('active2')">
-            <a class="nav-link" href="#">
-                <i class="fa fa-fw fa-scroll"></i>
-                <span>Berita</span></a>
-        </li>
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <div class="nav-item">
-        <li class="@yield('active3')">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRemu"
+        <li class="@yield('activeBerita')">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBerita"
                aria-expanded="true" aria-controls="collapseRemu">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Report</span>
+                <i class="fas fa-fw fa-scroll"></i>
+                <span>Berita Lab</span>
             </a>
-            <div id="collapseRemu" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
+            <div id="collapseBerita" class="collapse" aria-labelledby="headingRemu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Berita Labs:</h6>
                     @foreach($menuSidebar as $hA)
                         <div class="collapse-item">
-                            <a class="@yield('collapse1')" href="#" title="{{$hA->labRelation->nama_lab}}">{{\Illuminate\Support\Str::limit($hA->labRelation->nama_lab, 20) }}</a>
+                            <a href="/kepala/berita/{{$hA->labRelation->id_laboratorium}}" title="{{$hA->labRelation->nama_lab}}">{{\Illuminate\Support\Str::limit($hA->labRelation->nama_lab, 20) }}</a>
                         </div>
                     @endforeach
                 </div>
             </div>
         </li>
     </div>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
 
 
     <!-- Nav Item - Charts -->

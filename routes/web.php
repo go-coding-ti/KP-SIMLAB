@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KetuaLab\Utilities;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,12 @@ Route::group(['middleware'=>'LaboranMiddleware'],function (){
     route::post('/kepala/teknisi/tambah','KetuaLab\KetuaLabTeknisiController@insert')->name('kepala-lab-insert-teknisi');
     route::post('/kepala/teknisi/update','KetuaLab\KetuaLabTeknisiController@update')->name('kepala-lab-update-teknisi');
     route::delete('/kepala/teknisi/delete/{id_user}/{id_lab}','KetuaLab\KetuaLabTeknisiController@delete')->name('kepala-lab-delete-teknisi');
+
+    //Berita
+    route::get('/kepala/berita/{id}','KetuaLab\KetuaLabBeritaController@index')->name('kepala-lab-berita');
+
+    route::get('/kepala/report/{id}','KetuaLab\KetuaLabReportController@index')->name('kepala-lab-report');
+
 });
 
 

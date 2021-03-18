@@ -1,9 +1,12 @@
 @extends('KetuaLabLayout.layout')
+@section('activeTeknisi')
+    nav-item active
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="card-footer py-3 d-flex flex-row align-items-center justify-content-between">
-            <h4>Teknisi Saya</h4>
-            <button chref="#" data-toggle="modal" data-target="#tambah"><span class="fas fa-plus"></span>Tambah Pengguna</button>
+            <h5 class="m-0 font-weight-bold text-primary">Teknisi Saya</h5>
+            <button chref="#" data-toggle="modal" data-target="#tambah" class="btn" ><i class="fas fa-plus"></i>Tambah Pengguna</button>
         </div>
         <div class="row">
             @foreach($dataPengguna as $user)
@@ -12,17 +15,25 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="font-weight-bold text-primary">Nama Teknisi :
-                                        <br><small>{{$user->userRelation->name}}</small></h6>
-                                    <h6 class="font-weight-bold text-primary">Email :
-                                        <br><small>{{$user->userRelation->email}}</small></h6>
-                                    <h6 class="font-weight-bold text-primary">No Hp :
-                                        <br><small>{{$user->userRelation->no_hp}}</small></h6>
-                                    <h7 class="font-weight-bold text-primary">Alamat :
-                                        <br><small>{{$user->userRelation->alamat}}</small></h7>
+                                    <div class="form-group">
+                                        <h6 class="font-weight-bold text-primary">Nama Teknisi :
+                                            <br><small>{{$user->userRelation->name}}</small></h6>
+                                    </div>
+                                    <div class="form-group">
+                                        <h6 class="font-weight-bold text-primary">Email :
+                                            <br><small>{{$user->userRelation->email}}</small></h6>
+                                    </div>
+                                    <div class="form-group">
+                                        <h6 class="font-weight-bold text-primary">No Hp :
+                                            <br><small>{{$user->userRelation->no_hp}}</small></h6>
+                                    </div>
+                                    <div class="form-group">
+                                        <h7 class="font-weight-bold text-primary">Alamat :
+                                            <br><small>{{$user->userRelation->alamat}}</small></h7>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img class="rounded-circle img-fluid" src="/profile_images/{{$user->userRelation->foto_user}}">
+                                    <img class="rounded-circle img-fluid" src="/profile_images/{{$user->userRelation->foto_user}}" style="width: 150px; height: 150px">
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,7 @@
             <img class="border rounded-circle" style="height:50px;width:50px;" src="{{asset('assets/admin/img/guest.png')}}">
           </div>
           <div style="font-size: 10px !important;margin-left:10px;" class="sidebar-brand-text my-3">
-            Admin <br>{{\Illuminate\Support\Facades\Auth::user()->name}}
+            Admin <br>
           </div>
         </div>
         <!-- Divider -->

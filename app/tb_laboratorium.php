@@ -16,8 +16,14 @@ class tb_laboratorium extends Model
     ];
 
     public $timestamps = [ 'deleted_at', ];
+
     public function relasiLaboratoriumToBidang()
     {
         return $this->hasMany('App\tb_bidang','id_laboratorium','id_laboratorium');
+    }
+
+    public function berita()
+    {
+        return $this->hasMany('App\tb_berita','id_laboratorium','id_laboratorium');
     }
 }

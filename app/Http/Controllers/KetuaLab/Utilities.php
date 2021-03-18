@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\KetuaLab;
 
 use App\tb_laboran;
+use App\tb_laboratorium;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,27 @@ class Utilities
             if($hakAkses->hak_akses=='kepala lab'){
                 $hakAkses = tb_laboran::where('id_user',Auth::user()->id)->with('labRelation')->get();
                 return $hakAkses;
+            }
+        }
+    }
+
+    public static function getLab($id){
+        $labData = tb_laboratorium::where('id_laboratorium',$id)->first();
+        if($labData){
+            return $labData;
+        }
+    }
+
+    public static function getMyLab(){
+        $labData = tb_laboran::where('id_user',Auth::user()->id)->first();
+        $myIdLab = array();
+        if($labData){
+            if($labData->hak_akses=='kepala lab'){
+                $labData = tb_laboran::where('id_user',Auth::user()->id)->with('labRelation')->get();
+                foreach ($labData as $lb){
+                    $myIdLab[] = $lb->id_laboratorium;
+                }
+                return $myIdLab;
             }
         }
     }

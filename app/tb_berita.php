@@ -24,4 +24,6 @@ class tb_berita extends Model
         return $this->belongsTo('App\tb_laboratorium','id_laboratorium','id_laboratorium');
     }
 
+
+
 }
