@@ -20,7 +20,7 @@
         <!-- Copy drisini -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Daftar Peminjaman - {{$lab->nama_lab}}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Layanan Bidang - Bidang 1</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -28,56 +28,38 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th style="text-align:center;">Nama</th>
-                            <th style="text-align:center;">Layanan</th>
-                            <th style="text-align:center;">Tanggal Peminjaman</th>
-                            <th style="text-align:center;">Harga Total</th>
+                            <th style="text-align:center;">Nama Layanan</th>
+                            <th style="text-align:center;">Satuan</th>
+                            <th style="text-align:center;">Harga</th>
+                            <th style="text-align:center;">Keterangan</th>
                             <th style="text-align:center;">Status</th>
                             <th style="text-align:center;">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $d => $doto)
+
                             <tr>
-                                <td style="text-align:center;">{{$d + 1}}</td>
-                                <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToUser->name, 50) }}</td>
-                                <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToLayanan->nama_layanan, 50)}}</td>
-                                <td>{{$doto->tgl_pinjam}}</td>
-                                <td> RP. {{$doto->total_harga}}</td>
-                                <td>@if($doto->keterangan==1)
-                                        <a class="btn btn-primary text-white">Menunggu Konfirmasi</a>
-                                    @elseif($doto->keterangan==2)
-                                        <a class="btn btn-success text-white">Terkonfirmasi</a>
-                                    @else
-                                        <a class="btn btn-danger text-white">Ditolak</a>
-                                    @endif
-                                </td>
+                                <td style="text-align:center;">1</td>
+                                <td>Layanan 1</td>
+                                <td>Sampel</td>
+                                <td>IDR. 50.000</td>
+                                <td>Keterangan 1</td>
+                                <td>Diterima</td>
                                 <td>
-                                    @if($doto->keterangan==1)
-                                        <a class="btn btn-outline-success btn-sm"
-                                           href="/kepala/peminjaman/approve/{{$doto->id_peminjaman}}">
-                                            <i class="fa fa-check-circle"></i>
-                                        </a>
-                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                                                data-target="#showRefuse{{$doto->id_peminjaman}}"><i
-                                                class="fa fa-ban"></i></a>
-                                        </button>
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#show{{$doto->id_peminjaman}}"><i class="fa fa-eye"></i>
-                                        </button>
-                                    @elseif($doto->keterangan==2)
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#show{{$doto->id_peminjaman}}"><i class="fa fa-eye"></i>
-                                        </button>
-                                    @else
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#show{{$doto->id_peminjaman}}"><i class="fa fa-eye"></i>
-                                        </button>
-                                @endif
-                                <!-- Show -->
+                                    <a class="btn btn-outline-success btn-sm"
+                                       href="/kepala/peminjaman/approve/{{$doto->id_peminjaman}}">
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                                            data-target="#showRefuse{{$doto->id_peminjaman}}"><i
+                                            class="fa fa-ban"></i></a>
+                                    </button>
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#show{{$doto->id_peminjaman}}"><i class="fa fa-eye"></i>
+                                    </button>
+                                    <!-- Show -->
                                 </td>
                             </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>

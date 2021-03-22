@@ -10,13 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class Utilities
 {
     public static function sideBarMenu(){
-        $hakAkses = tb_laboran::where('id_user',Auth::user()->id)->first();
-        if($hakAkses){
-            if($hakAkses->hak_akses=='kepala lab'){
-                $hakAkses = tb_laboran::where('id_user',Auth::user()->id)->with('labRelation')->get();
-                return $hakAkses;
-            }
-        }
+        $hakAkses = tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','kepala lab')->with('labRelation')->get();
+        return $hakAkses;
     }
 
     public static function getLab($id){
@@ -27,17 +22,12 @@ class Utilities
     }
 
     public static function getMyLab(){
-        $labData = tb_laboran::where('id_user',Auth::user()->id)->first();
+        $labData = tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','kepala lab')->with('labRelation')->get();
         $myIdLab = array();
-        if($labData){
-            if($labData->hak_akses=='kepala lab'){
-                $labData = tb_laboran::where('id_user',Auth::user()->id)->with('labRelation')->get();
-                foreach ($labData as $lb){
-                    $myIdLab[] = $lb->id_laboratorium;
-                }
-                return $myIdLab;
-            }
+        foreach ($labData as $lb){
+            $myIdLab[] = $lb->id_laboratorium;
         }
+        return $myIdLab;
     }
 
 }

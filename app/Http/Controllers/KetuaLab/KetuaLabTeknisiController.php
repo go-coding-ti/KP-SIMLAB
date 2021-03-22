@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\tb_laboran;
 use App\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class KetuaLabTeknisiController extends Controller
 {
 
     public function index($id){
-        $menuSidebar = Utilities::sideBarMenu();
-        $dataPengguna = tb_laboran::where('id_laboratorium',$id)->where('hak_akses','teknisi')->with('userRelation')->get();
-        return view('KetuaLab.penggunaKepalaLab',compact('menuSidebar','dataPengguna'));
+        $check = tb_laboran::where('id_laboratorium',$id)->where('id_user',Auth::user()->id)->where('hak_akses','kepala lab')->with('userRelation')->first();
+        if($check){
+            $menuSidebar = Utilities::sideBarMenu();
+            $dataPengguna = tb_laboran::where('id_laboratorium',$id)->where('hak_akses','teknisi')->with('userRelation')->get();
+            return view('KetuaLab.penggunaKepalaLab',compact('menuSidebar','dataPengguna'));
+        } return redirect()->back();
     }
 
     public function insert(Request $request){
