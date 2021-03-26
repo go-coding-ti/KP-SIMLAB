@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\KetuaLab;
 
 use App\Http\Controllers\Controller;
+use App\tb_laboran;
 use App\tb_laboratorium;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KetuaLabBeritaController extends Controller
 {

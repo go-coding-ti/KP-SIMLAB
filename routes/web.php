@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KetuaLab\Utilities;
+use App\Http\Controllers\TeknisiLab\TeknisiLabUtilities;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +55,7 @@ route::get('/laboran',function (){
     return view('welcome');
 });
 
-Route::group(['middleware'=>'LaboranMiddleware'],function (){
+Route::group(['middleware'=>'KepalaLaboranMiddleware'],function (){
     //Index
     route::get('/kepala','KetuaLab\KetuaLabController@index')->name('ketua-lab-index');
 
@@ -72,8 +73,48 @@ Route::group(['middleware'=>'LaboranMiddleware'],function (){
     //Berita
     route::get('/kepala/berita/{id}','KetuaLab\KetuaLabBeritaController@index')->name('kepala-lab-berita');
 
+    //Report
     route::get('/kepala/report/{id}','KetuaLab\KetuaLabReportController@index')->name('kepala-lab-report');
 
+    //Bidang
+    route::get('/kepala/bidang/{id}','KetuaLab\KetuaLabBidangController@index');
+    route::post('/kepala/bidang/terima','KetuaLab\KetuaLabBidangController@terima');
+    route::post('/kepala/bidang/tolak','KetuaLab\KetuaLabBidangController@tolak');
+
+    //Layanan
+    route::get('/kepala/layanan/{id}/{bidang}','KetuaLab\KetuaLabLayananController@index');
+    route::post('/kepala/layanan/terima','KetuaLab\KetuaLabLayananController@terima');
+    route::post('/kepala/layanan/tolak','KetuaLab\KetuaLabLayananController@tolak');
+
+
+
+});
+
+Route::group(['middleware'=>'TeknisiMiddleware'],function (){
+    route::get('/teknisi',function (){
+        $menuSidebar = TeknisiLabUtilities::sideBarMenu();
+        return view('TeknisiLab.dashboard',compact('menuSidebar'));
+    });
+
+    route::get('/teknisi/bidang/{id}/{lab_name}','TeknisiLab\TeknisiLabBidangController@index');
+    route::post('/teknisi/bidang/tambah','TeknisiLab\TeknisiLabBidangController@create')->name('tambah-bidang-teknisi');
+    route::post('/teknisi/bidang/update','TeknisiLab\TeknisiLabBidangController@update')->name('update-bidang-teknisi');
+    route::delete('/teknisi/bidang/delete/{id_bidang}/{nama_bidang}/{id_laboratorium}','TeknisiLab\TeknisiLabBidangController@delete');
+    route::get('/teknisi/bidang/delete/batal/{id_bidang}/{nama_bidang}/{id_laboratorium}','TeknisiLab\TeknisiLabBidangController@batal');
+
+
+    route::get('/teknisi/layanan/{id}/{nama_bidang}','TeknisiLab\TeknisiLabLayananController@index');
+    route::post('/teknisi/layanan/tambah','TeknisiLab\TeknisiLabLayananController@create')->name('tambah-layanan-teknisi');
+    route::post('/teknisi/layanan/update','TeknisiLab\TeknisiLabLayananController@update')->name('update-layanan-teknisi');
+    route::delete('/teknisi/layanan/delete/{id_layanan}/{nama_layanan}/{id_bidang}','TeknisiLab\TeknisiLabLayananController@delete');
+    route::get('/teknisi/layanan/delete/batal/{id_layanan}/{nama_layanan}/{id_bidang}','TeknisiLab\TeknisiLabLayananController@batal');
+
+    route::get('/teknisi/{id}/berita','TeknisiLab\TeknisiLabBeritaController@index');
+    route::get('/teknisi/berita/tambah','TeknisiLab\TeknisiLabBeritaController@addIndeks')->name('tambah-berita-teknisi');
+    route::post('/teknisi/berita/tambah/post','TeknisiLab\TeknisiLabBeritaController@create')->name('tambah-post-berita-teknisi');
+    route::get('/teknisi/{id}/berita/update','TeknisiLab\TeknisiLabBeritaController@updateIndex');
+    route::post('/teknisi/berita/update/post','TeknisiLab\TeknisiLabBeritaController@update')->name('update-berita-teknisi');
+    route::delete('/teknisi/berita/delete/{id}','TeknisiLab\TeknisiLabBeritaController@delete');
 });
 
 

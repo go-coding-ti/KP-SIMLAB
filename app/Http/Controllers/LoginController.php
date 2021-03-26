@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\tb_laboran;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,12 @@ class LoginController extends Controller
     public function index(Request $request){
         if(session('admin')){
             return redirect('/peminjamanadmin');
-        } elseif (session('laboran')){
-            return redirect('/laboran');
+        } elseif (session('kepala')){
+            return redirect('/kepala');
+        } elseif (session('pimpinan')){
+            return redirect('/pimpinan');
+        } elseif (session('teknisi')){
+            return redirect('/teknisi');
         } else {
             return view('admin.login');
         }
@@ -26,8 +31,18 @@ class LoginController extends Controller
             if(Hash::check($request->password, $user->password)){
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                     if($user->hak_akses == 2){
-                        session(['laboran'=>true]);
-                        return redirect('/kepala');
+                        if(tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','kepala')->first()){
+                            session(['kepala'=>true]);
+                            return redirect('/kepala');
+                        }
+                        if(tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','pimpinan')->first()){
+                            session(['pimpinan'=>true]);
+                            return redirect('/pimpinan');
+                        }
+                        if(tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','teknisi')->first()){
+                            session(['teknisi'=>true]);
+                            return redirect('/teknisi');
+                        }
                     } elseif ($user->hak_akses == 3){
                         session(['admin'=>true]);
                         return redirect('/peminjamanadmin');

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class LaboranMiddleware
+class KepalaLaboranMiddleware
 {
     /**
      * Handle an incoming request.

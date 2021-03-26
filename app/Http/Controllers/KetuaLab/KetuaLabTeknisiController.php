@@ -22,19 +22,19 @@ class KetuaLabTeknisiController extends Controller
     }
 
     public function insert(Request $request){
-        if($request->hasfile('file')) {
-            $file = $request->file('file');
-            $file_name = time()."_".$file->getClientOriginalName();
-            $file->move(public_path().'/profile_images/', $file_name);
-            $dataUser = users::create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'no_hp'=>$request->no_hp,
-                'alamat'=>$request->alamat,
-                'password'=>Hash::make($request->password),
-                'hak_akses'=>2,
-                'foto_user'=>$file_name,
-            ]);
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:App\users,email',
+            'password'=>'required|min:6',
+            'id_lab'=>'required',
+        ]);
+        $dataUser = users::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'hak_akses'=>2,
+        ]);
+        if($dataUser){
             $arrayLaboratorium = $request->input('id_lab');
             foreach ( $arrayLaboratorium as $al){
                 tb_laboran::create([
@@ -44,39 +44,14 @@ class KetuaLabTeknisiController extends Controller
                 ]);
             }
             return redirect()->back();
-        } else {
-            $dataUser = users::create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'no_hp'=>$request->no_hp,
-                'alamat'=>$request->alamat,
-                'password'=>Hash::make($request->password),
-                'hak_akses'=>2,
-            ]);
-            $arrayLaboratorium = $request->input('id_lab');
-            foreach ( $arrayLaboratorium as $al){
-                tb_laboran::create([
-                    'hak_akses'=>'teknisi',
-                    'id_user'=>$dataUser->id,
-                    'id_laboratorium'=>$arrayLaboratorium,
-                ]);
-            }
-            return redirect()->back();
         }
+        return redirect()->back();
     }
 
     public function update(Request $request){
         $dataUser = users::find($request->id_user);
         $dataUser->name=$request->name;
         $dataUser->email=$request->email;
-        $dataUser->no_hp=$request->no_hp;
-        $dataUser->alamat=$request->alamat;
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $file_name = time()."_".$file->getClientOriginalName();
-            $file->move(public_path().'/profile_images/', $file_name);
-            $dataUser->foto_user = $file_name;
-        }
         $dataUser->save();
         return redirect()->back();
     }
