@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\tb_bidang;
 use App\tb_laboran;
 use App\tb_layanan;
+use App\users;
+use App\User;
 use App\tb_peminjaman;
 use DateTime;
 use Illuminate\Http\Request;
@@ -16,6 +18,8 @@ class KetuaLabController extends Controller
 
     public function index()
     {
+        
+        $user = users::find(Auth::user()->id);
         $menuSidebar = Utilities::sideBarMenu();
         $myLayanan = $this->allMyLab(Utilities::getMyLab());
         $perbulanGrafik = tb_peminjaman::selectRaw('sum(total_harga) as total, month(tgl_order) as month')->whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->groupBy('month')->orderByRaw('DATE_FORMAT(month,"%m")')->get();
@@ -38,17 +42,21 @@ class KetuaLabController extends Controller
             $json_bulan[] = $monthname;
         }
 
-        foreach ($laporan as $pelaporan) {
-            $totalBulanan = $totalBulanan + $pelaporan->sub_total;
+        if(count($laporan)>0){
+            foreach ($laporan as $pelaporan) {
+                $totalBulanan = $totalBulanan + $pelaporan->sub_total;
+            }
+            $totalBulanan = $totalBulanan / count($laporan);
         }
-        $totalBulanan = $totalBulanan / count($laporan);
 
-        foreach ($tahunan as $pelaporantahunan) {
-            $totalTahunan = $totalTahunan + $pelaporantahunan->sub_total;
+        if(count($tahunan)>0){
+            foreach ($tahunan as $pelaporantahunan) {
+                $totalTahunan = $totalTahunan + $pelaporantahunan->sub_total;
+            }
+            $totalTahunan = $totalTahunan / count($tahunan);
         }
-        $totalTahunan = $totalTahunan / count($tahunan);
 
-        return view('KetuaLab.dashboard', compact('menuSidebar', 'json_total', 'json_bulan', 'totalBulanan', 'totalTahunan', 'totalCount', 'laporanTabel'));
+        return view('KetuaLab.dashboard', compact('user','menuSidebar', 'json_total', 'json_bulan', 'totalBulanan', 'totalTahunan', 'totalCount', 'laporanTabel'));
     }
 
     public function allMyLab($id)
@@ -68,5 +76,10 @@ class KetuaLabController extends Controller
             $arrayData1[] = $data[$i]['id_layanan'];
         }
         return $arrayData1;
+    }
+    
+    public function readNotif($id){
+        $user = User::find($id);
+        $user->unreadNotifications->markAsRead();
     }
 }

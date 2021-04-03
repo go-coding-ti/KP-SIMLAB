@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function relasiUserToPeminjaman()
+    {
+        return $this->hasMany('App\tb_peminjaman','id_peminjam','id');
+    }
+
+    public function laboran(){
+        return $this->hasMany('App\tb_laboran', 'id_user', 'id');
+    }
 }

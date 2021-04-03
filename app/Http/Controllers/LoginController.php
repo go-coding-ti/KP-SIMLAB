@@ -31,7 +31,7 @@ class LoginController extends Controller
             if(Hash::check($request->password, $user->password)){
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                     if($user->hak_akses == 2){
-                        if(tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','kepala')->first()){
+                        if(tb_laboran::where('id_user',Auth::user()->id)->where('hak_akses','kepala lab')->first()){
                             session(['kepala'=>true]);
                             return redirect('/kepala');
                         }

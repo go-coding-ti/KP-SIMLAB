@@ -114,7 +114,17 @@
 <!-- Multi Input JQuery -->
 @yield('script')
 
-
+<script>
+    function notifClick(id_user){
+        jQuery.ajax({
+                url: "/notif/read/"+id_user,
+                method: 'get',
+                success: function(result){
+                    console.log('success');
+                }
+        });
+    }
+</script>
 
 
 </body>

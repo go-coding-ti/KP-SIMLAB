@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\tb_berita;
 use App\tb_bidang;
 use App\tb_laboratorium;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeknisiLabBeritaController extends Controller
@@ -54,5 +55,11 @@ class TeknisiLabBeritaController extends Controller
         $data = tb_berita::where('id_berita',$id)->first();
         $data->delete();
         return redirect()->back();
+    }
+
+    public function readNotif($id){
+        $user = User::find($id);
+
+        $user->unreadNotifications->markAsRead();
     }
 }

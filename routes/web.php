@@ -58,6 +58,7 @@ route::get('/laboran',function (){
 Route::group(['middleware'=>'KepalaLaboranMiddleware'],function (){
     //Index
     route::get('/kepala','KetuaLab\KetuaLabController@index')->name('ketua-lab-index');
+    route::get('/notif/read/{id}', 'KetuaLab\KetuaLabController@readNotif');
 
     //Peminjaman
     route::get('/kepala/peminjaman/{id}','KetuaLab\KetuaLabPeminjamanController@index')->name('kepala-lab-peminjaman');

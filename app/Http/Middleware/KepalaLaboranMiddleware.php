@@ -15,7 +15,7 @@ class KepalaLaboranMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!session('laboran')){
+        if(!session('kepala')){
             return redirect()->back();
         };
         return $next($request);
