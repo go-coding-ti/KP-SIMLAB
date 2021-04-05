@@ -53,7 +53,11 @@
                         Notification
                       </h6>
                       @foreach (Auth::user()->unReadNotifications as $notif)
+                      @if($notif->data['tipe']=='bidang')
                       <a class="dropdown-item d-flex align-items-center" href="/kepala/bidang/{{$notif->data['id_lab']}}">
+                      @elseif($notif->data['tipe']=='layanan')
+                      <a class="dropdown-item d-flex align-items-center" href="/kepala/layanan/{{$notif->data['id_bidang']}}/{{$notif->data['nama_bid']}}">
+                      @endif
                       <span class="font-weight-bold"></span>
                         <div class="mr-3">
                           <div class="icon-circle bg-primary">

@@ -9,14 +9,15 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id','name','email','email_verified_at','password','remember_token','alamat','no_hp','hak_akses','foto_user',
     ];
 
     /**

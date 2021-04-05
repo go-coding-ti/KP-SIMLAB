@@ -6,10 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\tb_laboratorium;
+use App\tb_bidang;
 
 class KetuaLabNotification extends Notification
 {
     use Queueable;
+
 
     /**
      * Create a new notification instance.
@@ -19,8 +22,8 @@ class KetuaLabNotification extends Notification
     public function __construct($status,$id_lab,$id_bidang,$user)
     {
         $this->status = $status;
-        $this->id_lab = $id_lab;
         $this->id_bidang = $id_bidang;
+        $this->id_lab =$id_lab;
         $this->user = $user;
     }
 
@@ -61,15 +64,15 @@ class KetuaLabNotification extends Notification
         $id_bidang = $this->id_bidang;
         $id_lab = $this->id_lab;
         $pesan = '';
-
         $lab = tb_laboratorium::find($id_lab);
-
         $nama_lab = $lab->nama_lab;
+        $bid = tb_bidang::find($id_bidang);
+        $nama_bid = $bid->nama_bidang;
 
         if($status == 1){
-            $pesan = "Teknisi ".$this->user->name." mengajukan penambahan bidang baru";
+            $pesan = "Pengajuan Bidang ".$nama_bid." Diterima";
         }else if($status == 2){
-            $pesan = "Teknisi ".$this->user->name." mengajukan pembatalan";
+            $pesan = "Pengajuan Pembaharuan Bidang ".$nama_bid." Ditolak";
         }
         
         $data = ['pesan' => $pesan, 'id_bidang' => $id_bidang, 'id_lab' => $id_lab, 'nama_lab' => $nama_lab];

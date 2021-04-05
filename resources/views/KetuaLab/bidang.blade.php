@@ -31,8 +31,10 @@
                                         Diterima
                                     @elseif($bidang->status == 0)
                                         Belum Diterima
-                                    @else
-                                        Tidak Diterima
+                                    @elseif($bidang->status == 3)
+                                       Permohonan Penghapusan
+                                       @else
+                                       Tidak Diterima
                                     @endif</td>
                                 <td>
                                     @if($bidang->status == 0)

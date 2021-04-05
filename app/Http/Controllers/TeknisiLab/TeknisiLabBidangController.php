@@ -28,12 +28,22 @@ class TeknisiLabBidangController extends Controller
     }
 
     public function update(Request $request){
+        $usr = Auth::user();
         $getBidangData = tb_bidang::where('id_bidang',$request->id_bidang)->where('nama_bidang',$request->old_nama_bidang)->where('id_laboratorium',$request->id_laboratorium)->first();
         if($getBidangData){
             $getBidangData->nama_bidang = $request->nama_bidang;
             $getBidangData->status = 0;
             $getBidangData->id_laboratorium = $request->id_lab;
             $getBidangData->save();
+
+            $this->id_lab = $request->id_lab;
+
+            $tb_laboran = tb_laboran::where('id_laboratorium',$this->id_lab)->where('hak_akses','kepala lab')->pluck('id_user');
+            $users = User::whereIn('id',$tb_laboran)->get();
+
+            foreach($users as $user){
+                $user->notify(new TeknisiNotification(3,$request->id_laboratorium,$request->id_bidang,$usr,'bidang'));
+            }
             return redirect()->back();
         }
     }
@@ -52,7 +62,7 @@ class TeknisiLabBidangController extends Controller
             })->get();
 
             foreach($users as $user){
-                $user->notify(new TeknisiNotification(2,$id_laboratorium,$id_bidang,$usr));
+                $user->notify(new TeknisiNotification(2,$id_laboratorium,$id_bidang,$usr,'bidang'));
             }
 
             return redirect()->back();
@@ -83,7 +93,7 @@ class TeknisiLabBidangController extends Controller
             $user_id = User::max('id');
 
             foreach($users as $user){
-                $user->notify(new TeknisiNotification(1,$al,$user_id,$usr));
+                $user->notify(new TeknisiNotification(1,$al,$user_id,$usr,'bidang'));
             }
             
         }

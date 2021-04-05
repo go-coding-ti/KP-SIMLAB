@@ -60,7 +60,7 @@
                           </div>
                         </div>
                         <div>
-                          {{-- <div class="small text-gray-500">{{$loop->iteration}}</div> --}}
+                        
                           <a href="/teknisi/bidang/{{$notif->data['id_lab']}}/{{$notif->data['nama_lab']}}"><span class="font-weight-bold">{{$notif->data['pesan']}}</span></a>
                         </div>
                       </a>
