@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/95583e2c69.js" crossorigin="anonymous"></script>
 
     <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
+    @yield('css')
 </head>
 
 <body id="page-top">

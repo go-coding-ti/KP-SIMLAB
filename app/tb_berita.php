@@ -12,7 +12,7 @@ class tb_berita extends Model
     protected $table = 'tb_berita';
     protected $primaryKey = 'id_berita';
     protected $fillable = [
-        'id_berita','id_laboratorium','judul','isi',
+        'id_berita','id_laboratorium','judul','isi','timestamp'
     ];
 
     public $timestamps = [

@@ -11,7 +11,7 @@ class tb_layanan extends Model
     protected $table = 'tb_layanan';
     protected $primaryKey = 'id_layanan';
     protected $fillable = [
-        'id_layanan','nama_layanan','unit_satuan','satuan','harga','id_bidang','keterangan','status',
+        'id_layanan','nama_layanan','unit_satuan','satuan','harga','id_bidang','keterangan','status','status_aktif','keterangan_perubahan','keterangan_aktif',
     ];
 
     public function relasiLayananToBidang()

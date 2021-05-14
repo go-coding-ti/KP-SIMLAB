@@ -18,10 +18,46 @@ use Illuminate\Support\Facades\Route;
 
 route::get('/','LoginController@index')->middleware('guest');
 
+Route::get('/log-berita',function (){
+    return view('PimpinanLab.activityLogBerita');
+});
+
+Route::get('/log-bidang',function (){
+    return view('PimpinanLab.activityLogBidang');
+});
+
+Route::get('/log-laboratorium',function (){
+    return view('PimpinanLab.activityLogLaboratorium');
+});
+
+Route::get('/log-layanan',function (){
+    return view('PimpinanLab.activityLogLayanan');
+});
+
+Route::get('/laporan-test',function (){
+    return view('laporan');
+});
+
+route::post('/log/layanan','Pimpinan\activityLog@logLayanan');
+route::post('/log/view/layanan','Pimpinan\activityLog@viewLogLayanan');
+
+route::post('/log/laboratorium','Pimpinan\activityLog@logLaboratorium');
+route::post('/log/view/laboratorium','Pimpinan\activityLog@viewLogLaboratorium');
+
+route::post('/log/bidang','Pimpinan\activityLog@logBidang');
+route::post('/log/view/bidang','Pimpinan\activityLog@viewLogBidang');
+
+route::post('/log/berita','Pimpinan\activityLog@logBerita');
+route::post('/log/view/berita','Pimpinan\activityLog@viewLogBerita');
+
 route::post('/logins','LoginController@login')->name('logins')->middleware('guest');
 route::get('/logouts','LoginController@logout')->name('logouts');
 
+
+
 Route::group(['middleware'=>'AdminMiddleware'],function(){
+    Route::get('/admin/profile', 'HomeController@profile');
+    Route::post('/admin/profile/update','HomeController@editProfile')->name('editProfileAdmin');
     route::get('/peminjamanadmin','ControllerPeminjaman@readPeminjaman')->name('ReadAllPeminjaman');
     // layanan
     route::get('/layananadmin','ControllerLayanan@readLayanan');
@@ -86,8 +122,13 @@ Route::group(['middleware'=>'KepalaLaboranMiddleware'],function (){
     route::get('/kepala/layanan/{id}/{bidang}','KetuaLab\KetuaLabLayananController@index');
     route::post('/kepala/layanan/terima','KetuaLab\KetuaLabLayananController@terima');
     route::post('/kepala/layanan/tolak','KetuaLab\KetuaLabLayananController@tolak');
+    route::post('/kapala/layanan/terima/hapus','KetuaLab\KetuaLabLayananController@penghapusan');
+    route::post('/kepala/layanan/tolak/hapus','KetuaLab\KetuaLabLayananController@tolakPenghapusan');
+    route::post('/kepala/layanan/aktifkan','KetuaLab\KetuaLabLayananController@aktifkan');
+    route::post('/kepala/layanan/nonaktifkan','KetuaLab\KetuaLabLayananController@nonaktifkan');
 
-
+    Route::get('/kepala/calendar','KetuaLab\KetuaLabPinjamController@calendar');
+    Route::post('/kepala/calendar/view','KetuaLab\KetuaLabPinjamController@ajaxGetPeminjaman');
 
 });
 
@@ -118,7 +159,39 @@ Route::group(['middleware'=>'TeknisiMiddleware'],function (){
     route::delete('/teknisi/berita/delete/{id}','TeknisiLab\TeknisiLabBeritaController@delete');
 });
 
+Route::group(['middleware'=>'PimpinanMiddleware'],function (){
+    Route::get('/pimpinan','Pimpinan\PimpinanLabController@index');
+
+    Route::get('/pimpinan/ketua/{id}','Pimpinan\PimpinanAkunKetuaLabController@index');
+    Route::post('/pimpinan/ketuas/tambah','Pimpinan\PimpinanAkunKetuaLabController@insert');
+    Route::post('/pimpinan/ketua/update','Pimpinan\PimpinanAkunKetuaLabController@update');
+    Route::delete('/pimpinan/ketua/delete/{id_user}/{id_lab}','Pimpinan\PimpinanAkunKetuaLabController@delete');
+
+    Route::get('/pimpinan/bidang/{id}','Pimpinan\PimpinanBidangController@index');
+    Route::post('/pimpinan/bidang/terima/aktif','Pimpinan\PimpinanBidangController@terimaAktif');
+    Route::post('/pimpinan/bidang/tolak/aktif','Pimpinan\PimpinanBidangController@tolakAktif');
+    Route::post('/pimpinan/bidang/terima/nonaktif','Pimpinan\PimpinanBidangController@terimaNonaktif');
+    Route::post('/pimpinan/bidang/tolak/nonaktif','Pimpinan\PimpinanBidangController@tolakNonaktif');
+    Route::post('/pimpinan/bidang/self/aktif','Pimpinan\PimpinanBidangController@selfAktif');
+    Route::post('/pimpinan/bidang/self/nonaktif','Pimpinan\PimpinanBidangController@selfNonaktif');
+
+    Route::get('/pimpinan/layanan/{id}','Pimpinan\PimpinanLayananController@index');
+    Route::post('/pimpinan/layanan/terima/aktif','Pimpinan\PimpinanLayananController@terimaAktif');
+    Route::post('/pimpinan/layanan/tolak/aktif','Pimpinan\PimpinanLayananController@tolakAktif');
+    Route::post('/pimpinan/layanan/terima/nonaktif','Pimpinan\PimpinanLayananController@terimaNonaktif');
+    Route::post('/pimpinan/layanan/tolak/nonaktif','Pimpinan\PimpinanLayananController@tolakNonaktif');
+    Route::post('/pimpinan/layanan/self/aktif','Pimpinan\PimpinanLayananController@selfAktif');
+    Route::post('/pimpinan/layanan/self/nonaktif','Pimpinan\PimpinanLayananController@selfNonaktif');
+
+    Route::get('/pimpinan/profile','Pimpinan\PimpinanLabController@profile')->name('profilePimpinan');
+    Route::post('/pimpinan/profile/update','Pimpinan\PimpinanLabController@editProfile')->name('editProfilePimpinan');
+
+    Route::post('/pimpinan/getCalendar','Pimpinan\PimpinanLabController@ajaxGetPeminjaman');
+
+    route::get('/pimpinan/calendar','Pimpinan\PimpinanLabController@calendar');
+});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

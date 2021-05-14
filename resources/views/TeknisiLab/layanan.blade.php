@@ -47,7 +47,7 @@
                                         Ditolak
                                     @endif</td>
                                 <td>
-                                    @if($layanan->status == 0 || $layanan->status==1)
+                                    @if($layanan->status == 0 || $layanan->status==1 || $layanan->status==2)
                                         <button class="btn btn-primary" href="#" data-toggle="modal"
                                                 data-target="#terima{{$layanan->id_layanan}}"><i
                                                 class="fa fa-edit"></i>
@@ -114,7 +114,7 @@
         </div>
 
         @foreach($getLayanan->relasiBidangtoLayanan as $glayanan)
-            @if($glayanan->status==0 || $glayanan->status==1)
+            @if($glayanan->status==0 || $glayanan->status==1 || $glayanan->status==2)
                 <div class="modal fade" id="terima{{$glayanan->id_layanan}}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

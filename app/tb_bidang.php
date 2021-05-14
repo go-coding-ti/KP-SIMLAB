@@ -12,7 +12,7 @@ class tb_bidang extends Model
     protected $table = 'tb_bidang';
     protected $primaryKey = 'id_bidang';
     protected $fillable = [
-        'id_bidang','nama_bidang','id_laboratorium','status',
+        'id_bidang','nama_bidang','id_laboratorium','status','status_aktif','keterangan_perubahan','keterangan_aktif',
     ];
 
     public $timestamps = [ 'deleted_at', ];

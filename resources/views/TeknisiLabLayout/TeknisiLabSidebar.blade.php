@@ -18,7 +18,7 @@
                  src="{{asset('assets/admin/img/guest.png')}}">
         </div>
         <div style="font-size: 10px !important;margin-left:10px;"
-             class="sidebar-brand-text my-3">{{\Illuminate\Support\Facades\Auth::user()->name}}
+             class="sidebar-brand-text my-3">Teknisi <br>{{\Illuminate\Support\Facades\Auth::user()->name}}
         </div>
     </div>
     <!-- Divider -->
@@ -27,7 +27,7 @@
     <!-- Nav Item - Dashboard -->
     <div class="nav-item">
         <li class="@yield('active2')">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/teknisi">
                 <i class="fa fa-fw fa-bell"></i>
                 <span>Dashboard</span></a>
         </li>

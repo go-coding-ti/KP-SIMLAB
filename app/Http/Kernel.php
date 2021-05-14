@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'KepalaLaboranMiddleware'=>\App\Http\Middleware\KepalaLaboranMiddleware::class,
         'AdminMiddleware'=>\App\Http\Middleware\AdminMiddleware::class,
         'TeknisiMiddleware'=>\App\Http\Middleware\TeknisiMiddleware::class,
+        'PimpinanMiddleware'=>\App\Http\Middleware\PimpinanMiddleware::class,
     ];
 }

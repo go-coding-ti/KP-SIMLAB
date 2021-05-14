@@ -1,4 +1,4 @@
-@extends('adminlayout.layout')
+@extends('TeknisiLabLayout.layout')
 @section('content')
     <div class="container-fluid">
         <div class="card shadow mb-4">

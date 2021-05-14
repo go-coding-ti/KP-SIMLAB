@@ -37,19 +37,19 @@ class TeknisiLabLayananController extends Controller
             $getLayanan->id_bidang = $request->id_bidang;
             $getLayanan->save();
 
-            $datalayanan = tb_layanan::where('id_layanan',$getLayanan->id_layanan)->with('relasiLayananToBidang')->first();
+            $datalayanan = tb_layanan::where('id_layanan', $getLayanan->id_layanan)->with('relasiLayananToBidang')->first();
             $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
             // $users = User::with('laboran')->whereHas('laboran', function($q){
             //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
             // })->get();
 
-            $tb_laboran = tb_laboran::where('id_laboratorium',$this->id_lab)->where('hak_akses','kepala lab')->pluck('id_user');
-            $users = User::whereIn('id',$tb_laboran)->get();
+            $tb_laboran = tb_laboran::where('id_laboratorium', $this->id_lab)->where('hak_akses', 'kepala lab')->pluck('id_user');
+            $users = User::whereIn('id', $tb_laboran)->get();
 
-            foreach($users as $user){
-                $user->notify(new TeknisiNotification(6,$this->id_lab,$request->id_bidang,$usr,'layanan'));
+            foreach ($users as $user) {
+                $user->notify(new TeknisiNotification(6, $this->id_lab, $request->id_bidang, $usr, 'layanan'));
             }
-            
+
             return redirect()->back();
         }
     }
@@ -59,21 +59,46 @@ class TeknisiLabLayananController extends Controller
         $usr = Auth::user();
         $getLayanan = tb_layanan::where('id_layanan', $id_layanan)->where('nama_layanan', $nama_layanan)->where('id_bidang', $id_bidang)->first();
         if ($getLayanan) {
-            $getLayanan->status = 3;
-            $getLayanan->save();
+            if ($getLayanan->status == 1){
+                $getLayanan->status = 3;
+                $getLayanan->save();
+                $datalayanan = tb_layanan::where('id_layanan', $id_layanan)->with('relasiLayananToBidang')->first();
+                $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
+                // $users = User::with('laboran')->whereHas('laboran', function($q){
+                //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
+                // })->get();
 
-            $datalayanan = tb_layanan::where('id_layanan',$id_layanan)->with('relasiLayananToBidang')->first();
-            $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
-            // $users = User::with('laboran')->whereHas('laboran', function($q){
-            //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
-            // })->get();
+                $tb_laboran = tb_laboran::where('id_laboratorium', $this->id_lab)->where('hak_akses', 'kepala lab')->pluck('id_user');
+                $users = User::whereIn('id', $tb_laboran)->get();
 
-            $tb_laboran = tb_laboran::where('id_laboratorium',$this->id_lab)->where('hak_akses','kepala lab')->pluck('id_user');
-            $users = User::whereIn('id',$tb_laboran)->get();
-
-            foreach($users as $user){
-                $user->notify(new TeknisiNotification(5,$this->id_lab,$id_bidang,$usr,'layanan'));
+                foreach ($users as $user) {
+                    $user->notify(new TeknisiNotification(7, $this->id_lab, $id_bidang, $usr, 'layanan'));
+                }
+                return redirect()->back();
             }
+            elseif ($getLayanan->status==0){
+                $getLayanan->status = 3;
+                $getLayanan->save();
+                $datalayanan = tb_layanan::where('id_layanan', $id_layanan)->with('relasiLayananToBidang')->first();
+                $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
+                // $users = User::with('laboran')->whereHas('laboran', function($q){
+                //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
+                // })->get();
+
+                $tb_laboran = tb_laboran::where('id_laboratorium', $this->id_lab)->where('hak_akses', 'kepala lab')->pluck('id_user');
+                $users = User::whereIn('id', $tb_laboran)->get();
+
+                foreach ($users as $user) {
+                    $user->notify(new TeknisiNotification(7, $this->id_lab, $id_bidang, $usr, 'layanan'));
+                }
+                return redirect()->back();
+            }
+            elseif ($getLayanan->status == 2) {
+                $getLayanan->delete();
+                return redirect()->back();
+            }
+
+
             return redirect()->back();
         }
     }
@@ -97,25 +122,26 @@ class TeknisiLabLayananController extends Controller
             'status' => 0,
         ]);
 
-            
-            $datalayanan = tb_layanan::where('id_layanan',$layanan->id_layanan)->with('relasiLayananToBidang')->first();
-            $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
-            // $users = User::with('laboran')->whereHas('laboran', function($q){
-            //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
-            // })->get();
 
-            $tb_laboran = tb_laboran::where('id_laboratorium',$this->id_lab)->where('hak_akses','kepala lab')->pluck('id_user');
-            $users = User::whereIn('id',$tb_laboran)->get();
+        $datalayanan = tb_layanan::where('id_layanan', $layanan->id_layanan)->with('relasiLayananToBidang')->first();
+        $this->id_lab = $datalayanan->relasiLayananToBidang->relasiBidangToLaboratorium->id_laboratorium;
+        // $users = User::with('laboran')->whereHas('laboran', function($q){
+        //     return $q->where('hak_akses', 'kepala lab')->where('id_laboratorium',$this->id_lab);
+        // })->get();
 
-            foreach($users as $user){
-                $user->notify(new TeknisiNotification(4,$this->id_lab,$layanan->id_bidang,$usr,'layanan'));
-            }
+        $tb_laboran = tb_laboran::where('id_laboratorium', $this->id_lab)->where('hak_akses', 'kepala lab')->pluck('id_user');
+        $users = User::whereIn('id', $tb_laboran)->get();
+
+        foreach ($users as $user) {
+            $user->notify(new TeknisiNotification(4, $this->id_lab, $layanan->id_bidang, $usr, 'layanan'));
+        }
         return redirect()->back();
     }
 
-    public function batal($id_layanan, $nama_layanan, $id_bidang){
+    public function batal($id_layanan, $nama_layanan, $id_bidang)
+    {
         $getLayanan = tb_layanan::where('id_layanan', $id_layanan)->where('nama_layanan', $nama_layanan)->where('id_bidang', $id_bidang)->first();
-        if($getLayanan){
+        if ($getLayanan) {
             $getLayanan->status = 0;
             $getLayanan->save();
             return redirect()->back();

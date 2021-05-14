@@ -1,4 +1,4 @@
-@extends('adminlayout.layout')
+@extends('PimpinanLayout.layout')
 @section('content')
     <div class="container">
         <div class="row gutters">
@@ -20,7 +20,7 @@
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
-                        <form method="POST" action="{{route('editProfileAdmin')}}"
+                        <form method="POST" action="{{route('editProfilePimpinan')}}"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="row gutters">
@@ -30,16 +30,14 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="fullName">Nama</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                               value="{{$data->name}}"
+                                        <input type="text" class="form-control" id="name" name="name" value="{{$data->name}}"
                                                placeholder="Enter full name">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="eMail">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email"
-                                               value="{{$data->email}}"
+                                        <input type="email" class="form-control" id="email" name="email" value="{{$data->email}}"
                                                placeholder="Enter email ID" readonly>
                                     </div>
                                 </div>

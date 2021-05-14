@@ -83,6 +83,8 @@ class TeknisiNotification extends Notification
             $pesan = "Teknisi ".$this->user->name." Mengajukan Pembatalan Pengajuan Layanan Pada Bidang ".$nama_bid."";
         }else if($status == 6){
             $pesan = "Teknisi ".$this->user->name." Mengajukan Pembaharuan Layanan Pada Bidang ".$nama_bid."";
+        }else if($status == 7){
+            $pesan = "Teknisi ".$this->user->name." Mengajukan Penghapusan Layanan Pada Bidang ".$nama_bid."";
         }
 
 
