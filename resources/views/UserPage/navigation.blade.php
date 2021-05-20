@@ -6,9 +6,6 @@
             <!-- NAV -->
             <ul class="main-nav nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Laboratorium</a></li>
-                <li><a href="#">Bidang</a></li>
-                <li><a href="#">Layanan</a></li>
             </ul>
             <!-- /NAV -->
         </div>

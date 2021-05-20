@@ -22,6 +22,18 @@ Route::get('/user-test-page',function (){
     return view('UserPage.userProfile');
 });
 
+Route::get('/store-test-page',function (){
+    return view('UserPage.store');
+});
+
+Route::get('/product-detail-test-page',function (){
+    return view('UserPage.product');
+});
+
+Route::get('/checkout-test-page',function (){
+    return view('UserPage.checkout');
+});
+
 Route::get('/log-berita',function (){
     return view('PimpinanLab.activityLogBerita');
 });
