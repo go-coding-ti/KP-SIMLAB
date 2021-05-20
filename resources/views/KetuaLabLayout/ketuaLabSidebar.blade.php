@@ -18,7 +18,7 @@
                  src="{{asset('assets/admin/img/guest.png')}}">
         </div>
         <div style="font-size: 10px !important;margin-left:10px;"
-             class="sidebar-brand-text my-3">{{\Illuminate\Support\Facades\Auth::user()->name}}
+             class="sidebar-brand-text my-3">Kepala Lab <br>{{\Illuminate\Support\Facades\Auth::user()->name}}
         </div>
     </div>
     <!-- Divider -->
@@ -30,6 +30,14 @@
             <a class="nav-link" href="/kepala">
                 <i class="fa fa-fw fa-bell"></i>
                 <span>Dashboard</span></a>
+        </li>
+    </div>
+
+    <div class="nav-item">
+        <li class="@yield('calendar')">
+            <a class="nav-link" href="/kepala/calendar">
+                <i class="fa fa-fw fa-calendar"></i>
+                <span>Calendar</span></a>
         </li>
     </div>
 

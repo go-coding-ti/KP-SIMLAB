@@ -10,6 +10,7 @@ use App\tb_layanan;
 use App\tb_peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KetuaLabPeminjamanController extends Controller
 {
@@ -36,6 +37,7 @@ class KetuaLabPeminjamanController extends Controller
         $approvalData = tb_peminjaman::find($id);
         $approvalData->keterangan=2;
         $approvalData->save();
+        Alert::success('Berhasil', 'Peminjaman berhasil diterima!');
         return redirect()->back();
     }
 
@@ -44,6 +46,7 @@ class KetuaLabPeminjamanController extends Controller
         $refuseData->keterangan=3;
         $refuseData->alasan=$request->alasan;
         $refuseData->save();
+        Alert::info('Berhasil', 'Peminjaman berhasil ditolak!');
         return redirect()->back();
     }
 }

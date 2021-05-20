@@ -12,17 +12,7 @@ class LoginController extends Controller
 {
 
     public function index(Request $request){
-        if(session('admin')){
-            return redirect('/peminjamanadmin');
-        } elseif (session('kepala')){
-            return redirect('/kepala');
-        } elseif (session('pimpinan')){
-            return redirect('/pimpinan');
-        } elseif (session('teknisi')){
-            return redirect('/teknisi');
-        } else {
-            return view('admin.login');
-        }
+        return view('admin.login');
     }
 
     public function login(Request $request){

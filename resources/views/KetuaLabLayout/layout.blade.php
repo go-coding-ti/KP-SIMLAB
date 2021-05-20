@@ -8,8 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>SIM LAB</title>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -100,8 +106,6 @@
 <script src="{{ asset('assets/admin/vendor/chart.js/Chart.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{ asset('assets/admin/js/demo/chart-pie-demo.js')}}"></script>
-<!-- Page level custom scripts -->
 <script src="{{ asset('assets/admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/demo/datatables-demo.js')}}"></script>
@@ -126,7 +130,7 @@
     }
 </script>
 
-
+@include('sweetalert::alert')
 </body>
 
 </html>

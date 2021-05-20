@@ -15,7 +15,7 @@
         <!-- Content Row -->
         <div class="row">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-3">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center ">
@@ -34,7 +34,7 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-3">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -53,15 +53,33 @@
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-3">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2 p-3">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Jumlah Transaksi
+                                    Transaksi Bulan {{\Carbon\Carbon::now()->format('F')}}
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalCount}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$transactionThisMonth}}</div>
+                            </div>
+                            <div class="col-auto p-3">
+                                <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-3">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2 p-3">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Transaksi Tahun {{\Carbon\Carbon::now()->format('Y')}}
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$transactionThisYear}}</div>
                             </div>
                             <div class="col-auto p-3">
                                 <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
@@ -77,7 +95,7 @@
         <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-12 col-lg-11">
+            <div class="col-xl-6 col-lg-5">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div
@@ -88,6 +106,33 @@
                     <div class="card-body">
                         <div class="chart-area">
                             <canvas id="myAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center ">
+                        <h6 class="m-0 font-weight-bold text-primary">Transaksi Layanan ({{\Carbon\Carbon::now()->format('Y')}})</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Menunggu Konfirmasi
+                                        </span>
+                            <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Peminjaman Diterima
+                                        </span>
+                            <span class="mr-2">
+                                            <i class="fas fa-circle text-danger"></i> Peminjaman Ditolak
+                                        </span>
                         </div>
                     </div>
                 </div>
@@ -249,6 +294,37 @@
                     }
                 }
             }
+        });
+
+        // Pie Chart Example
+        var ctxs = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctxs, {
+            type: 'pie',
+            data: {
+                labels: {!! json_encode($json_pie_keterangan) !!},
+                datasets: [{
+                    data: {!! json_encode($json_pie_jumlah_transaksi) !!},
+                    backgroundColor: ['#36b9cc', '#1cc88a', '#FF0000'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#8B0000'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+            },
         });
     </script>
 @endsection

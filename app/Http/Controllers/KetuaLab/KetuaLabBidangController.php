@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Notifications\KetuaLabNotification;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KetuaLabBidangController extends Controller
 {
@@ -33,6 +34,7 @@ class KetuaLabBidangController extends Controller
             foreach($users as $user){
                 $user->notify(new KetuaLabNotification(1,$this->id_lab,$request->id_bidang,$usr));
             }
+        Alert::success('Berhasil', 'Bidang telah berhasil diterima!');
         return redirect()->back();
     }
 
@@ -40,6 +42,7 @@ class KetuaLabBidangController extends Controller
         $getBidang = tb_bidang::where('id_bidang',$request->id_bidang)->where('nama_bidang',$request->nama_bidang)->firstOrFail();
         $getBidang->status=2;
         $getBidang->save();
+        Alert::info('Berhasil', 'Bidang telah berhasil ditolak!');
         return redirect()->back();
     }
 }
