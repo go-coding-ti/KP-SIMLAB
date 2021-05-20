@@ -5,9 +5,13 @@ namespace App\Http\Controllers\KetuaLab;
 use App\Http\Controllers\Controller;
 use App\tb_laboran;
 use App\users;
+use App\Helpers\AlertHelper;
+use RealRashid\SweetAlert\ToSweetAlert;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KetuaLabTeknisiController extends Controller
 {
@@ -22,18 +26,24 @@ class KetuaLabTeknisiController extends Controller
     }
 
     public function insert(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'=>'required',
             'email'=>'required|email|unique:App\users,email',
             'password'=>'required|min:6',
             'id_lab'=>'required',
         ]);
+        if ($validator->fails()) {
+            AlertHelper::dataAlert('error','Error','Ooops, sepertinya terdapat kesalahan!');
+            return back()->withInput();
+        }
+
         $dataUser = users::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'hak_akses'=>2,
         ]);
+
         if($dataUser){
             $arrayLaboratorium = $request->input('id_lab');
             foreach ( $arrayLaboratorium as $al){
@@ -43,9 +53,11 @@ class KetuaLabTeknisiController extends Controller
                     'id_laboratorium'=>$al,
                 ]);
             }
-            return redirect()->back();
+            AlertHelper::dataAlert('success','Berhasil','Teknisi berhasil dibuat!');
+            return back();
         }
-        return redirect()->back();
+        AlertHelper::dataAlert('error','Error','Ooops, sepertinya terdapat kesalahan!');
+        return back();
     }
 
     public function update(Request $request){
@@ -53,12 +65,14 @@ class KetuaLabTeknisiController extends Controller
         $dataUser->name=$request->name;
         $dataUser->email=$request->email;
         $dataUser->save();
+        AlertHelper::dataAlert('success','Berhasil','Teknisi berhasil diupdate!');
         return redirect()->back();
     }
 
     public function delete($id_user, $id_lab){
         $deleteUser = tb_laboran::where('id_user',$id_user)->where('id_laboratorium',$id_lab)->first();
         $deleteUser->delete();
-        return redirect()->back()->with('success','Data berhasil didelete!');
+        AlertHelper::dataAlert('info','Info','Teknisi berhasil dihapus!');
+        return redirect()->back();
     }
 }

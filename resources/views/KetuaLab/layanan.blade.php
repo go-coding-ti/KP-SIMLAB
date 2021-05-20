@@ -34,11 +34,11 @@
                                 <td>IDR {{number_format($layanan->harga)}}</td>
                                 <td>{{$layanan->keterangan}}</td>
                                 <td>@if($layanan->status == 1)
-                                        Diterima
+                                        Aktif
                                         @if($layanan->status_aktif==0)
-                                            - Tidak Aktif
+
                                         @elseif($layanan->status_aktif==1)
-                                            - Aktif
+
                                         @elseif($layanan->status_aktif==2)
                                             - Permohonan pengaktifan
                                         @elseif($layanan->status_aktif==3)
@@ -47,11 +47,11 @@
                                     @elseif($layanan->status == 0)
                                         Belum Diterima
                                     @elseif($layanan->status == 2)
-                                        Permohonan Ditolak
+                                        Tidak Aktif
                                         @if($layanan->status_aktif==0)
-                                            - Tidak Aktif
+
                                         @elseif($layanan->status_aktif==1)
-                                            - Aktif
+
                                         @elseif($layanan->status_aktif==2)
                                             - Permohonan pengaktifan
                                         @elseif($layanan->status_aktif==3)

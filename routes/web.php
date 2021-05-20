@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 route::get('/','LoginController@index')->middleware('guest');
 
+Route::get('/user-test-page',function (){
+    return view('UserPage.userProfile');
+});
+
 Route::get('/log-berita',function (){
     return view('PimpinanLab.activityLogBerita');
 });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\tb_bidang;
 use App\tb_layanan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KetuaLabLayananController extends Controller
 {
@@ -20,14 +21,16 @@ class KetuaLabLayananController extends Controller
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->firstOrFail();
         $getLayanan->status=1;
         $getLayanan->save();
-        return redirect()->back()->with('success','Permohonan telah diterima!!');
+        Alert::success('Berhasil', 'Permohonan telah diterima!!');
+        return redirect()->back();
     }
 
     public function tolak(Request $request){
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->firstOrFail();
         $getLayanan->status=2;
         $getLayanan->save();
-        return redirect()->back()->with('success','Permohonan ditolak!!');
+        Alert::info('Berhasil', 'Permohonan ditolak!!');
+        return redirect()->back();
     }
 
     public function aktifkan(Request $request)
@@ -35,7 +38,8 @@ class KetuaLabLayananController extends Controller
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->where('status_aktif',0)->firstOrFail();
         $getLayanan->status_aktif=2;
         $getLayanan->save();
-        return redirect()->back()->with('success','Permohonan telah diajukan!!');
+        Alert::info('Berhasil', 'Permohonan telah diajukan!!');
+        return redirect()->back();
     }
 
     public function nonaktifkan(Request $request)
@@ -43,13 +47,15 @@ class KetuaLabLayananController extends Controller
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->where('status_aktif',1)->firstOrFail();
         $getLayanan->status_aktif=3;
         $getLayanan->save();
-        return redirect()->back()->with('success','Permohonan telah diajukan!!');
+        Alert::info('Berhasil', 'Permohonan telah diajukan!!');
+        return redirect()->back();
     }
 
     public function penghapusan(Request $request){
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->firstOrFail();
         $getLayanan->delete();
-        return redirect()->back()->with('success','Layanan telah dihapus !!');
+        Alert::info('Berhasil', 'Layanan berhasil dihapus !!');
+        return redirect()->back();
     }
 
     public function tolakPenghapusan(Request $request)
@@ -57,6 +63,7 @@ class KetuaLabLayananController extends Controller
         $getLayanan = tb_layanan::where('id_layanan',$request->id_layanan)->where('nama_layanan',$request->nama_layanan)->firstOrFail();
         $getLayanan->status=2;
         $getLayanan->save();
-        return redirect()->back()->with('success','Pembatalan penghapusan layanan berhasil !!');
+        Alert::info('Berhasil', 'Pembatalan penghapusan layanan berhasil !!');
+        return redirect()->back();
     }
 }
