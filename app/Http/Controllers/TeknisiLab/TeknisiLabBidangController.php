@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TeknisiLab;
 
+use App\Helpers\AlertHelper;
 use App\Http\Controllers\Controller;
 use App\tb_bidang;
 use App\tb_laboran;
@@ -44,8 +45,11 @@ class TeknisiLabBidangController extends Controller
             foreach($users as $user){
                 $user->notify(new TeknisiNotification(3,$request->id_laboratorium,$request->id_bidang,$usr,'bidang'));
             }
+            AlertHelper::dataAlert('success','Success','Data berhasil diupdate!!');
             return redirect()->back();
         }
+        AlertHelper::dataAlert('errors','Error','Data tidak ditemukan!!');
+        return redirect()->back();
     }
 
     public function delete($id_bidang, $nama_bidang,$id_laboratorium){
@@ -64,9 +68,11 @@ class TeknisiLabBidangController extends Controller
             foreach($users as $user){
                 $user->notify(new TeknisiNotification(2,$id_laboratorium,$id_bidang,$usr,'bidang'));
             }
-
+            AlertHelper::dataAlert('info','Success','Data berhasil dihapus!!');
             return redirect()->back();
         }
+        AlertHelper::dataAlert('errors','Error','Data tidak ditemukan!!');
+        return redirect()->back();
     }
 
     public function create(Request $request){
@@ -95,7 +101,7 @@ class TeknisiLabBidangController extends Controller
             foreach($users as $user){
                 $user->notify(new TeknisiNotification(1,$al,$user_id,$usr,'bidang'));
             }
-            
+
         }
 
         return redirect()->back();

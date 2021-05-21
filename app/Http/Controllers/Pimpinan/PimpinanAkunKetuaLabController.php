@@ -61,7 +61,7 @@ class PimpinanAkunKetuaLabController extends Controller
             }
             return redirect()->back()->with('error','Data tidak ditemukan!');
         }
-        return redirect()->back()->with('error','Data tidak ditemukan!');
+        return redirect()->back()->with('errors','Data tidak ditemukan!');
     }
 
     public function delete($id_user, $id_lab){

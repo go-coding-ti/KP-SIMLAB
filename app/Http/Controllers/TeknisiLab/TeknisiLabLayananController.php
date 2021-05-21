@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TeknisiLab;
 
+use App\Helpers\AlertHelper;
 use App\Http\Controllers\Controller;
 use App\tb_bidang;
 use App\tb_laboran;
@@ -50,8 +51,13 @@ class TeknisiLabLayananController extends Controller
                 $user->notify(new TeknisiNotification(6, $this->id_lab, $request->id_bidang, $usr, 'layanan'));
             }
 
+            AlertHelper::dataAlert('success','Success','Data berhasil diupdate!!');
             return redirect()->back();
         }
+
+        AlertHelper::dataAlert('errors','Error','Data tidak ditemukan!!');
+        return redirect()->back();
+
     }
 
     public function delete($id_layanan, $nama_layanan, $id_bidang)
@@ -74,6 +80,7 @@ class TeknisiLabLayananController extends Controller
                 foreach ($users as $user) {
                     $user->notify(new TeknisiNotification(7, $this->id_lab, $id_bidang, $usr, 'layanan'));
                 }
+                AlertHelper::dataAlert('success','Success','Pengajuan penghapusan layanan berhasil!!');
                 return redirect()->back();
             }
             elseif ($getLayanan->status==0){
@@ -91,14 +98,14 @@ class TeknisiLabLayananController extends Controller
                 foreach ($users as $user) {
                     $user->notify(new TeknisiNotification(7, $this->id_lab, $id_bidang, $usr, 'layanan'));
                 }
+                AlertHelper::dataAlert('success','Success','Pengajuan penghapusan layanan berhasil!!');
                 return redirect()->back();
             }
             elseif ($getLayanan->status == 2) {
                 $getLayanan->delete();
+                AlertHelper::dataAlert('success','Success','Penghapusan layanan berhasil!!');
                 return redirect()->back();
             }
-
-
             return redirect()->back();
         }
     }
@@ -135,6 +142,7 @@ class TeknisiLabLayananController extends Controller
         foreach ($users as $user) {
             $user->notify(new TeknisiNotification(4, $this->id_lab, $layanan->id_bidang, $usr, 'layanan'));
         }
+        AlertHelper::dataAlert('success','Success','Data berhasil ditambahkan!!');
         return redirect()->back();
     }
 
@@ -144,6 +152,7 @@ class TeknisiLabLayananController extends Controller
         if ($getLayanan) {
             $getLayanan->status = 0;
             $getLayanan->save();
+            AlertHelper::dataAlert('success','Success','Pembatalan berhasil!!');
             return redirect()->back();
         }
     }

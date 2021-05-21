@@ -24,7 +24,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah Nonaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
     public function tolakNonaktif(Request $request)
@@ -36,7 +36,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah ditolak!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
     public function terimaAktif(Request $request)
@@ -48,7 +48,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah diaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
     public function tolakAktif(Request $request)
@@ -60,7 +60,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah ditolak!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
     public function selfAktif(Request $request)
@@ -72,7 +72,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah diaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
     public function selfNonaktif(Request $request)
@@ -84,7 +84,7 @@ class PimpinanBidangController extends Controller
             $getBidang->save();
             return redirect()->back()->with('success', 'Bidang telah dinonaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Bidang tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Bidang tidak ditemukan!!');
     }
 
 }

@@ -25,7 +25,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah diaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
     public function tolakNonaktif(Request $request)
@@ -37,7 +37,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah ditolak!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
     public function terimaAktif(Request $request)
@@ -49,7 +49,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah diaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
     public function tolakAktif(Request $request)
@@ -61,7 +61,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah ditolak!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
     public function selfAktif(Request $request)
@@ -73,7 +73,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah diaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
     public function selfNonaktif(Request $request)
@@ -85,7 +85,7 @@ class PimpinanLayananController extends Controller
             $getLayanan->save();
             return redirect()->back()->with('success', 'Layanan telah dinonaktifkan!!');
         }
-        return redirect()->back()->with('error', 'Layanan tidak ditemukan!!');
+        return redirect()->back()->with('errors', 'Layanan tidak ditemukan!!');
     }
 
 }

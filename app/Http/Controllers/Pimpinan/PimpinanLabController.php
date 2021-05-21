@@ -57,7 +57,7 @@ class PimpinanLabController extends Controller
             $user->save();
             return redirect(route('profilePimpinan'))->with('success','Profile anda berhasil diupdate!!');
         }
-        return redirect()->back()->withInput()->with('error','Password yang anda masukan salah!!');
+        return redirect()->back()->withInput()->with('errors','Password yang anda masukan salah!!');
     }
 
     public function ajaxGetPeminjaman(Request $request){

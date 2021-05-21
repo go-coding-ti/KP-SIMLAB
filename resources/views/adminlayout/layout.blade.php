@@ -109,7 +109,7 @@
 
 <!-- Custom Javascript -->
 @yield('custom_javascript')
-
+@include('sweetalert::alert')
 </body>
 
 </html>

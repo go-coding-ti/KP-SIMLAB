@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TeknisiLab;
 
+use App\Helpers\AlertHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\logs_class;
 use App\tb_berita;
@@ -36,6 +37,7 @@ class TeknisiLabBeritaController extends Controller
             'isi' => $request->isi,
         ]);
         logs_class::berita_logs($data->id_berita, Auth::user()->id, 'add', $data->judul, $data->isi, $data->created_at);
+        AlertHelper::dataAlert('success','Berhasil','Berita berhasil dibuat!');
         return redirect('/teknisi/' . $request->id_laboratorium . '/berita');
     }
 
@@ -55,8 +57,11 @@ class TeknisiLabBeritaController extends Controller
             $data->isi = $request->isi;
             $data->save();
             logs_class::berita_logs($data->id_berita, Auth::user()->id, 'update', $data->judul, $data->isi, $data->timestamp);
+            AlertHelper::dataAlert('success','Berhasil','Data berhasil diupdate!');
             return redirect('/teknisi/' . $request->id_laboratorium . '/berita');
         }
+        AlertHelper::dataAlert('erros','Error','Data tidak ditemukan!!');
+        return back();
 
     }
 
@@ -65,6 +70,7 @@ class TeknisiLabBeritaController extends Controller
         $data = tb_berita::where('id_berita', $id)->first();
         logs_class::berita_logs($data->id_berita, Auth::user()->id, 'delete', $data->judul, $data->isi, $data->timestamp);
         $data->delete();
+        AlertHelper::dataAlert('info','Success','Data berhasil dihapus!!');
         return redirect()->back();
     }
 

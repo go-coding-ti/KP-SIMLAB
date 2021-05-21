@@ -138,7 +138,7 @@ Route::group(['middleware'=>'KepalaLaboranMiddleware'],function (){
     route::get('/kepala/layanan/{id}/{bidang}','KetuaLab\KetuaLabLayananController@index');
     route::post('/kepala/layanan/terima','KetuaLab\KetuaLabLayananController@terima');
     route::post('/kepala/layanan/tolak','KetuaLab\KetuaLabLayananController@tolak');
-    route::post('/kapala/layanan/terima/hapus','KetuaLab\KetuaLabLayananController@penghapusan');
+    route::post('/kepala/layanan/terima/hapus','KetuaLab\KetuaLabLayananController@penghapusan');
     route::post('/kepala/layanan/tolak/hapus','KetuaLab\KetuaLabLayananController@tolakPenghapusan');
     route::post('/kepala/layanan/aktifkan','KetuaLab\KetuaLabLayananController@aktifkan');
     route::post('/kepala/layanan/nonaktifkan','KetuaLab\KetuaLabLayananController@nonaktifkan');
