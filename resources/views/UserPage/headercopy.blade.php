@@ -22,7 +22,7 @@
             <!-- row -->
             <div class="row">
                 <!-- LOGO -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="header-logo">
                         <a style="height:70px !important;" class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                             <div class="sidebar-brand-icon">
@@ -33,15 +33,9 @@
                     </div>
                 </div>
                 <!-- /LOGO -->
-
                 <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search" >
-                        <form class="text-center" action="{{route('search')}}" method="POST">
-                            @csrf
-                            <input id="search" name="search" class="input input-select" placeholder="Search here">
-                            <input class="search-btn" value="Search" type="submit">
-                        </form>
+                <div class="col-md-5">
+                    <div class="header-search">
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
@@ -56,8 +50,8 @@
                                 <!-- Wishlist -->
 								<div>
                                     <a href="#">
-                                        <i class="fa fa-bell-o" style="font-size:20px;"></i>
-                                                <span>Notifikasi</span>
+                                        <i class="fa fa-bell-o"></i>
+                                        <span>Notifikasi</span>
                                         <div class="qty">2</div>
                                     </a>
 								</div>
@@ -67,9 +61,9 @@
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <div class="sidebar-brand-icon">
-                                            <img class="border rounded-circle" style="height:30px;width:30px;" src="/profile_images/{{ Auth::user()->foto_user }}">
+                                            <img class="border rounded-circle" style="height:30px;width:30px;" src="{{asset('assets/admin/img/guest.png')}}">
                                         </div>
-										<span class="text-white">{{Auth::user()->name}}</span>
+										<span>{{Auth::user()->name}}</span>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">

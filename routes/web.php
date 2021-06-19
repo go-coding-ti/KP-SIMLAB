@@ -14,21 +14,26 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-route::get('/','LoginController@index')->middleware('guest');
+Route::get('/', function () {
+    return view('UserPage.store');
+});
+Route::get('/', 'Users\StoreController@index')->name('store');
 
 Route::get('/user-test-page',function (){
     return view('UserPage.userProfile');
 });
 
-Route::get('/store-test-page',function (){
-    return view('UserPage.store');
-});
+route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
+route::post('/search', 'Users\StoreController@search')->name('search');
+// Route::get('/store-test-page',function (){
+//     return view('UserPage.store');
+// });
 
-Route::get('/product-detail-test-page',function (){
-    return view('UserPage.product');
-});
+// Route::get('/product-detail-test-page',function (){
+//     return view('UserPage.product');
+// });
+
+Route::get('/Laboratorium/{id}','Users\StoreController@show');
 
 Route::get('/checkout-test-page',function (){
     return view('UserPage.checkout');
@@ -206,8 +211,4 @@ Route::group(['middleware'=>'PimpinanMiddleware'],function (){
 
     route::get('/pimpinan/calendar','Pimpinan\PimpinanLabController@calendar');
 });
-
-
 Auth::routes();
-
-

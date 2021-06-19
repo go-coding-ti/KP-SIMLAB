@@ -36,13 +36,16 @@ class LoginController extends Controller
                     } elseif ($user->hak_akses == 3){
                         session(['admin'=>true]);
                         return redirect('/peminjamanadmin');
+
+                    } elseif ($user->hak_akses == 1){
+                        return redirect('/');
                     }
                 }
             } else {
-                return redirect('/');
+                return redirect('/logins');
             }
         } else {
-            return redirect('/');
+            return redirect('/logins');
         }
     }
 
