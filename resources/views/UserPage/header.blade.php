@@ -56,7 +56,7 @@
                                 <!-- Wishlist -->
 								<div>
                                     <a href="#">
-                                        <i class="fa fa-bell-o" style="font-size:20px;"></i>
+                                        <i class="fa fa-bell-o" style="font-size:30px;"></i>
                                                 <span>Notifikasi</span>
                                         <div class="qty">2</div>
                                     </a>
@@ -67,42 +67,43 @@
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <div class="sidebar-brand-icon">
-                                            <img class="border rounded-circle" style="height:30px;width:30px;" src="/profile_images/{{ Auth::user()->foto_user }}">
+                                            <img class="border rounded-circle" style="height:35px;width:35px;" src="/profile_images/{{ Auth::user()->foto_user }}">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Logout
+                                            </a>
                                         </div>
-										<span class="text-white">{{Auth::user()->name}}</span>
+                                        <!-- Logout Modal-->
+                                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <a class="btn btn-primary" href="{{route('logouts')}}">Logout</a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+										
 									</a>
 									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+										<div class="text-center" class="cart-summary">
+                                            <img class="border rounded-circle" style="height:60px;width:60px;" src="/profile_images/{{ Auth::user()->foto_user }}">
+											<h4>{{Auth::user()->name}}</h4>
+                                            <div>
+                                                <a href="#">Edit User</a>
+                                                
 										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
+										
 									</div>
 								</div>
 								<!-- /Cart -->
@@ -118,4 +119,6 @@
     </div>
     <!-- /MAIN HEADER -->
 </header>
+
+
 
