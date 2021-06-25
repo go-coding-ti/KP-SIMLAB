@@ -10,7 +10,7 @@ use App\tb_berita;
 class StoreController extends Controller
 {
     public function index(){
-        $Laboratorium = tb_laboratorium::paginate(9);
+        $Laboratorium = tb_laboratorium::paginate(6);
         $Berita = tb_berita::all();
         return view('UserPage.store',compact('Laboratorium','Berita'));
     }
@@ -22,7 +22,7 @@ class StoreController extends Controller
     }
 
     public function search(Request $request){
-        $Laboratorium = tb_laboratorium::where('nama_lab','like','%'.$request->search.'%')->get();
+        $Laboratorium = tb_laboratorium::where('nama_lab','like','%'.$request->search.'%')->paginate(6);
         $Berita = tb_berita::all();
         return view('UserPage.store',compact('Laboratorium','Berita'));
     }

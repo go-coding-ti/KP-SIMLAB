@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TeknisiLab;
 
 use App\Helpers\AlertHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\logs_class;
 use App\tb_bidang;
 use App\tb_laboran;
 use App\tb_laboratorium;
@@ -52,6 +53,8 @@ class TeknisiLabLayananController extends Controller
             }
 
             AlertHelper::dataAlert('success','Success','Data berhasil diupdate!!');
+
+            logs_class::layanan_logs($getLayanan->id_layanan, Auth::user()->id,'update',$getLayanan->nama_layanan,$getLayanan->satuan, $getLayanan->harga, $getLayanan->keterangan);
             return redirect()->back();
         }
 
@@ -143,6 +146,7 @@ class TeknisiLabLayananController extends Controller
             $user->notify(new TeknisiNotification(4, $this->id_lab, $layanan->id_bidang, $usr, 'layanan'));
         }
         AlertHelper::dataAlert('success','Success','Data berhasil ditambahkan!!');
+        logs_class::layanan_logs($layanan->id_layanan, Auth::user()->id,'add',$layanan->nama_layanan,$layanan->satuan, $layanan->harga, $layanan->keterangan);
         return redirect()->back();
     }
 

@@ -211,4 +211,5 @@ Route::group(['middleware'=>'PimpinanMiddleware'],function (){
 
     route::get('/pimpinan/calendar','Pimpinan\PimpinanLabController@calendar');
 });
+
 Auth::routes();
