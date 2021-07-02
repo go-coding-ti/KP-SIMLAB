@@ -131,6 +131,64 @@
     function logoutModal(condition) {
         $('#logoutModal').modal(condition);
     }
+
+    function IsiCart(id,user_id){ 
+            jQuery.ajax({
+                        url: "{{url('/Cartpenyewaan')}}",
+                        method: 'post',
+                        dataType: 'json',
+                        data: {
+                            _token: '{{csrf_token()}}',
+                            id_user: user_id,
+                            id_laboratorium: id, 
+                        },
+                        success: function(result){
+                            alert(result.success);
+                            $('#qty').text(result.jumlahcarts);
+                            console.log(result.jumlahcarts);
+                            $('#isicart').empty().append(result.carts);
+                        }
+                    });
+    }
+    function layanan(id){ 
+            var id_bidang = $('#bidangtolayanan'+id).val();
+            jQuery.ajax({
+                        url: "{{url('/layanan')}}",
+                        method: 'post',
+                        dataType: 'json',
+                        data: {
+                            _token: '{{csrf_token()}}',
+                            id_bidang: id_bidang,
+                        },
+                        success: function(result){
+                            $('#layanan'+id).empty().append(result.layanan);
+                        }
+                    });
+    }
+
+    function total(id){ 
+            var id_layanan = $('#layanan'+id).val();
+            var ek=[];
+            var total=0;
+            jQuery.ajax({
+                        url: "{{url('/total')}}",
+                        method: 'post',
+                        dataType: 'json',
+                        data: {
+                            _token: '{{csrf_token()}}',
+                            id: id_layanan,
+                        },
+                        success: function(result){
+                            $('#total'+id).empty().append(result.layanan.harga);
+                            $('#subtotal'+id).empty().append(result.layanan.harga);
+                            $('.harga').each(function() { ek.push($(this).text()); });
+                                for(var i=0;i<ek.length;i++){
+                                    total = total+parseInt(ek[i]);
+                                }
+                                $('#grand-total').empty().append(total);
+                        }
+            });
+    }
 </script>
 </body>
 </html>

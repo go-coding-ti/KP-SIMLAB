@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('UserPage.store');
 });
+
+
+
 Route::get('/', 'Users\StoreController@index')->name('store');
 
 Route::get('/user-test-page',function (){
@@ -25,6 +28,10 @@ Route::get('/user-test-page',function (){
 
 route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
 route::post('/search', 'Users\StoreController@search')->name('search');
+route::post('/Cartpenyewaan','Users\StoreController@AddCart')->name('addcart');
+route::post('/layanan','Users\CartsController@layanan')->name('layanan');
+route::post('/total','Users\CartsController@total')->name('total');
+route::get('/checkout','Users\CartsController@index');
 // Route::get('/store-test-page',function (){
 //     return view('UserPage.store');
 // });

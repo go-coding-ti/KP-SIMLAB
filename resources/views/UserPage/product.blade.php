@@ -1,4 +1,12 @@
-@extends('UserPage.layoutUsercopy')
+@php
+ if(is_null(Auth::user())){
+  $user_id = 0;
+ }else{
+  $user_id = Auth::user()->id;
+ }
+@endphp
+
+@extends('UserPage.layoutUser')
 
 @section('content')
     <!-- BREADCRUMB -->
@@ -89,7 +97,7 @@
                 <div class="col-md-12">
                     <div class="product-details">
                         <div class="add-to-cart" >
-                            <button class="add-to-cart-btn btn-block" ><i class="fa fa-shopping-cart"></i> Sewa </button>
+                            <button class="add-to-cart-btn btn-block" onclick="IsiCart({{$lab->id_laboratorium}},{{$user_id}})" ><i class="fa fa-shopping-cart"></i> Sewa </button>
                         </div>
                     </div>
                     </div>

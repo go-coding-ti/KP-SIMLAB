@@ -18,11 +18,11 @@
     <!-- MAIN HEADER -->
     <div id="header">
         <!-- container -->
-        <div class="container">
+        <div class="container-sm">
             <!-- row -->
             <div class="row">
                 <!-- LOGO -->
-                <div class="col-md-3">
+                <div class="col-md-8" >
                     <div class="header-logo">
                         <a style="height:70px !important;"
                            class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -35,36 +35,78 @@
                 </div>
                 <!-- /LOGO -->
 
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form class="text-center" action="{{route('search')}}" method="POST">
-                            @csrf
-                            <input id="search" name="search" class="input input-select" placeholder="Search here">
-                            <input class="search-btn" value="Search" type="submit">
-                        </form>
-                    </div>
-                </div>
-                <!-- /SEARCH BAR -->
+                
 
                 <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
+                <div class="col-md-4 clearfix">
+                    <div class="header-ctn" class="text-center">
                         @if (!Auth::user())
                             <a class="text-white mx-4" href="{{ route('register') }}">Register</a><span>|</span>
                             <a class="text-white mx-4" href="{{ route('logins') }}">Login</a>
                         @else
-                            <div>
+                            <!-- NOTIF -->
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-bell-o" style="font-size: 25px;"></i>
+                                    <div class="qty">2</div>
+                                </a>
+                                <div class="cart-dropdown">
+                                    <div class="text-center" class="cart-summary"></div>
+                                        <div class="product-body">
+                                            <small class="text-muted"> 26 Juni 2021 </small>
+                                            <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan bahan fakultas teknik telah diperbaharui </a></h6>
+                                            
+                                        </div>
+                                        <div class="product-body">
+                                            <small class="text-muted"> 26 Juni 2021 </small>
+                                            <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan bahan fakultas teknik telah diperbaharui </a></h6>
+                                            
+                                        </div>
+                                    <center><a href="/marknotif" class="btn" style="background-color: white;">Mark All As Read</a></center>
+                                </div>
+                            </div>
+                            <!-- NOTIF -->
+                            <!-- CART -->
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-shopping-cart" style="font-size: 25px;"></i>
+                                    <div id="qty" class="qty">{{$carts->count()}}</div>
+                                </a>
+                                <div class="cart-dropdown" id="isicart">
+                                    <div class="cart-list">
+                                        @foreach ($carts->take(3) as $cart)
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}" style="height:70px;width:70px;"alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <small class="text-muted"> {{$cart->created_at}} </small>
+                                                <h6 class="product-name"><a href="#">{{$cart->laboratorium->nama_lab}}</a></h6>
+                                            </div>
+                                            {{-- <button class="delete"><i class="fa fa-close"></i></button> --}}
+                                        </div>
+                                        @endforeach                                        
+                                                                          
+                                        </ul>
+                                        
+                                    </div>
+                                    <center><a href="/checkout" class="btn" style="background-color: white;">Show All</a></center>  
+                                </div>
+                            </div>
+                            <!-- CART -->
+                            
+                            {{-- <div>
                                 <a href="#">
                                     <i class="fa fa-bell-o" style="font-size:30px;"></i>
                                     <span>Notifikasi</span>
                                     <div class="qty">2</div>
                                 </a>
-                            </div>
+                            </div> --}}
+                            <!-- ACCOUNT -->
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-user text-light" style="font-size: 30px;"></i>
-                                    <span class="text-light">{{Auth::user()->name}}</span>
+                                    <i class="fa fa-user text-light" style="font-size: 25px;"></i>
+                                    
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="text-center" class="cart-summary">
@@ -84,10 +126,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- ACCOUNT -->
                         @endif
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 </header>
