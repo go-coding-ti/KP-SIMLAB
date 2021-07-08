@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\tb_bidang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\tb_laboratorium;
@@ -18,18 +19,19 @@ class StoreController extends Controller
         if(!is_null(Auth::user())){
             $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();
         }
-        
-        return view('UserPage.store',compact('Laboratorium','Berita','carts'));
+
+        return view('UserPage.store',compact('Laboratorium','Berita'));
     }
 
     public function show($id){
-        $getLaboratorium = tb_laboratorium::where('id_laboratorium',$id)->get();
+        $lab = tb_laboratorium::where('id_laboratorium',$id)->first();
+        $bidang = tb_bidang::where('id_laboratorium',$lab->id_laboratorium)->with('relasiBidangtoLayanan')->get();
         $Berita = tb_berita::all();
         $carts =[];
         if(!is_null(Auth::user())){
             $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();
         }
-        return view('UserPage.product',compact('getLaboratorium','Berita','carts'));
+        return view('UserPage.product',compact('lab','Berita','bidang'));
     }
 
     public function search(Request $request){
@@ -44,13 +46,13 @@ class StoreController extends Controller
             'id_laboratorium'=>$request->id_laboratorium,
             'status'=>"cart",
         ]);
-        $carts = tb_carts::with('laboratorium','user')->where('id_user',$request->id_user)->get();
+        $carts = tb_carts::with('laboratorium','user')->where('id_user',$request->id_user)->where('status','cart')->get();
         $jumlahcarts = $carts->count();
         $string = '<div>';
 
                         foreach($carts as $cart){
                             $assetImg = asset('/images/'.$cart->laboratorium->foto_lab);
-                            
+
                             $string = $string.'<div class="product-widget">
                             <div class="product-img">
                             <img src="'.$assetImg.'" style="height:70px;width:70px;"alt="">
@@ -61,10 +63,10 @@ class StoreController extends Controller
                             </div>
                             <button class="delete"><i class="fa fa-close"></i></button>
                         </div>';
-                            
+
                         }
                         $string =  $string.    '<hr>
-                            <center><a href="" class="btn" style="background-color: white;">Show All</a></center>                                
+                            <center><a href="/checkout" class="btn" style="background-color: white;">Show All</a></center>
                             </ul>
                             </div>
                         ';

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KetuaLab\Utilities;
 use App\Http\Controllers\TeknisiLab\TeknisiLabUtilities;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,8 @@ route::post('/search', 'Users\StoreController@search')->name('search');
 route::post('/Cartpenyewaan','Users\StoreController@AddCart')->name('addcart');
 route::post('/layanan','Users\CartsController@layanan')->name('layanan');
 route::post('/total','Users\CartsController@total')->name('total');
-route::get('/checkout','Users\CartsController@index');
+route::get('/checkout','Users\CartsController@index')->name('check-out-page');
+route::post('/check-out','Users\PeminjamanController@pinjam')->name('check-out-post');
 // Route::get('/store-test-page',function (){
 //     return view('UserPage.store');
 // });

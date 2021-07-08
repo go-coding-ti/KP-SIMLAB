@@ -1,5 +1,11 @@
 <header>
-    <!-- TOP HEADER -->
+@php
+    use App\tb_carts;
+    if(!is_null(\Illuminate\Support\Facades\Auth::user())){
+        $carts = tb_carts::with('laboratorium.relasiLaboratoriumToBidang','user')->where('id_user',Auth::user()->id)->where('status','cart')->get();
+    }
+@endphp
+<!-- TOP HEADER -->
     <!-- <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -22,7 +28,7 @@
             <!-- row -->
             <div class="row">
                 <!-- LOGO -->
-                <div class="col-md-8" >
+                <div class="col-md-8">
                     <div class="header-logo">
                         <a style="height:70px !important;"
                            class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -35,7 +41,6 @@
                 </div>
                 <!-- /LOGO -->
 
-                
 
                 <!-- ACCOUNT -->
                 <div class="col-md-4 clearfix">
@@ -44,7 +49,7 @@
                             <a class="text-white mx-4" href="{{ route('register') }}">Register</a><span>|</span>
                             <a class="text-white mx-4" href="{{ route('logins') }}">Login</a>
                         @else
-                            <!-- NOTIF -->
+                        <!-- NOTIF -->
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-bell-o" style="font-size: 25px;"></i>
@@ -52,20 +57,23 @@
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="text-center" class="cart-summary"></div>
-                                        <div class="product-body">
-                                            <small class="text-muted"> 26 Juni 2021 </small>
-                                            <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan bahan fakultas teknik telah diperbaharui </a></h6>
-                                            
-                                        </div>
-                                        <div class="product-body">
-                                            <small class="text-muted"> 26 Juni 2021 </small>
-                                            <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan bahan fakultas teknik telah diperbaharui </a></h6>
-                                            
-                                        </div>
-                                    <center><a href="/marknotif" class="btn" style="background-color: white;">Mark All As Read</a></center>
+                                    <div class="product-body">
+                                        <small class="text-muted"> 26 Juni 2021 </small>
+                                        <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan
+                                                bahan fakultas teknik telah diperbaharui </a></h6>
+
+                                    </div>
+                                    <div class="product-body">
+                                        <small class="text-muted"> 26 Juni 2021 </small>
+                                        <h6 class="product-name"><a href="#">Status Penyewaan Laboratorium struktur dan
+                                                bahan fakultas teknik telah diperbaharui </a></h6>
+
+                                    </div>
+                                    <center><a href="/marknotif" class="btn" style="background-color: white;">Mark All
+                                            As Read</a></center>
                                 </div>
                             </div>
-                            <!-- NOTIF -->
+
                             <!-- CART -->
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
@@ -75,38 +83,33 @@
                                 <div class="cart-dropdown" id="isicart">
                                     <div class="cart-list">
                                         @foreach ($carts->take(3) as $cart)
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}" style="height:70px;width:70px;"alt="">
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}"
+                                                         style="height:70px;width:70px;" alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <small class="text-muted"> {{$cart->created_at}} </small>
+                                                    <h6 class="product-name"><a
+                                                            href="#">{{$cart->laboratorium->nama_lab}}</a></h6>
+                                                </div>
+                                                {{-- <button class="delete"><i class="fa fa-close"></i></button> --}}
                                             </div>
-                                            <div class="product-body">
-                                                <small class="text-muted"> {{$cart->created_at}} </small>
-                                                <h6 class="product-name"><a href="#">{{$cart->laboratorium->nama_lab}}</a></h6>
-                                            </div>
-                                            {{-- <button class="delete"><i class="fa fa-close"></i></button> --}}
-                                        </div>
-                                        @endforeach                                        
-                                                                          
-                                        </ul>
-                                        
+                                            @endforeach
+
+                                            </ul>
+
                                     </div>
-                                    <center><a href="/checkout" class="btn" style="background-color: white;">Show All</a></center>  
+                                    <center><a href="/checkout" class="btn" style="background-color: white;">Show
+                                            All</a></center>
                                 </div>
                             </div>
-                            <!-- CART -->
-                            
-                            {{-- <div>
-                                <a href="#">
-                                    <i class="fa fa-bell-o" style="font-size:30px;"></i>
-                                    <span>Notifikasi</span>
-                                    <div class="qty">2</div>
-                                </a>
-                            </div> --}}
                             <!-- ACCOUNT -->
+                        
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-user text-light" style="font-size: 25px;"></i>
-                                    
+
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="text-center" class="cart-summary">
@@ -130,9 +133,9 @@
                         @endif
                     </div>
                 </div>
-            {{-- </div> --}}
+                {{-- </div> --}}
+            </div>
         </div>
-    </div>
 </header>
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"

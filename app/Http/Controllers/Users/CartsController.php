@@ -19,14 +19,14 @@ class CartsController extends Controller
         $carts =[];
         if(!is_null(Auth::user())){
             // $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();
-            $carts = tb_carts::with('laboratorium.relasiLaboratoriumToBidang','user')->where('id_user',Auth::user()->id)->get();
+            $carts = tb_carts::with('laboratorium.relasiLaboratoriumToBidang','user')->where('id_user',Auth::user()->id)->where('status','cart')->get();
         }
-       
+
         return view('UserPage.checkout',compact('Laboratorium','Berita','carts'));
     }
     public function layanan(Request $request){
         $bidangs = tb_bidang::with('relasiBidangtoLayanan')->where('id_bidang',$request->id_bidang)->get();
-        $string = '<option value="0">Pilih Layananan</option>';
+        $string = '<option value="0">Pilih Layanan</option>';
         foreach ($bidangs[0]->relasiBidangtoLayanan as $layanan){
             $string = $string.'<option value="'.$layanan->id_layanan.'">'.$layanan->nama_layanan.'</option>';
         }

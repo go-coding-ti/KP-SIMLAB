@@ -42,6 +42,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
+
         .account-settings .user-profile {
             margin: 0 0 1rem 0;
             padding-bottom: 1rem;
@@ -119,75 +120,46 @@
 @include('UserPage.footer')
 <!-- /FOOTER -->
 <!-- jQuery Plugins -->
-<script src="{{asset('electro-js/jquery.min.js')}}"></script>
+
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
-<script src="{{asset('electro-js/bootstrap.min.js')}}"></script>
+
 <script src="{{asset('electro-js/slick.min.js')}}"></script>
 <script src="{{asset('electro-js/nouislider.min.js')}}"></script>
 <script src="{{asset('electro-js/jquery.zoom.min.js')}}"></script>
 <script src="{{asset('electro-js/main.js')}}"></script>
+<script src="{{asset('electro-js/bootstrap.min.js')}}"></script>
+<script src="{{asset('electro-js/jquery.min.js')}}"></script>
 @yield('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.carouselExampleControls').carousel({
+            interval: 2000
+        })
+    });
+</script>
+
 <script>
     function logoutModal(condition) {
         $('#logoutModal').modal(condition);
     }
 
-    function IsiCart(id,user_id){ 
-            jQuery.ajax({
-                        url: "{{url('/Cartpenyewaan')}}",
-                        method: 'post',
-                        dataType: 'json',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            id_user: user_id,
-                            id_laboratorium: id, 
-                        },
-                        success: function(result){
-                            alert(result.success);
-                            $('#qty').text(result.jumlahcarts);
-                            console.log(result.jumlahcarts);
-                            $('#isicart').empty().append(result.carts);
-                        }
-                    });
-    }
-    function layanan(id){ 
-            var id_bidang = $('#bidangtolayanan'+id).val();
-            jQuery.ajax({
-                        url: "{{url('/layanan')}}",
-                        method: 'post',
-                        dataType: 'json',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            id_bidang: id_bidang,
-                        },
-                        success: function(result){
-                            $('#layanan'+id).empty().append(result.layanan);
-                        }
-                    });
-    }
-
-    function total(id){ 
-            var id_layanan = $('#layanan'+id).val();
-            var ek=[];
-            var total=0;
-            jQuery.ajax({
-                        url: "{{url('/total')}}",
-                        method: 'post',
-                        dataType: 'json',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            id: id_layanan,
-                        },
-                        success: function(result){
-                            $('#total'+id).empty().append(result.layanan.harga);
-                            $('#subtotal'+id).empty().append(result.layanan.harga);
-                            $('.harga').each(function() { ek.push($(this).text()); });
-                                for(var i=0;i<ek.length;i++){
-                                    total = total+parseInt(ek[i]);
-                                }
-                                $('#grand-total').empty().append(total);
-                        }
-            });
+    function IsiCart(id, user_id) {
+        jQuery.ajax({
+            url: "{{url('/Cartpenyewaan')}}",
+            method: 'post',
+            dataType: 'json',
+            data: {
+                _token: '{{csrf_token()}}',
+                id_user: user_id,
+                id_laboratorium: id,
+            },
+            success: function (result) {
+                alert(result.success);
+                $('#qty').text(result.jumlahcarts);
+                console.log(result.jumlahcarts);
+                $('#isicart').empty().append(result.carts);
+            }
+        });
     }
 </script>
 </body>
