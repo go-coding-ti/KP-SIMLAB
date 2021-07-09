@@ -219,7 +219,7 @@
                     id: id_layanan,
                 },
                 success: function(result){
-                    var input = $("input[id=qty'" + id + "']");
+                    var input = $("input[id=qty" + id + "]");
                     var subtotal = input.val() * result.layanan.harga;
                     $('#subtotal'+id).empty().append(subtotal);
                     $('.harga').each(function() { ek.push($(this).text()); });
