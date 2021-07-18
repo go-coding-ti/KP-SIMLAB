@@ -72,4 +72,9 @@ class StoreController extends Controller
                         ';
     	return response()->json(['success' => 'berhasil','jumlahcarts'=>$jumlahcarts,'carts'=>$string]);
     }
+    public function chekout($id){
+        $laboratoriums = tb_laboratorium::with('relasiLaboratoriumToBidang')->where('id_laboratorium',$id)->get();
+        $Berita = tb_berita::all();
+        return view('UserPage.checkout1',compact('laboratoriums','Berita'));
+    }
 }

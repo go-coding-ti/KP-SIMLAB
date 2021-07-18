@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('UserPage.store');
 });
-
+// Route::get('/beritas',function (){
+//     return view('UserPage.Berita');
+// });
 
 
 Route::get('/', 'Users\StoreController@index')->name('store');
@@ -27,13 +29,20 @@ Route::get('/user-test-page',function (){
     return view('UserPage.userProfile');
 });
 
+
+
 route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
 route::post('/search', 'Users\StoreController@search')->name('search');
 route::post('/Cartpenyewaan','Users\StoreController@AddCart')->name('addcart');
+route::get('/checkout/{id}','Users\StoreController@chekout')->name('checkout');
+route::post('/hapuscart','Users\CartsController@hapus')->name('hapuscart');
 route::post('/layanan','Users\CartsController@layanan')->name('layanan');
 route::post('/total','Users\CartsController@total')->name('total');
 route::get('/checkout','Users\CartsController@index')->name('check-out-page');
 route::post('/check-out','Users\PeminjamanController@pinjam')->name('check-out-post');
+route::post('/checkoutsatu','Users\PeminjamanController@pinjamsatu')->name('check-out-satu');
+
+route::get('/beritas','Users\BeritasController@index')->name('beritas');
 // Route::get('/store-test-page',function (){
 //     return view('UserPage.store');
 // });

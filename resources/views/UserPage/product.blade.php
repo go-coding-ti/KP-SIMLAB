@@ -45,10 +45,11 @@
                         accusamus labore sustainable VHS.</p>
                     <div class="col-md-6">
                         <div class="add-to-cart">
-                            <button class="add-to-cart-btn btn-block"
-                                    onclick="GoToCart({{$lab->id_laboratorium}},{{$user_id}})"><i
-                                    class="fa fa-shopping-cart"></i> Sewa
+                            <a href="{{route('checkout',$lab->id_laboratorium)}}">
+                            <button class="add-to-cart-btn btn-block">
+                                <i class="fa fa-shopping-cart"></i> Sewa
                             </button>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-6">

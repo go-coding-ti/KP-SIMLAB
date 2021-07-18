@@ -37,4 +37,25 @@ class PeminjamanController extends Controller
         }
         return redirect('/');
     }
+
+    public function pinjamsatu(Request $request){
+        $layanan = $request->layanan;
+        $date = $request->event_date;
+        $qty = $request->qty;
+        foreach ($layanan as $index => $layanans){
+            $dataLayanan = tb_layanan::find($layanans);
+            tb_peminjaman::create([
+                'id_peminjam'=>Auth::user()->id,
+                'id_layanan'=>$layanans,
+                'tgl_order'=>Carbon::now(),
+                'tgl_pinjam'=>$date[$index],
+                'jumlah'=>$qty[$index],
+                'satuan'=>$dataLayanan->satuan,
+                'harga'=>$dataLayanan->harga,
+                'total_harga'=>$dataLayanan->harga * $qty[$index],
+            ]);
+        }
+        return redirect('/');
+    }
+
 }

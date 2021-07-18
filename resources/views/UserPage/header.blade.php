@@ -46,8 +46,8 @@
                 <div class="col-md-4 clearfix">
                     <div class="header-ctn" class="text-center">
                         @if (!Auth::user())
-                            <a class="text-white mx-4" href="{{ route('register') }}">Register</a><span>|</span>
-                            <a class="text-white mx-4" href="{{ route('logins') }}">Login</a>
+                            <a class="text-white mx-4" href="{{ route('register') }}">Daftar</a><span>|</span>
+                            <a class="text-white mx-4" href="{{ route('logins') }}">Masuk</a>
                         @else
                         <!-- NOTIF -->
                             <div class="dropdown">
@@ -124,7 +124,7 @@
                                         <a href="#">Profile</a>
                                         <a class="dropdown-item" href="#" onclick="logoutModal('show')">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Logout
+                                            Keluar
                                         </a>
                                     </div>
                                 </div>

@@ -37,4 +37,14 @@ class CartsController extends Controller
         $getLayanan = tb_layanan::find($request->id);
         return response()->json(['success' => 'berhasil','layanan'=>$getLayanan]);
     }
+
+    public function hapus(Request $request){
+        $getcart = tb_carts::find($request->id_cart);
+        $getcart->status = "batal";
+        $getcart->save();
+        
+        $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->where('status','cart')->get();
+        $jumlahcarts = $carts->count();
+        return response()->json(['success' => 'berhasil','jumlahcarts'=>$jumlahcarts]);
+    }
 }

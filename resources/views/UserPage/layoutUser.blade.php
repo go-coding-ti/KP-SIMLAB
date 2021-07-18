@@ -41,6 +41,31 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+            <!-- Favicons -->
+        <link href="Berita/img/favicon.png" rel="icon">
+        <link href="Berita/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="Berita/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="Berita/vendor/aos/aos.css" rel="stylesheet">
+        {{-- <link href="Berita/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+        <link href="Berita/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="Berita/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="Berita/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="Berita/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        {{-- <link href="Berita/css/style.css" rel="stylesheet"> --}}
+
+        <!-- =======================================================
+        * Template Name: Moderna - v4.3.0
+        * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+        * Author: BootstrapMade.com
+        * License: https://bootstrapmade.com/license/
+        ======================================================== -->
     <style>
 
         .account-settings .user-profile {
@@ -158,6 +183,24 @@
                 $('#qty').text(result.jumlahcarts);
                 console.log(result.jumlahcarts);
                 $('#isicart').empty().append(result.carts);
+            }
+        });
+    }
+
+    function hapuscart(id) {
+        jQuery.ajax({
+            url: "{{url('/hapuscart')}}",
+            method: 'post',
+            dataType: 'json',
+            data: {
+                _token: '{{csrf_token()}}',
+                id_cart: id,
+            },
+            success: function (result) {
+                alert(result.success);
+                $('#layanan-'+id).hide();
+                $('#layanankanan-'+id).hide();
+                $('#qty').text(result.jumlahcarts);
             }
         });
     }

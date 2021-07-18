@@ -35,14 +35,15 @@
                                 <h3 class="title">Checkout Laboratorium</h3>
                             </div>
                             @foreach ($carts as $cart)
-                                <div class="row border-top border-bottom">
-
+                                <div class="row border-top border-bottom" id="layanan-{{$cart->id}}">
+                                    
                                     <div class="row main align-items-center">
                                         <br>
-                                        <div class="col-3"><img
+                                        <div class="col-md-5"><img
                                                 src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}"
-                                                style="height:110px;width:180px;" alt=""></div>
+                                                style="height:220px;width:360px;" alt=""></div>
                                         <div class="col">
+                                            <br>
                                             <div class="title" class="row text-muted">{{$cart->created_at}}</div>
                                             <div class="title"><h5
                                                     class="text-uppercase">{{$cart->laboratorium->nama_lab}}</h5></div>
@@ -57,6 +58,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <br>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Layanan</h6>
                                                 <select id="layanan{{$cart->id}}" class="col-12" class="input-select"
@@ -93,14 +95,17 @@
                                                                 <span class="fas fa-minus"></span>
                                                             </button>
                                                         </span>
-                                                                <input id="qty{{$cart->id}}" type="text" name="qty[]" class="form-control input-number" value="0" min="0" max="100" required readonly>
+                                                                <input id="qty{{$cart->id}}" type="text" name="qty[]" class="form-control input-number" value="1" min="1" max="100" required readonly>
                                                                 <span class="input-group-btn">
                                                             <button type="button" value="qty{{$cart->id}}" class="btn btn-success btn-number ml-2" data-type="plus" data-id="{{$cart->id}}" data-field="qty{{$cart->id}}">
                                                                 <span class="fas fa-plus"></span>
                                                             </button>
+                                                            <button type="button" class="btn btn-danger ml-4" onclick="hapuscart({{$cart->id}})"><span class="fas fa-trash"></span></button>
                                                         </span>
                                                             </div>
                                                         </div>
+                                                        
+                                                        <br><br>
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,7 +127,7 @@
                                 <div><strong>TOTAL</strong></div>
                             </div>
                             @foreach ($carts as $item)
-                                <div class="order-products">
+                                <div class="order-products" id="layanankanan-{{$item->id}}">
                                     <div class="order-col">
                                         <div>{{$item->laboratorium->nama_lab}}</div>
                                         <div class="harga" id="subtotal{{$item->id}}">0</div>

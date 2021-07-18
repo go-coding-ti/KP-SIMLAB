@@ -25,7 +25,9 @@
                     @endforeach
                 </div>
             </div>
+            <center><a href="/beritas"><button type="button" class="btn btn-danger">Lihat Semua Berita</button></center></a>
         </div>
+        <br>
 
         <div id="bottom-footer" class="section">
             <div class="container">
