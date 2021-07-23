@@ -121,14 +121,63 @@
             color: #2e323c;
         }
 
-        .card {
-            background: #ffffff;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            border: 0;
-            margin-bottom: 1rem;
+        .border-light-grey {
+            border-style: solid;
+            border-width: 1px;
+            border-color: lightgrey;
         }
+
+        .no-border {
+            border-style: hidden;
+        }
+
+        no-background-button{
+            background: none;
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            cursor:pointer;
+            overflow: hidden;
+            outline:none;
+        }
+
+        .btn-success-custom {
+            color: #fff;
+            background-color: #009600;
+            border-color: #009600;
+        }
+
+        .btn-success-custom:hover {
+            color: #fff;
+            background-color: #007800;
+            border-color: #007800;
+        }
+
+        .btn-success-custom:focus, .btn-success-custom.focus {
+            color: #fff;
+            background-color: #009600;
+            border-color: #009600;
+            box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+        }
+
+        .btn-success-custom.disabled, .btn-success-custom:disabled {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success-custom:not(:disabled):not(.disabled):active, .btn-success-custom:not(:disabled):not(.disabled).active,
+        .show > .btn-success-custom.dropdown-toggle {
+            color: #fff;
+            background-color: #1e7e34;
+            border-color: #1c7430;
+        }
+
+        .btn-success-custom:not(:disabled):not(.disabled):active:focus, .btn-success-custom:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-success-custom.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+        }
+
     </style>
 </head>
 <body>
@@ -145,15 +194,14 @@
 @include('UserPage.footer')
 <!-- /FOOTER -->
 <!-- jQuery Plugins -->
-
+<script src="{{asset('electro-js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
-
+<script src="{{asset('electro-js/bootstrap.min.js')}}"></script>
 <script src="{{asset('electro-js/slick.min.js')}}"></script>
 <script src="{{asset('electro-js/nouislider.min.js')}}"></script>
 <script src="{{asset('electro-js/jquery.zoom.min.js')}}"></script>
 <script src="{{asset('electro-js/main.js')}}"></script>
-<script src="{{asset('electro-js/bootstrap.min.js')}}"></script>
-<script src="{{asset('electro-js/jquery.min.js')}}"></script>
+
 @yield('js')
 <script type="text/javascript">
     $(document).ready(function(){

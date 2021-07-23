@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KetuaLab\Utilities;
 use App\Http\Controllers\TeknisiLab\TeknisiLabUtilities;
+use App\tb_berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/user-test-page',function (){
     return view('UserPage.userProfile');
 });
 
+Route::Get('/user-transaction-page','Users\UserController@penyewaan');
 
 
 route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
