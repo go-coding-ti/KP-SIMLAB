@@ -28,7 +28,7 @@
             <div class="row">
                 <form method="POST" action="{{route('check-out-post')}}">
                     @csrf
-                    <div class="col-md-8">
+                    <div class="col-md-8 m-3">
                         <!-- Billing Details -->
                         <div class="billing-details">
                             <div class="section-title">
@@ -41,7 +41,7 @@
                                         <br>
                                         <div class="col-md-5"><img
                                                 src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}"
-                                                style="height:220px;width:360px;" alt=""></div>
+                                                style="height:220px;width:340px;" alt=""></div>
                                         <div class="col">
                                             <br>
                                             <div class="title" class="row text-muted">{{$cart->created_at}}</div>
@@ -49,7 +49,7 @@
                                                     class="text-uppercase">{{$cart->laboratorium->nama_lab}}</h5></div>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Bidang</h6>
-                                                <select id="bidangtolayanan{{$cart->id}}" class="col-12"
+                                                <select id="bidangtolayanan{{$cart->id}}" class="custom-select d-block h-100"
                                                         class="input-select" onchange="layanan({{$cart->id}})" required>
                                                     <option value="0">-- Pilih Bidang --</option>
                                                     @foreach ($cart->laboratorium->relasiLaboratoriumToBidang as $bidang)
@@ -61,7 +61,7 @@
                                             <br>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Layanan</h6>
-                                                <select id="layanan{{$cart->id}}" class="col-12" class="input-select"
+                                                <select id="layanan{{$cart->id}}" class="custom-select d-block h-100" class="input-select"
                                                         onchange="total({{$cart->id}})" name="layanan[]"
                                                         onclick="total({{$cart->id}})" required>
                                                     <option value="0">-- Pilih Layanan --</option>
@@ -70,42 +70,48 @@
                                         </div>
                                         <div class="add-to-cart">
                                             <div class="qty-label">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-xl-3 col-sm-12">
+                                                <div class="dates row my-5">
+                                                    <div class="col-12 col-md-4 col-lg-4">
                                                         <p class="qty-label">Tanggal Sewa</p>
+                                                        <input type="date" id="usr1" class="input-select" name="event_date[]" placeholder="YYYY-MM-DD" autocomplete="off" required>
                                                     </div>
-                                                    <div class="col-md-5 col-xl-5 col-sm-12">
+                                                    <div class="col-12 col-md-4 col-lg-4">
                                                         <p class="qty-label" id="tipekuantitas{{$cart->id}}">Kuantitas ( )</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="qty-label">
-                                                <div class="dates row">
-                                                    <div class="col-md-3 col-xl-3 col-sm-12">
-                                                        <input type="date" style="width:192px;" id="usr1"
-                                                               class="input-select"
-                                                               name="event_date[]" placeholder="YYYY-MM-DD"
-                                                               autocomplete="off" required>
-                                                    </div>
-                                                    <div class="col-md-5 col-xl-5 col-sm-12">
                                                         <div class="numpick">
-                                                            <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                            <button type="button" value="qty{{$cart->id}}" class="btn btn-danger btn-number mr-2" data-type="minus" data-id="{{$cart->id}}" data-field="qty{{$cart->id}}">
-                                                                <span class="fas fa-minus"></span>
-                                                            </button>
-                                                        </span>
-                                                                <input id="qty{{$cart->id}}" type="text" name="qty[]" class="form-control input-number" value="1" min="1" max="100" required readonly>
+                                                            <div style="width: 180px" class="input-group">
                                                                 <span class="input-group-btn">
-                                                            <button type="button" value="qty{{$cart->id}}" class="btn btn-success btn-number ml-2" data-type="plus" data-id="{{$cart->id}}" data-field="qty{{$cart->id}}">
-                                                                <span class="fas fa-plus"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-danger ml-4" onclick="hapuscart({{$cart->id}})"><span class="fas fa-trash"></span></button>
-                                                        </span>
+                                                                    <button type="button" value="qty" class="btn btn-danger btn-number" data-type="minus" data-id="" data-field="qty">
+                                                                        <span class="fas fa-minus"></span>
+                                                                    </button>
+                                                                </span>
+                                                                <input id="qty" type="text" name="qty[]" class="form-control input-number text-center"  value="1" min="1" max="100" required readonly>
+                                                                    <span class="input-group-btn">
+                                                                <button type="button" value="qty" class="btn btn-success btn-number" data-type="plus" data-id="" data-field="qty">
+                                                                    <span class="fas fa-plus"></span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger ml-4" onclick="hapuscart()"><span class="fas fa-trash"></span></button>
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                        
-                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 col-lg-4">
+                                                        <p class="qty-label" id="tipekuantitas{{$cart->id}}">Input File</p>
+                                                        <div class="numpick">
+                                                            <div class="input-group">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" value="qty" class="btn btn-danger btn-number" data-type="minus" data-id="" data-field="qty">
+                                                                        <span class="fas fa-minus"></span>
+                                                                    </button>
+                                                                </span>
+                                                                <input id="qty" type="text" name="qty[]" class="form-control input-number" value="1" min="1" max="100" required readonly>
+                                                                    <span class="input-group-btn">
+                                                                <button type="button" value="qty" class="btn btn-success btn-number" data-type="plus" data-id="" data-field="qty">
+                                                                    <span class="fas fa-plus"></span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger ml-4" onclick="hapuscart()"><span class="fas fa-trash"></span></button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,69 +123,32 @@
                     </div>
 
                     <!-- Order Details -->
-                    <div class="col-md-4 order-details">
-                        <div class="section-title text-center">
-                            <h3 class="title">Your Order</h3>
-                        </div>
-                        <div class="order-summary">
-                            <div class="order-col">
-                                <div><strong>PRODUCT</strong></div>
-                                <div><strong>TOTAL</strong></div>
+                    <div class="col-md-3 m-3 border border-dark rounded">
+                        <div class="p-3">
+                            <div class="section-title text-center">
+                                <h3 class="title">Your Order</h3>
                             </div>
-                            @foreach ($carts as $item)
-                                <div class="order-products" id="layanankanan-{{$item->id}}">
-                                    <div class="order-col">
-                                        <div>{{$item->laboratorium->nama_lab}}</div>
-                                        <div class="harga" id="subtotal{{$item->id}}">0</div>
+                            <div class="order-summary">
+                                <div class="order-col">
+                                    <div><strong>PRODUCT</strong></div>
+                                    <div><strong>TOTAL</strong></div>
+                                </div>
+                                @foreach ($carts as $item)
+                                    <div class="order-products" id="layanankanan-{{$item->id}}">
+                                        <div class="order-col">
+                                            <div>{{$item->laboratorium->nama_lab}}</div>
+                                            <div class="harga" id="subtotal{{$item->id}}">0</div>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-
-                            <div class="order-col">
-                                <div><strong>TOTAL</strong></div>
-                                <div id="grand-total"><strong class="order-total">000.00</strong></div>
-                            </div>
-                        </div>
-                        {{-- <div class="payment-method">
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-1">
-                                <label for="payment-1">
-                                    <span></span>
-                                    Direct Bank Transfer
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                @endforeach
+    
+                                <div class="order-col">
+                                    <div><strong>TOTAL</strong></div>
+                                    <div id="grand-total"><strong class="order-total">000.00</strong></div>
                                 </div>
                             </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-2">
-                                <label for="payment-2">
-                                    <span></span>
-                                    Cheque Payment
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-3">
-                                <label for="payment-3">
-                                    <span></span>
-                                    Paypal System
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="terms">
-                            <label for="terms">
-                                <span></span>
-                                I've read and accept the <a href="#">terms & conditions</a>
-                            </label>
-                        </div> --}}
-                        <button type="submit" class="primary-btn order-submit">Place order</button>
+                            <button type="submit" class="primary-btn order-submit">Place order</button>
+                        </div> 
                     </div>
                 </form>
                 <!-- /Order Details -->

@@ -1,8 +1,8 @@
 <nav id="navigation">
     <!-- container -->
-    <div class="container-sm">
+    <div class="container">
         <!-- responsive-nav -->
-        <div class="col-md-7" id="responsive-nav">
+        <div class="col-12 col-md-7" id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav">
                 <li class="active"><a href="/">Home</a></li>
@@ -10,7 +10,8 @@
             <!-- /NAV -->
         </div>
          <!-- SEARCH BAR -->
-         <div class="col-md-5">
+         <div class="col-12 col-md-5 ">
+            
             <div class="header-search">
                 <form class="text-end" action="{{route('search')}}" method="POST">
                     @csrf

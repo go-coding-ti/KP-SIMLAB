@@ -14,7 +14,7 @@ class StoreController extends Controller
 {
     public function index(){
         $Laboratorium = tb_laboratorium::paginate(6);
-        $Berita = tb_berita::all();
+        $Berita = tb_berita::paginate(3);
         $carts =[];
         if(!is_null(Auth::user())){
             $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();
@@ -26,7 +26,7 @@ class StoreController extends Controller
     public function show($id){
         $lab = tb_laboratorium::where('id_laboratorium',$id)->first();
         $bidang = tb_bidang::where('id_laboratorium',$lab->id_laboratorium)->with('relasiBidangtoLayanan')->get();
-        $Berita = tb_berita::all();
+        $Berita = tb_berita::paginate(3);
         $carts =[];
         if(!is_null(Auth::user())){
             $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();
@@ -36,7 +36,7 @@ class StoreController extends Controller
 
     public function search(Request $request){
         $Laboratorium = tb_laboratorium::where('nama_lab','like','%'.$request->search.'%')->paginate(6);
-        $Berita = tb_berita::all();
+        $Berita = tb_berita::paginate(3);
         return view('UserPage.store',compact('Laboratorium','Berita'));
     }
 
@@ -74,7 +74,7 @@ class StoreController extends Controller
     }
     public function chekout($id){
         $laboratoriums = tb_laboratorium::with('relasiLaboratoriumToBidang')->where('id_laboratorium',$id)->get();
-        $Berita = tb_berita::all();
+        $Berita = tb_berita::paginate(3);
         return view('UserPage.checkout1',compact('laboratoriums','Berita'));
     }
 }

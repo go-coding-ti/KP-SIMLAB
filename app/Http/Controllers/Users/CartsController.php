@@ -15,7 +15,7 @@ class CartsController extends Controller
 {
     public function index(){
         $Laboratorium = tb_laboratorium::all();
-        $Berita = tb_berita::all();
+        $Berita = tb_berita::paginate(3);
         $carts =[];
         if(!is_null(Auth::user())){
             // $carts = tb_carts::with('laboratorium','user')->where('id_user',Auth::user()->id)->get();

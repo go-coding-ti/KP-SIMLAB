@@ -9,6 +9,8 @@
     <title>Electro - HTML Ecommerce Template</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+          
+          
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -35,7 +37,7 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+    
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,7 +58,6 @@
         <link href="Berita/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="Berita/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="Berita/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
         <!-- Template Main CSS File -->
         {{-- <link href="Berita/css/style.css" rel="stylesheet"> --}}
 
