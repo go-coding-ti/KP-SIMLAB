@@ -32,7 +32,7 @@
                                 <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToUser->name, 50) }}</td>
                                 <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToLayanan->nama_layanan, 50)}}</td>
                                 <td>{{$doto->tgl_pinjam}}</td>
-                                <td> RP. {{$doto->total_harga}}</td>
+                                <td> RP. {{number_format($doto->total_harga)}}</td>
                                 <td>@if($doto->keterangan==1)
                                         <a class="btn btn-primary text-white">Menunggu Konfirmasi</a>
                                     @elseif($doto->keterangan==2)
@@ -53,13 +53,15 @@
                                     @if($doto->keterangan==1)
                                         @if($doto->is_process !=1)
                                             <a class="btn btn-outline-warning btn-sm"
-                                               href="/kepala/peminjaman/on-process/{{$doto->id_peminjaman}}" data-toggle="tooltip"
+                                               href="/kepala/peminjaman/on-process/{{$doto->id_peminjaman}}"
+                                               data-toggle="tooltip"
                                                title="Pengecekan!!">
                                                 <i class="fa fa-cog"></i>
                                             </a>
                                         @elseif($doto->is_process == 1)
                                             <a class="btn btn-outline-primary btn-sm"
-                                               href="/kepala/peminjaman/perbaikan/{{$doto->id_peminjaman}}" data-toggle="tooltip"
+                                               href="/kepala/peminjaman/perbaikan/{{$doto->id_peminjaman}}"
+                                               data-toggle="tooltip"
                                                title="Perbaikan!!">
                                                 <i class="fa fa-pen"></i>
                                             </a>
@@ -125,7 +127,7 @@
         @foreach($data as $datas)
             <div class="modal fade" id="show{{$datas->id_peminjaman}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Data Peminjaman</h5>
@@ -134,79 +136,109 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Nama</label>
-                                    <input type="text" class="form-control" id="no_telp" name="no_telp"
-                                           value="{{$datas->relasiPeminjamanToUser->name}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Layanan</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->relasiPeminjamanToLayanan->nama_layanan}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Tanggal Order</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->tgl_order}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Tanggal Peminjaman</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->tgl_pinjam}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Tanggal Selesai</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->tgl_selesai}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Jumlah</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->jumlah}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Satuan</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->satuan}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Harga</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->harga}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Total Harga</label>
-                                    <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                           value="{{$datas->total_harga}}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">Keterangan</label>
-                                    <br>
-                                    @if($datas->keterangan==1)
-                                        <a class="btn btn-primary text-white">Menunggu Konfirmasi</a>
-                                    @elseif($datas->keterangan==2)
-                                        <a class="btn btn-success text-white">Terkonfirmasi</a>
-                                    @elseif($datas->keterangan==3)
-                                        <a class="btn btn-danger text-white">Ditolak</a>
-                                    @elseif($datas->keterangan==4)
-                                        <a class="btn btn-warning text-white">Menunggu Pembayaran</a>
-                                    @elseif($datas->keterangan==5)
-                                        <a class="btn btn-secondary text-white">Pengerjaan</a>
-                                    @elseif($datas->keterangan==6)
-                                        <a class="btn btn-success text-white">Selesai</a>
-                                    @elseif($datas->keterangan==7)
-                                        <a class="btn btn-outline-warning text-dark">Perbaikan</a>
-                                    @endif
-                                </div>
-                                @if($datas->keterangan==3)
+                            <div class="row">
+                                <div class="col-md-4 col-xl-4 col-lg-4 col-sm-12 pt-0 mt-0">
                                     <div class="form-group">
-                                        <label class="font-weight-bold text-dark">Alasan</label>
-                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
-                                               value="{{$datas->alasan}}" readonly>
+                                        <label class="font-weight-bold text-dark">Nama</label>
+                                        <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                               value="{{$datas->relasiPeminjamanToUser->name}}" readonly>
                                     </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4 col-lg-4 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Tanggal Order</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="{{$datas->tgl_order}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4 col-lg-4 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Tanggal Peminjaman</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="{{$datas->tgl_pinjam}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-xl-6 col-sm-12 col-md-6 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Layanan</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="{{$datas->relasiPeminjamanToLayanan->nama_layanan}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Jumlah</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="{{$datas->jumlah}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Satuan</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="{{$datas->satuan}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Harga</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="Rp {{number_format($datas->harga)}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 pt-0 mt-0">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold text-dark">Total Harga</label>
+                                        <input type="text" class="form-control" id="nama_bidang" name="nama_bidang"
+                                               value="Rp {{number_format($datas->total_harga)}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold text-dark">Keterangan</label>
+                                <br>
+                                @if($datas->keterangan==1)
+                                    <a class="btn btn-primary text-white">Menunggu Konfirmasi</a>
+                                @elseif($datas->keterangan==2)
+                                    <a class="btn btn-success text-white">Terkonfirmasi</a>
+                                @elseif($datas->keterangan==3)
+                                    <a class="btn btn-danger text-white">Ditolak</a>
+                                @elseif($datas->keterangan==4)
+                                    <a class="btn btn-warning text-white">Menunggu Pembayaran</a>
+                                @elseif($datas->keterangan==5)
+                                    <a class="btn btn-secondary text-white">Pengerjaan</a>
+                                @elseif($datas->keterangan==6)
+                                    <a class="btn btn-success text-white">Selesai</a>
+                                @elseif($datas->keterangan==7)
+                                    <a class="btn btn-outline-warning text-dark">Perbaikan</a>
                                 @endif
-                            </form>
+                            </div>
+
+                                <div class="form-group">
+                                    <label class="font-weight-bold text-dark">File Peminjaman</label>
+                                    <div class="row no-gutters">
+                                        @foreach($datas->filePeminjaman as $fp)
+                                        <div class="col-auto mx-1 mt-0 pt-0">
+                                            <a class="btn btn-primary btn-sm" target="_blank"
+                                               href="/file_peminjaman/{{$fp->nama_file}}"><i
+                                                    class="fa fa-download"></i>
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                            @if($datas->keterangan==3)
+                                <div class="form-group">
+                                    <label class="font-weight-bold text-dark">Alasan</label>
+                                    <input type="text" class="form-control"
+                                           value="{{$datas->alasan}}" readonly>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -265,12 +297,12 @@
                                     <div class="form-group">
                                         <label class="font-weight-bold text-dark">Harga</label>
                                         <input type="text" class="form-control"
-                                               value="{{$datas->harga}}" readonly>
+                                               value="Rp {{number_format($datas->harga)}}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-bold text-dark">Total Harga</label>
                                         <input type="text" class="form-control"
-                                               value="{{$datas->total_harga}}" readonly>
+                                               value="Rp {{number_format($datas->total_harga)}}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-bold text-dark">Keterangan</label>
@@ -299,7 +331,7 @@
                                     <div class="form-group modal-footer">
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                                 data-target="#showRefuse{{$doto->id_peminjaman}}">
-                                            <i class="fa fa-ban"> Refuse</i></a>
+                                            <i class="fa fa-ban"></i>Refuse</a>
                                         </button>
                                     </div>
                                 </form>

@@ -32,7 +32,7 @@ class KetuaLabPeminjamanController extends Controller
                 $arrayData[] = $data[$i]['id_layanan'];
             }
             $lab = tb_laboratorium::where('id_laboratorium', $id)->first();
-            $data = tb_peminjaman::whereIn('id_layanan', $arrayData)->with('relasiPeminjamanToLayanan', 'relasiPeminjamanToUser')->get();
+            $data = tb_peminjaman::whereIn('id_layanan', $arrayData)->with('relasiPeminjamanToLayanan', 'relasiPeminjamanToUser','filePeminjaman')->get();
             return view('KetuaLab.peminjaman', compact('menuSidebar', 'data', 'lab'));
         }
         return redirect()->back();

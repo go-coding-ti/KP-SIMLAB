@@ -28,4 +28,9 @@ class tb_peminjaman extends Model
     {
         return $this->hasMany('App\progress_penyewaan','id_peminjaman','id_peminjaman');
     }
+
+    public function filePeminjaman()
+    {
+        return $this->hasMany('App\file_peminjaman','id_peminjaman','id_peminjaman');
+    }
 }
