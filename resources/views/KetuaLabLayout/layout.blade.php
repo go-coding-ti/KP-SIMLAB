@@ -28,6 +28,79 @@
 
 
     <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <style>
+        p.ket-1 {
+            color: #fff;
+            background-color: #FF993C;
+            border-color: #FF993C;
+        }
+
+        p.ket-1:hover {
+            color: #fff;
+            background-color: #FF993C;
+            border-color: #FF993C;
+        }
+
+        p.ket-2 {
+            color: #fff;
+            background-color: #0f3bc0;
+            border-color: #0f3bc0;
+        }
+
+        p.ket-2:hover {
+            color: #fff;
+            background-color: #0f3bc0;
+            border-color: #0f3bc0;
+        }
+
+        p.ket-3 {
+            color: #fff;
+            background-color: #ff3b7d;
+            border-color: #ff3b7d;
+        }
+
+        p.ket-3:hover {
+            color: #fff;
+            background-color: #ff3b7d;
+            border-color: #ff3b7d;
+        }
+
+        p.ket-4 {
+            color: #000000;
+            background-color: #ffff00;
+            border-color: #ffff00;
+        }
+
+        p.ket-4:hover {
+            color: #000000;
+            background-color: #ffff00;
+            border-color: #ffff00;
+        }
+
+        p.ket-5 {
+            color: #fff;
+            background-color: #8800ff;
+            border-color: #8800ff;
+        }
+
+        p.ket-5:hover {
+            color: #fff;
+            background-color: #8800ff;
+            border-color: #8800ff;
+        }
+
+        p.ket-6 {
+            color: #000000;
+            background-color: #3cff00;
+            border-color: #3cff00;
+        }
+
+        p.ket-6:hover {
+            color: #000000;
+            background-color: #3cff00;
+            border-color: #3cff00;
+        }
+    </style>
 
 </head>
 

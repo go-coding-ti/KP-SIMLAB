@@ -17,14 +17,16 @@ class KetuaLabReportController extends Controller
     public function index($id){
         $check = tb_laboran::where('id_laboratorium',$id)->where('id_user',Auth::user()->id)->where('hak_akses','kepala lab')->first();
         if($check){
+            $json_pie_jumlah_transaksi = [];
+            $json_pie_keterangan = [];
             $menuSidebar = Utilities::sideBarMenu();
             $labData = Utilities::getLab($id);
             $arrayData = $this->lab($id);
-            $perbulangrafik = tb_peminjaman::selectRaw('sum(total_harga) as total, month(tgl_order) as month')->whereIn('id_layanan', $arrayData)->whereBetween('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()])->where('keterangan', '2')->groupBy('month')->orderByRaw('DATE_FORMAT(month,"%m")')->get();
-            $laporanTabel = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year, month(tgl_order) as month')->groupBy('year','month')->whereIn('id_layanan',$arrayData)->where('keterangan','2')->orderBy('year','ASC')->get();
+            $perbulangrafik = tb_peminjaman::selectRaw('sum(total_harga) as total, month(tgl_order) as month')->whereIn('id_layanan', $arrayData)->whereBetween('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()])->where('keterangan', '6')->groupBy('month')->orderByRaw('DATE_FORMAT(month,"%m")')->get();
+            $laporanTabel = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year, month(tgl_order) as month')->groupBy('year','month')->whereIn('id_layanan',$arrayData)->where('keterangan','6')->orderBy('year','ASC')->get();
 
-            $laporan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, month(tgl_order) as month')->whereIn('id_layanan', $arrayData)->where('keterangan', '2')->whereYear('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->groupBy('month')->orderBy('month', 'DESC')->get();
-            $tahunan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year')->whereIn('id_layanan', $arrayData)->where('keterangan', '2')->whereYear('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->groupBy('year')->orderBy('year', 'DESC')->get();
+            $laporan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, month(tgl_order) as month')->whereIn('id_layanan', $arrayData)->where('keterangan', '6')->whereYear('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->groupBy('month')->orderBy('month', 'DESC')->get();
+            $tahunan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year')->whereIn('id_layanan', $arrayData)->where('keterangan', '6')->whereYear('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->groupBy('year')->orderBy('year', 'DESC')->get();
             $piechart = tb_peminjaman::selectRaw('keterangan as ket, count(*) as jumlah')->whereIn('id_layanan', $arrayData)->whereYear('tgl_order',[Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->groupBy('ket')->orderBy('ket')->get();
 
             if(count($piechart)>0){
@@ -39,7 +41,7 @@ class KetuaLabReportController extends Controller
                 foreach ($piechart as $pie){
                     if($pie->ket==1){
                         $json_pie_jumlah_transaksi[0] = $pie->jumlah;
-                    } elseif ($pie->ket==2){
+                    } elseif ($pie->ket==6){
                         $json_pie_jumlah_transaksi[1] = $pie->jumlah;
                     } elseif ($pie->ket==3){
                         $json_pie_jumlah_transaksi[2] = $pie->jumlah;
@@ -47,8 +49,8 @@ class KetuaLabReportController extends Controller
                 }
             }
 
-            $transactionThisYear = tb_peminjaman::whereIn('id_layanan', $arrayData)->where('keterangan', '2')->whereYear('tgl_order',Carbon::now()->year)->count();
-            $transactionThisMonth = tb_peminjaman::whereIn('id_layanan', $arrayData)->where('keterangan', '2')->whereMonth('tgl_order',Carbon::now()->month)->count();
+            $transactionThisYear = tb_peminjaman::whereIn('id_layanan', $arrayData)->whereYear('tgl_order',Carbon::now()->year)->count();
+            $transactionThisMonth = tb_peminjaman::whereIn('id_layanan', $arrayData)->whereMonth('tgl_order',Carbon::now()->month)->count();
 
             $json_total = [];
             $json_bulan = [];

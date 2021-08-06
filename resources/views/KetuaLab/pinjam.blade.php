@@ -2,9 +2,30 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <div id="calendar"></div>
+        <div class="row">
+            <div class="col-md-3 col-xl-3 col-sm-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: white">
+                        <h3 class="card-title text-primary text-center font-weight-bold">Keterangan</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li style="list-style-type: none"><p class="btn ket-1 col-9">Menunggu Konfirmasi</p></li>
+                            <li style="list-style-type: none"><p class="btn ket-2 col-9">Diterima</p></li>
+                            <li style="list-style-type: none"><p class="btn ket-3 col-9">Ditolak</p></li>
+                            <li style="list-style-type: none"><p class="btn ket-4 col-9">Menunggu Pembayaran</p></li>
+                            <li style="list-style-type: none"><p class="btn ket-5 col-9">Pengerjaan</p></li>
+                            <li style="list-style-type: none"><p class="btn ket-6 col-9">Selesai</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-xl-9 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -80,7 +101,7 @@
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,dayGridWeek'
+                    right: 'dayGridMonth,dayGridWeek,timeGridDay'
                 },
                 events: {!!json_encode($eventoo)!!},
                 eventClick: function (info) {

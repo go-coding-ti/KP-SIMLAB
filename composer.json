@@ -16,7 +16,8 @@
         "laravel/helpers": "^1.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "realrashid/sweet-alert": "^3.2"
+        "realrashid/sweet-alert": "^3.2",
+      "ext-zip": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

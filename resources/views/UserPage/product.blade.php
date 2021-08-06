@@ -74,7 +74,7 @@
                     <!-- product tab content -->
                     <div class="tab-content">
                         <!-- tab1  -->
-                        <div id="tab1" class="tab-pane fade in active">
+                        <div id="tab1" class="tab-pane active">
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -87,15 +87,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /tab1  -->
-                        <!-- tab2  -->
-                        <div id="tab2" class="tab-pane fade in">
+                        <div id="tab2" class="tab-pane">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class="row">
                                             @foreach($bidang as $bid)
-                                                <div class="card">
+                                                <div class="card no-border">
                                                     <button class="card-header btn primary-btn cta-btn"
                                                             data-toggle="collapse"
                                                             data-target="#collapse{{$bid->id_bidang}}"

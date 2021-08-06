@@ -31,7 +31,8 @@ Route::get('/user-test-page',function (){
 });
 
 Route::Get('/user-transaction-page','Users\UserController@penyewaan');
-
+Route::post('/bukti-pembayaran','Users\UserController@uploadBuktiPembayaran')->name('upload-bukti-pembayaran');
+Route::post('/upload-perbaikan-file','Users\UserController@perbaikanFile')->name('perbaikan-file');
 
 route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
 route::post('/search', 'Users\StoreController@search')->name('search');
@@ -43,6 +44,7 @@ route::post('/total','Users\CartsController@total')->name('total');
 route::get('/checkout','Users\CartsController@index')->name('check-out-page');
 route::post('/check-out','Users\PeminjamanController@pinjam')->name('check-out-post');
 route::post('/checkoutsatu','Users\PeminjamanController@pinjamsatu')->name('check-out-satu');
+
 
 route::get('/beritas','Users\BeritasController@index')->name('beritas');
 // Route::get('/store-test-page',function (){
@@ -141,6 +143,14 @@ Route::group(['middleware'=>'KepalaLaboranMiddleware'],function (){
     route::get('/kepala/peminjaman/{id}','KetuaLab\KetuaLabPeminjamanController@index')->name('kepala-lab-peminjaman');
     route::get('/kepala/peminjaman/approve/{id}','KetuaLab\KetuaLabPeminjamanController@approval')->name('kepala-lab-approval');
     route::post('/kepala/peminjaman/refuse/','KetuaLab\KetuaLabPeminjamanController@refuse')->name('kepala-lab-refusal');
+
+    //Pembayaran
+    route::get('/konfirmasi-pembayaran/{id}','KetuaLab\KetuaLabPeminjamanController@konfirmasiPembayaran')->name('konfirmasi-pembayaran-kepala-lab');
+    route::post('/tolak-pembayaran','KetuaLab\KetuaLabPeminjamanController@menolakPembayaran')->name('menolak-pembayaran-kepala-lab');
+    route::get('/pengerjaan/{id}','KetuaLab\KetuaLabPeminjamanController@pengerjaan')->name('pengerjaan-ketua-lab');
+    Route::post('/pengerjaan-selesai','KetuaLab\KetuaLabPeminjamanController@selesai')->name('peminjaman-selesai-upload-file');
+    Route::get('/kepala/peminjaman/on-process/{id}','KetuaLab\KetuaLabPeminjamanController@on_process')->name('pengecekan-laboran');
+    Route::get('/kepala/peminjaman/perbaikan/{id}','KetuaLab\KetuaLabPeminjamanController@perbaikan')->name('perbaikan-laboran');
 
     //Teknisi
     route::get('/kepala/teknisi/{id}','KetuaLab\KetuaLabTeknisiController@index')->name('kepala-lab-teknisi');

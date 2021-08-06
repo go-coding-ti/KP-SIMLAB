@@ -15,7 +15,7 @@
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-12">
-            
+
                 <!-- Featured blog post-->
             <div class="card mb-4">
                 <a href="#!"><img class="card-img-top" src="/images/{{$Berita->first()->relasiBeritaToLaboratorium->foto_lab}}" alt="..." /></a>
@@ -31,20 +31,20 @@
                 @foreach ($Berita as $item => $i)
                 @if ($item > 0)
                     <div class="col-lg-6">
-                        <!-- Blog post-->                   
+                        <!-- Blog post-->
                         <div class="card mb-4">
                             <a href="#!"><img class="card-img-top" src="/images/{{$i->relasiBeritaToLaboratorium->foto_lab}}" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted">{{$i->created_at}}</div>
                                 <h2 class="card-title h4">{{$i->judul}}</h2>
-                                <p class="card-text">{{$i->isi}}</p>
+                                <p class="card-text">{{str_limit($i->isi,75)}}</p>
                                 <a class="btn btn-primary" href="#!">Read more →</a>
                             </div>
-                        </div>    
+                        </div>
                     </div>
-                    
+
                 @endif
-                
+
                 @endforeach
             </div>
             <!-- Pagination-->
@@ -61,8 +61,8 @@
                 </ul>
             </nav>
         </div>
-            
-        
+
+
     </div>
 </div>
 

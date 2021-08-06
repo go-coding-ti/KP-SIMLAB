@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <!-- ACCOUNT -->
-                        
+
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-user text-light" style="font-size: 25px;"></i>
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="#">Profile</a>
+                                        <a href="/user-transaction-page">Profile</a>
                                         <a class="dropdown-item" href="#" onclick="logoutModal('show')">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Keluar

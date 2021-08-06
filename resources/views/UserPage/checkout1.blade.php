@@ -35,22 +35,24 @@
                                 <h3 class="title">Checkout Laboratorium</h3>
                             </div>
                             @foreach ($laboratoriums as $laboratorium)
-                                <div class="row border-top border-bottom" id="layanan-{{$laboratorium->id_laboratorium}}">
-                                    
+                                <div class="row border-top border-bottom"
+                                     id="layanan-{{$laboratorium->id_laboratorium}}">
                                     <div class="row main align-items-center">
                                         <br>
                                         <div class="col-md-5"><img
                                                 src="{{asset('/images/'.$laboratorium->foto_lab)}}"
-                                                style="height:220px;width:360px;" alt=""></div>
+                                                class="img-fluid" alt=""></div>
                                         <div class="col">
                                             <br>
-                                            <div class="title" class="row text-muted">{{$laboratorium->created_at}}</div>
+                                            <div class="title"
+                                                 class="row text-muted">{{$laboratorium->created_at}}</div>
                                             <div class="title"><h5
                                                     class="text-uppercase">{{$laboratorium->nama_lab}}</h5></div>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Bidang</h6>
-                                                <select id="bidangtolayanan{{$laboratorium->id_laboratorium}}" class="col-12"
-                                                        class="input-select" onchange="layanan({{$laboratorium->id_laboratorium}})" required>
+                                                <select id="bidangtolayanan{{$laboratorium->id_laboratorium}}"
+                                                        class="custom-select-lg col-12 input-select"
+                                                        onchange="layanan({{$laboratorium->id_laboratorium}})" required>
                                                     <option value="0">-- Pilih Bidang --</option>
                                                     @foreach ($laboratorium->relasiLaboratoriumToBidang as $bidang)
                                                         <option
@@ -61,53 +63,67 @@
                                             <br>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Layanan</h6>
-                                                <select id="layanan{{$laboratorium->id_laboratorium}}" class="col-12" class="input-select"
-                                                        onchange="total({{$laboratorium->id_laboratorium}})" name="layanan[]"
+                                                <select id="layanan{{$laboratorium->id_laboratorium}}"
+                                                        class="input-select custom-select-lg col-12"
+                                                        onchange="total({{$laboratorium->id_laboratorium}})"
+                                                        name="layanan[]"
                                                         onclick="total({{$laboratorium->id_laboratorium}})" required>
                                                     <option value="0">-- Pilih Layanan --</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="add-to-cart">
-                                            <div class="qty-label">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-xl-3 col-sm-12">
-                                                        <p class="qty-label">Tanggal Sewa</p>
-                                                    </div>
-                                                    <div class="col-md-5 col-xl-5 col-sm-12">
-                                                        <p class="qty-label" id="tipekuantitas{{$laboratorium->id_laboratorium}}">Kuantitas ( )</p>
-                                                    </div>
+
+                                    </div>
+                                    <div class="add-to-cart  mt-3">
+                                        <div class="qty-label">
+                                            <div class="row">
+                                                <div class="col-md-4 col-xl-4 col-sm-12">
+                                                    <p class="qty-label">Tanggal Sewa</p>
+                                                    <input type="date" style="width:192px;" id="usr1"
+                                                           class="input-select"
+                                                           name="event_date[]" placeholder="YYYY-MM-DD"
+                                                           autocomplete="off" required>
                                                 </div>
-                                            </div>
-                                            <div class="qty-label">
-                                                <div class="dates row">
-                                                    <div class="col-md-3 col-xl-3 col-sm-12">
-                                                        <input type="date" style="width:192px;" id="usr1"
-                                                               class="input-select"
-                                                               name="event_date[]" placeholder="YYYY-MM-DD"
-                                                               autocomplete="off" required>
-                                                    </div>
-                                                    <div class="col-md-5 col-xl-5 col-sm-12">
-                                                        <div class="numpick">
-                                                            <div class="input-group">
+                                                <div class="col-md-5 col-xl-5 col-sm-12">
+                                                    <p class="qty-label"
+                                                       id="tipekuantitas{{$laboratorium->id_laboratorium}}">Kuantitas ( )</p>
+                                                    <div class="numpick">
+                                                        <div class="input-group">
                                                         <span class="input-group-btn">
-                                                            <button type="button" value="qty{{$laboratorium->id_laboratorium}}" class="btn btn-danger btn-number mr-2" data-type="minus" data-id="{{$laboratorium->id_laboratorium}}" data-field="qty{{$laboratorium->id_laboratorium}}">
+                                                            <button type="button"
+                                                                    value="qty{{$laboratorium->id_laboratorium}}"
+                                                                    class="btn btn-danger btn-number mr-2"
+                                                                    data-type="minus"
+                                                                    data-id="{{$laboratorium->id_laboratorium}}"
+                                                                    data-field="qty{{$laboratorium->id_laboratorium}}">
                                                                 <span class="fas fa-minus"></span>
                                                             </button>
                                                         </span>
-                                                                <input id="qty{{$laboratorium->id_laboratorium}}" type="text" name="qty[]" class="form-control input-number" value="1" min="1" max="100" required readonly>
-                                                                <span class="input-group-btn">
-                                                            <button type="button" value="qty{{$laboratorium->id_laboratorium}}" class="btn btn-success btn-number ml-2" data-type="plus" data-id="{{$laboratorium->id_laboratorium}}" data-field="qty{{$laboratorium->id_laboratorium}}">
+                                                            <input id="qty{{$laboratorium->id_laboratorium}}"
+                                                                   type="text" name="qty[]"
+                                                                   class="form-control input-number" value="1" min="1"
+                                                                   max="100" required readonly>
+                                                            <span class="input-group-btn">
+                                                            <button type="button"
+                                                                    value="qty{{$laboratorium->id_laboratorium}}"
+                                                                    class="btn btn-success btn-number ml-2"
+                                                                    data-type="plus"
+                                                                    data-id="{{$laboratorium->id_laboratorium}}"
+                                                                    data-field="qty{{$laboratorium->id_laboratorium}}">
                                                                 <span class="fas fa-plus"></span>
                                                             </button>
-                                                            <button type="button" class="btn btn-danger ml-4" onclick="hapuscart({{$laboratorium->id_laboratorium}})"><span class="fas fa-trash"></span></button>
+                                                            <button type="button" class="btn btn-danger ml-4"
+                                                                    onclick="hapuscart({{$laboratorium->id_laboratorium}})"><span
+                                                                    class="fas fa-trash"></span></button>
                                                         </span>
-                                                            </div>
                                                         </div>
-                                                        
-                                                        <br><br>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="qty-label mb-3">
+                                            <div class="dates row">
+
                                             </div>
                                         </div>
                                     </div>
@@ -198,8 +214,8 @@
         //     alert(id);
         // }
 
-        function layanan(id){
-            var id_bidang = $('#bidangtolayanan'+id).val();
+        function layanan(id) {
+            var id_bidang = $('#bidangtolayanan' + id).val();
             jQuery.ajax({
                 url: "{{url('/layanan')}}",
                 method: 'post',
@@ -208,17 +224,17 @@
                     _token: '{{csrf_token()}}',
                     id_bidang: id_bidang,
                 },
-                success: function(result){
-                    $('#layanan'+id).empty().append(result.layanan);
+                success: function (result) {
+                    $('#layanan' + id).empty().append(result.layanan);
                 }
             });
         }
 
 
-        function total(id){
-            var id_layanan = $('#layanan'+id).val();
-            var ek=[];
-            var total=0;
+        function total(id) {
+            var id_layanan = $('#layanan' + id).val();
+            var ek = [];
+            var total = 0;
             jQuery.ajax({
                 url: "{{url('/total')}}",
                 method: 'post',
@@ -227,38 +243,42 @@
                     _token: '{{csrf_token()}}',
                     id: id_layanan,
                 },
-                success: function(result){
+                success: function (result) {
                     var input = $("input[id=qty" + id + "]");
                     var subtotal = input.val() * result.layanan.harga;
-                    $('#subtotal'+id).empty().append(subtotal);
-                    $('.harga').each(function() { ek.push($(this).text()); });
-                    for(var i=0;i<ek.length;i++){
-                        total = total+parseInt(ek[i]);
+                    $('#subtotal' + id).empty().append(subtotal);
+                    $('.harga').each(function () {
+                        ek.push($(this).text());
+                    });
+                    for (var i = 0; i < ek.length; i++) {
+                        total = total + parseInt(ek[i]);
                     }
-                    document.getElementById("tipekuantitas"+id).innerHTML = "Kuantitas ( "+result.layanan.keterangan+" )";
+                    document.getElementById("tipekuantitas" + id).innerHTML = "Kuantitas ( " + result.layanan.keterangan + " )";
                     $('#grand-total').empty().append(total);
                 }
             });
         }
 
-        function multi_quantity(id,number){
-            var ek=[];
-            var total=0;
+        function multi_quantity(id, number) {
+            var ek = [];
+            var total = 0;
             jQuery.ajax({
                 url: "{{url('/total')}}",
                 method: 'post',
                 dataType: 'json',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: $('#layanan'+id).val(),
+                    id: $('#layanan' + id).val(),
                 },
-                success: function(result){
+                success: function (result) {
                     var value = result.layanan.harga * number;
-                    $('#subtotal'+id).empty().append(value);
+                    $('#subtotal' + id).empty().append(value);
                     console.log(value);
-                    $('.harga').each(function() { ek.push($(this).text()); });
-                    for(var i=0;i<ek.length;i++){
-                        total = total+parseInt(ek[i]);
+                    $('.harga').each(function () {
+                        ek.push($(this).text());
+                    });
+                    for (var i = 0; i < ek.length; i++) {
+                        total = total + parseInt(ek[i]);
                     }
                     $('#grand-total').empty().append(total);
                 }

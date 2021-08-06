@@ -18,17 +18,17 @@ class KetuaLabController extends Controller
 
     public function index()
     {
-        
+
         $user = users::find(Auth::user()->id);
         $menuSidebar = Utilities::sideBarMenu();
         $myLayanan = $this->allMyLab(Utilities::getMyLab());
-        $perbulanGrafik = tb_peminjaman::selectRaw('sum(total_harga) as total, month(tgl_order) as month')->whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->groupBy('month')->orderByRaw('DATE_FORMAT(month,"%m")')->get();
-        $laporanTabel = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year, month(tgl_order) as month ')->whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->groupBy('year','month')->orderBy('year', 'ASC')->get();
+        $perbulanGrafik = tb_peminjaman::selectRaw('sum(total_harga) as total, month(tgl_order) as month')->whereIn('id_layanan', $myLayanan)->where('keterangan', '6')->groupBy('month')->orderByRaw('DATE_FORMAT(month,"%m")')->get();
+        $laporanTabel = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year, month(tgl_order) as month ')->whereIn('id_layanan', $myLayanan)->where('keterangan', '6')->groupBy('year','month')->orderBy('year', 'ASC')->get();
 
-        $laporan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, month(tgl_order) as month')->whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->groupBy('month')->orderBy('month', 'DESC')->get();
-        $tahunan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year')->whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->groupBy('year')->orderBy('year', 'DESC')->get();
+        $laporan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, month(tgl_order) as month')->whereIn('id_layanan', $myLayanan)->where('keterangan', '6')->groupBy('month')->orderBy('month', 'DESC')->get();
+        $tahunan = tb_peminjaman::selectRaw('count(*) as jumlah, sum(total_harga) as sub_total, year(tgl_order) as year')->whereIn('id_layanan', $myLayanan)->where('keterangan', '6')->groupBy('year')->orderBy('year', 'DESC')->get();
 
-        $totalCount = tb_peminjaman::whereIn('id_layanan', $myLayanan)->where('keterangan', '2')->count();
+        $totalCount = tb_peminjaman::whereIn('id_layanan', $myLayanan)->where('keterangan', '6')->count();
 
         $json_total = [];
         $json_bulan = [];
@@ -77,7 +77,7 @@ class KetuaLabController extends Controller
         }
         return $arrayData1;
     }
-    
+
     public function readNotif($id){
         $user = User::find($id);
         $user->unreadNotifications->markAsRead();

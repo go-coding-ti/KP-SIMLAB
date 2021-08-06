@@ -26,6 +26,7 @@ class PimpinanLabController extends Controller
     public function calendar(Request $request)
     {
         $myLabID = PimpinanUtilites::getMyLabID();
+        $eventoo = [];
         $myBidangID = tb_bidang::whereIn('id_laboratorium',$myLabID)->pluck('id_bidang');
         $myLayananID = tb_layanan::whereIn('id_bidang',$myBidangID)->pluck('id_layanan');
         $data = tb_peminjaman::whereIn('id_layanan',$myLayananID)->where('keterangan',2)->with('relasiPeminjamanToLayanan','relasiPeminjamanToUser')->get();

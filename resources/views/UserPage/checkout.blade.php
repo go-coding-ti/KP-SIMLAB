@@ -23,34 +23,33 @@
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
-        <div class="container-sm">
+        <div class="container-xl">
             <!-- row -->
             <div class="row">
-                <form method="POST" action="{{route('check-out-post')}}">
+                <form method="POST" action="{{route('check-out-post')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-md-8 m-3">
+                    <div class="col-md-12 col-xl-8 col-sm-12 col-lg-8">
                         <!-- Billing Details -->
                         <div class="billing-details">
                             <div class="section-title">
                                 <h3 class="title">Checkout Laboratorium</h3>
                             </div>
-                            @foreach ($carts as $cart)
+                            @foreach ($carts as $key =>  $cart)
                                 <div class="row border-top border-bottom" id="layanan-{{$cart->id}}">
-                                    
                                     <div class="row main align-items-center">
                                         <br>
                                         <div class="col-md-5"><img
                                                 src="{{asset('/images/'.$cart->laboratorium->foto_lab)}}"
-                                                style="height:220px;width:340px;" alt=""></div>
+                                                class="img-fluid" alt=""></div>
                                         <div class="col">
                                             <br>
-                                            <div class="title" class="row text-muted">{{$cart->created_at}}</div>
                                             <div class="title"><h5
                                                     class="text-uppercase">{{$cart->laboratorium->nama_lab}}</h5></div>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Bidang</h6>
-                                                <select id="bidangtolayanan{{$cart->id}}" class="custom-select d-block h-100"
-                                                        class="input-select" onchange="layanan({{$cart->id}})" required>
+                                                <select id="bidangtolayanan{{$cart->id}}"
+                                                        class="custom-select-lg col-12 input-select"
+                                                        onchange="layanan({{$cart->id}})" required>
                                                     <option value="0">-- Pilih Bidang --</option>
                                                     @foreach ($cart->laboratorium->relasiLaboratoriumToBidang as $bidang)
                                                         <option
@@ -61,56 +60,63 @@
                                             <br>
                                             <div class="title">
                                                 <h6 class="text-uppercase">Layanan</h6>
-                                                <select id="layanan{{$cart->id}}" class="custom-select d-block h-100" class="input-select"
+                                                <select id="layanan{{$cart->id}}"
+                                                        class="custom-select-lg col-12 input-select"
                                                         onchange="total({{$cart->id}})" name="layanan[]"
-                                                        onclick="total({{$cart->id}})" required>
+                                                        required>
                                                     <option value="0">-- Pilih Layanan --</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="add-to-cart">
-                                            <div class="qty-label">
-                                                <div class="dates row my-5">
-                                                    <div class="col-12 col-md-4 col-lg-4">
-                                                        <p class="qty-label">Tanggal Sewa</p>
-                                                        <input type="date" id="usr1" class="input-select" name="event_date[]" placeholder="YYYY-MM-DD" autocomplete="off" required>
-                                                    </div>
-                                                    <div class="col-12 col-md-4 col-lg-4">
-                                                        <p class="qty-label" id="tipekuantitas{{$cart->id}}">Kuantitas ( )</p>
-                                                        <div class="numpick">
-                                                            <div style="width: 180px" class="input-group">
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <div class="qty-label">
+                                            <div class="dates row my-5">
+                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                    <p class="qty-label">Tanggal Sewa</p>
+                                                    <input type="date" id="usr1" class="input-select"
+                                                           name="event_date[]" autocomplete="off" required>
+                                                </div>
+                                                <div class="col-sm-12 col-md-8 col-lg-8">
+                                                    <p class="qty-label" id="tipekuantitas{{$cart->id}}">Kuantitas (
+                                                        )</p>
+                                                    <div class="row">
+                                                        <div class="numpick col-md-5 col-lg-5 col-sm-12">
+                                                            <div class="input-group col-md-12 col-xl-12 col-sm-12">
                                                                 <span class="input-group-btn">
-                                                                    <button type="button" value="qty" class="btn btn-danger btn-number" data-type="minus" data-id="" data-field="qty">
+                                                                    <button type="button" value="qty"
+                                                                            class="btn btn-danger btn-number"
+                                                                            data-type="minus" data-id="{{$cart->id}}"
+                                                                            data-field="qty{{$cart->id}}">
                                                                         <span class="fas fa-minus"></span>
                                                                     </button>
                                                                 </span>
-                                                                <input id="qty" type="text" name="qty[]" class="form-control input-number text-center"  value="1" min="1" max="100" required readonly>
-                                                                    <span class="input-group-btn">
-                                                                <button type="button" value="qty" class="btn btn-success btn-number" data-type="plus" data-id="" data-field="qty">
+                                                                <input id="qty{{$cart->id}}" type="text" name="qty[]"
+                                                                       class="form-control input-number text-center"
+                                                                       value="1" min="1" max="100" required readonly>
+                                                                <span class="input-group-btn">
+                                                                <button type="button" value="qty"
+                                                                        class="btn btn-success btn-number"
+                                                                        data-type="plus" data-id="{{$cart->id}}"
+                                                                        data-field="qty{{$cart->id}}">
                                                                     <span class="fas fa-plus"></span>
                                                                 </button>
-                                                                <button type="button" class="btn btn-danger ml-4" onclick="hapuscart()"><span class="fas fa-trash"></span></button>
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-4 col-lg-4">
-                                                        <p class="qty-label" id="tipekuantitas{{$cart->id}}">Input File</p>
-                                                        <div class="numpick">
-                                                            <div class="input-group">
-                                                                <span class="input-group-btn">
-                                                                    <button type="button" value="qty" class="btn btn-danger btn-number" data-type="minus" data-id="" data-field="qty">
-                                                                        <span class="fas fa-minus"></span>
-                                                                    </button>
-                                                                </span>
-                                                                <input id="qty" type="text" name="qty[]" class="form-control input-number" value="1" min="1" max="100" required readonly>
-                                                                    <span class="input-group-btn">
-                                                                <button type="button" value="qty" class="btn btn-success btn-number" data-type="plus" data-id="" data-field="qty">
-                                                                    <span class="fas fa-plus"></span>
-                                                                </button>
-                                                                <button type="button" class="btn btn-danger ml-4" onclick="hapuscart()"><span class="fas fa-trash"></span></button>
-                                                                </span>
+                                                        <div class="col-md-5 col-lg-5 col-sm-12">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="file{{$key}}[]" class="custom-file-input"
+                                                                       id="InputFile" multiple>
+                                                                <label class="custom-file-label"
+                                                                       for="InputFile">Choose
+                                                                    file...</label>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                            <button type="button" class="btn btn-danger ml-4"
+                                                                    onclick="hapuscart({{$cart->id}})"><span
+                                                                    class="fas fa-trash"></span></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,9 +127,7 @@
                             @endforeach
                         </div>
                     </div>
-
-                    <!-- Order Details -->
-                    <div class="col-md-3 m-3 border border-dark rounded">
+                    <div class="col-md-12 col-xl-3 col-sm-12 col-lg-3 border border-dark rounded">
                         <div class="p-3">
                             <div class="section-title text-center">
                                 <h3 class="title">Your Order</h3>
@@ -141,30 +145,26 @@
                                         </div>
                                     </div>
                                 @endforeach
-    
+
                                 <div class="order-col">
                                     <div><strong>TOTAL</strong></div>
                                     <div id="grand-total"><strong class="order-total">000.00</strong></div>
                                 </div>
                             </div>
                             <button type="submit" class="primary-btn order-submit">Place order</button>
-                        </div> 
+                        </div>
                     </div>
                 </form>
-                <!-- /Order Details -->
             </div>
-            <!-- /row -->
         </div>
-        <!-- /container -->
     </div>
-    <!-- /SECTION -->
 
 @endsection
 
 @section('js')
     <script>
-        function layanan(id){
-            var id_bidang = $('#bidangtolayanan'+id).val();
+        function layanan(id) {
+            var id_bidang = $('#bidangtolayanan' + id).val();
             jQuery.ajax({
                 url: "{{url('/layanan')}}",
                 method: 'post',
@@ -173,17 +173,17 @@
                     _token: '{{csrf_token()}}',
                     id_bidang: id_bidang,
                 },
-                success: function(result){
-                    $('#layanan'+id).empty().append(result.layanan);
+                success: function (result) {
+                    $('#layanan' + id).empty().append(result.layanan);
                 }
             });
         }
 
 
-        function total(id){
-            var id_layanan = $('#layanan'+id).val();
-            var ek=[];
-            var total=0;
+        function total(id) {
+            var id_layanan = $('#layanan' + id).val();
+            var ek = [];
+            var total = 0;
             jQuery.ajax({
                 url: "{{url('/total')}}",
                 method: 'post',
@@ -192,38 +192,42 @@
                     _token: '{{csrf_token()}}',
                     id: id_layanan,
                 },
-                success: function(result){
+                success: function (result) {
                     var input = $("input[id=qty" + id + "]");
                     var subtotal = input.val() * result.layanan.harga;
-                    $('#subtotal'+id).empty().append(subtotal);
-                    $('.harga').each(function() { ek.push($(this).text()); });
-                    for(var i=0;i<ek.length;i++){
-                        total = total+parseInt(ek[i]);
+                    $('#subtotal' + id).empty().append(subtotal);
+                    $('.harga').each(function () {
+                        ek.push($(this).text());
+                    });
+                    for (var i = 0; i < ek.length; i++) {
+                        total = total + parseInt(ek[i]);
                     }
-                    document.getElementById("tipekuantitas"+id).innerHTML = "Kuantitas ( "+result.layanan.keterangan+" )";
+                    document.getElementById("tipekuantitas" + id).innerHTML = "Kuantitas ( " + result.layanan.keterangan + " )";
                     $('#grand-total').empty().append(total);
                 }
             });
         }
 
-        function multi_quantity(id,number){
-            var ek=[];
-            var total=0;
+        function multi_quantity(id, number) {
+            var ek = [];
+            var total = 0;
             jQuery.ajax({
                 url: "{{url('/total')}}",
                 method: 'post',
                 dataType: 'json',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: $('#layanan'+id).val(),
+                    id: $('#layanan' + id).val(),
                 },
-                success: function(result){
+                success: function (result) {
                     var value = result.layanan.harga * number;
-                    $('#subtotal'+id).empty().append(value);
+                    $('#subtotal' + id).empty().append(value);
                     console.log(value);
-                    $('.harga').each(function() { ek.push($(this).text()); });
-                    for(var i=0;i<ek.length;i++){
-                        total = total+parseInt(ek[i]);
+                    $('.harga').each(function () {
+                        ek.push($(this).text());
+                    });
+                    for (var i = 0; i < ek.length; i++) {
+                        total = total + parseInt(ek[i]);
                     }
                     $('#grand-total').empty().append(total);
                 }
