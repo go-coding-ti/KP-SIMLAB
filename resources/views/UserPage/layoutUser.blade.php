@@ -19,7 +19,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="{{asset('electro-css/bootstrap.min.css')}}"/>
 
     <!-- Slick -->
@@ -46,25 +47,27 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-            <!-- Favicons -->
-        <link href="Berita/img/favicon.png" rel="icon">
-        <link href="Berita/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="{{asset('Berita/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('Berita/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+        rel="stylesheet">
 
-        <!-- Vendor CSS Files -->
-        <link href="Berita/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="Berita/vendor/aos/aos.css" rel="stylesheet">
-        {{-- <link href="Berita/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
-        <link href="Berita/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="Berita/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="Berita/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="Berita/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <!-- Template Main CSS File -->
-        {{-- <link href="Berita/css/style.css" rel="stylesheet"> --}}
+    <!-- Vendor CSS Files -->
+    <link href="{{asset('Berita/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('Berita/vendor/aos/aos.css')}}" rel="stylesheet">
+    {{-- <link href="Berita/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="{{asset('Berita/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('Berita/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('Berita/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{asset('Berita/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+{{-- <link href="Berita/css/style.css" rel="stylesheet"> --}}
 
-        <!-- =======================================================
+<!-- =======================================================
         * Template Name: Moderna - v4.3.0
         * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
         * Author: BootstrapMade.com
@@ -88,8 +91,12 @@
 @include('UserPage.footer')
 <!-- /FOOTER -->
 <!-- jQuery Plugins -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 <script src="{{asset('electro-js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('electro-js/bootstrap.min.js')}}"></script>
@@ -99,13 +106,6 @@
 <script src="{{asset('electro-js/main.js')}}"></script>
 
 @yield('js')
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.carouselExampleControls').carousel({
-            interval: 2000
-        })
-    });
-</script>
 @include('sweetalert::alert')
 <script>
     function logoutModal(condition) {
@@ -142,8 +142,8 @@
             },
             success: function (result) {
                 alert(result.success);
-                $('#layanan-'+id).hide();
-                $('#layanankanan-'+id).hide();
+                $('#layanan-' + id).hide();
+                $('#layanankanan-' + id).hide();
                 $('#qty').text(result.jumlahcarts);
             }
         });

@@ -13,7 +13,7 @@
             <div class="card-body">
 
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>No.</th>
@@ -25,7 +25,7 @@
                             <th style="text-align:center;">Aksi</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="font-weight-bold">
                         @foreach($data as $d => $doto)
                             <tr>
                                 <td style="text-align:center;">{{$d + 1}}</td>
@@ -33,22 +33,36 @@
                                 <td>{{\Illuminate\Support\Str::limit($doto->relasiPeminjamanToLayanan->nama_layanan, 50)}}</td>
                                 <td>{{$doto->tgl_pinjam}}</td>
                                 <td> RP. {{number_format($doto->total_harga)}}</td>
-                                <td>@if($doto->keterangan==1)
-                                        <a class="btn btn-primary text-white">Menunggu Konfirmasi</a>
+                                @if($doto->keterangan==1)
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-primary">
+                                        Menunggu Konfirmasi
+                                    </td>
                                     @elseif($doto->keterangan==2)
-                                        <a class="btn btn-success text-white">Terkonfirmasi</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-success">
+                                        Terkonfirmasi
+                                    </td>
                                     @elseif($doto->keterangan==3)
-                                        <a class="btn btn-danger text-white">Ditolak</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-danger">
+                                        Ditolak
+                                    </td>
                                     @elseif($doto->keterangan==4)
-                                        <a class="btn btn-warning text-white">Menunggu Pembayaran</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-warning">
+                                        Menunggu Pembayaran
+                                    </td>
                                     @elseif($doto->keterangan==5)
-                                        <a class="btn btn-secondary text-white">Pengerjaan</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-warning">
+                                        Pengerjaan
+                                    </td>
                                     @elseif($doto->keterangan==6)
-                                        <a class="btn btn-success text-white">Selesai</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-success">
+                                        Selesai
+                                    </td>
                                     @elseif($doto->keterangan==7)
-                                        <a class="btn btn-outline-warning text-dark">Perbaikan</a>
+                                    <td style="text-align:center;" class="align-middle font-weight-bolder text-warning">
+                                        Perbaikan
+                                    </td>
                                     @endif
-                                </td>
+
                                 <td>
                                     @if($doto->keterangan==1)
                                         @if($doto->is_process !=1)
@@ -119,6 +133,16 @@
                             </tr>
                         @endforeach
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>No.</th>
+                            <th style="text-align:center;">Nama</th>
+                            <th style="text-align:center;">Layanan</th>
+                            <th style="text-align:center;">Tanggal Peminjaman</th>
+                            <th style="text-align:center;">Harga Total</th>
+                            <th style="text-align:center;">Status</th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -218,19 +242,19 @@
                                 @endif
                             </div>
 
-                                <div class="form-group">
-                                    <label class="font-weight-bold text-dark">File Peminjaman</label>
-                                    <div class="row no-gutters">
-                                        @foreach($datas->filePeminjaman as $fp)
+                            <div class="form-group">
+                                <label class="font-weight-bold text-dark">File Peminjaman</label>
+                                <div class="row no-gutters">
+                                    @foreach($datas->filePeminjaman as $fp)
                                         <div class="col-auto mx-1 mt-0 pt-0">
                                             <a class="btn btn-primary btn-sm" target="_blank"
                                                href="/file_peminjaman/{{$fp->nama_file}}"><i
                                                     class="fa fa-download"></i>
                                             </a>
                                         </div>
-                                        @endforeach
-                                    </div>
+                                    @endforeach
                                 </div>
+                            </div>
 
                             @if($datas->keterangan==3)
                                 <div class="form-group">
@@ -442,7 +466,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Data Peminjaman</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Penyelesaian</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -471,3 +495,4 @@
         @endforeach
     </div>
 @endsection
+

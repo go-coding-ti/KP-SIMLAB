@@ -52,7 +52,8 @@
                         <!-- NOTIF -->
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-bell-o" style="font-size: 25px;"></i>
+                                    <i class="fa fa-bell-o"></i>
+                                    <span>Notification</span>
                                     <div class="qty">2</div>
                                 </a>
                                 <div class="cart-dropdown">
