@@ -36,6 +36,7 @@ Route::post('/upload-perbaikan-file','Users\UserController@perbaikanFile')->name
 
 route::get('/logins','LoginController@index')->middleware('guest')->name('logins');
 route::post('/search', 'Users\StoreController@search')->name('search');
+route::post('/filter', 'Users\UserController@filter')->name('filter');
 route::post('/Cartpenyewaan','Users\StoreController@AddCart')->name('addcart');
 route::get('/checkout/{id}','Users\StoreController@chekout')->name('checkout');
 route::post('/hapuscart','Users\CartsController@hapus')->name('hapuscart');

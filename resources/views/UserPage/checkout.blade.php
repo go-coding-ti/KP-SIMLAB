@@ -28,7 +28,7 @@
             <div class="row">
                 <form method="POST" action="{{route('check-out-post')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-md-12 col-xl-8 col-sm-12 col-lg-8">
+                    <div class="col-md-12 col-xl-8 col-sm-12 col-lg-8 mr-5">
                         <!-- Billing Details -->
                         <div class="billing-details">
                             <div class="section-title">

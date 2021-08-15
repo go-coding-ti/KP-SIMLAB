@@ -8,11 +8,17 @@
                     <div class="account-settings">
                         <div class="user-profile">
                             <div class="user-avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                                <img class="border rounded-circle" style="height:60px;width:60px;"
+                                             src="/profile_images/{{ Auth::user()->foto_user }}">
                             </div>
-                            <h5 class="user-name">Dewa</h5>
-                            <h6 class="user-email">Dewa@gmail.com</h6>
+                            <h5 class="user-name">{{Auth::user()->name}}</h5>
+                            <h6 class="user-email">{{Auth::user()->email}}</h6>
                         </div>
+                        <div class="button mt-2 d-flex flex-row align-items-center"> <button class="btn btn-sm btn-success w-100 ml-2 m-1">Edit Biodata</button> <button class="btn btn-sm btn-danger w-100" >Ubah Password</button> </div>
+                        <hr>
+                        <h4 class="text-center">Biodata Diri</h4>
+                        {{-- <center><button class="btn btn-danger">Edit Profile</button></center><br>
+                        <center><button class="btn btn-danger">Ubah Kata sandi</button></center> --}}
                     </div>
                 </div>
             </div>
@@ -20,72 +26,109 @@
                 <div>
                     <h3>Daftar Transaksi</h3>
                 </div>
+                <input id="signup-token" name="_token" type="hidden" value="{{csrf_token()}}">
+                <div class="scrollmenu" class="col-sm d-flex justify-content-center">
+                    <div class="form-group p-3">
+                        <div data-toggle="buttons">
+                            <label class="btn btn-outline-success active" onclick="filterbutton(0)">
+                                <input type="radio" name="options" id="option0" autocomplete="off" checked> Semua Transaksi
+                            </label>
+                            <label class="btn btn-outline-success" onclick="filterbutton(1)">
+                              <input type="radio" name="options" id="option1" autocomplete="off"  > Menunggu Konfirmasi
+                            </label>
+                            <label class="btn btn-outline-success" onclick="filterbutton(2)">
+                              <input type="radio" name="options" id="option2" autocomplete="off"> Diterima 
+                            </label>
+                            <label class="btn btn-outline-success"  onclick="filterbutton(3)">
+                              <input type="radio" name="options" id="option3" autocomplete="off"> Ditolak
+                            </label>
+                            <label class="btn btn-outline-success" onclick="filterbutton(4)">
+                                <input type="radio" name="options" id="option4" autocomplete="off"> Menunggu Pembayaran
+                            </label>
+                            <label class="btn btn-outline-success" onclick="filterbutton(5)">
+                                <input type="radio" name="options" id="option5" autocomplete="off"> Pengerjaan
+                            </label>
+                            <label class="btn btn-outline-success" onclick="filterbutton(6)">
+                                <input type="radio" name="options" id="option6" autocomplete="off"> Selesai
+                            </label>
+                            <label class="btn btn-outline-success m-1" onclick="filterbutton(7)">
+                                <input type="radio" name="options" id="option7" autocomplete="off"> Perbaikan
+                            </label>
+                              
+                          </div>
+                          
+                    </div>
+                </div>
+            
+
                 <div class="card border-light-grey mb-3">
-                    <div class="card-body">
-                        @foreach($penyewaan as $pem)
-                            <div class="card @if($pem->keterangan == 7) warning-gradient-90-card @endif no-border col-xl-12 col-sm-12 col-md-12 pb-4 pt-2">
-                                <div class="col-xl-12 col-sm-12 col-md-12 border-bottom">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-1 col-xl-1 col-sm-1">
+                    <div class="ganti">
+                            <div class="card-body">
+                                @foreach($penyewaan as $pem)
+                                    <div class="card @if($pem->keterangan == 7) warning-gradient-90-card @endif no-border col-xl-12 col-sm-12 col-md-12 pb-4 pt-2">
+                                        <div class="col-xl-12 col-sm-12 col-md-12 border-bottom">
                                             <div class="row no-gutters">
-                                                <div class="col-2">
-                                                    <i class="fas fa-dollar-sign"></i>
+                                                <div class="col-md-1 col-xl-1 col-sm-1">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-2">
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <p class="font-weight-bold">Sewa</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-10">
-                                                    <p class="font-weight-bold">Sewa</p>
+                                                <div class="col-md-2 col-xl-2 col-sm-2">
+                                                    <p class="">{{date('d F Y', strtotime($pem->tgl_order))}}</p>
+                                                </div>
+                                                <div class="col-md-4 col-xl-4 col-sm-4">
+                                                    <p class="text-@if($pem->keterangan==1)waring
+                                                                    @elseif($pem->keterangan==2)success
+                                                                    @elseif($pem->keterangan==3)danger
+                                                                    @elseif($pem->keterangan==4)info
+                                                                    @elseif($pem->keterangan==5)primary
+                                                                    @elseif($pem->keterangan==6)success
+                                                                    @endif font-weight-bold">
+                                                        @if($pem->keterangan==1) Menunggu Konfirmasi
+                                                        @elseif($pem->keterangan==2)Diterima
+                                                        @elseif($pem->keterangan==3)Ditolak
+                                                        @elseif($pem->keterangan==4)Menunggu Pembayaran
+                                                        @elseif($pem->keterangan==5)Pengerjaan
+                                                        @elseif($pem->keterangan==6)Selesai
+                                                        @endif</p>
+                                                </div>
+                                                <div class="col-md-5 col-xl-5 col-sm-5">
+                                                    <p class="text-gray">INV\XXX\XXX\10\03\2021</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-xl-2 col-sm-2">
-                                            <p class="">{{date('d F Y', strtotime($pem->tgl_order))}}</p>
+                                        <div class="col-xl-12 col-sm-12 col-md-12 pt-4 pl-0 ">
+                                            <div class="row">
+                                                <div class="col-xl-4 col-md-4 col-sm-12">
+                                                    <img src="http://dev.ipb.ac.id/media/images/lab-fmipa1.jpg"
+                                                        class="img-fluid">
+                                                </div>
+                                                <div class="col-xl-5 col-md-4 col-sm-12">
+                                                    <h5>{{$pem->relasiPeminjamanToLayanan->relasiLayananToBidang->relasiBidangToLaboratorium->nama_lab}}</h5>
+                                                    <p style="font-size: small;">{{$pem->relasiPeminjamanToLayanan->nama_layanan}}</p>
+                                                    <p style="font-size: small;">{{$pem->jumlah}} {{$pem->satuan}} x
+                                                        IDR {{number_format($pem->harga)}},-</p>
+                                                </div>
+                                                <div class="col-xl-3 col-md-4 col-sm-12 border-left text-center">
+                                                    <p style="font-size: small;">Total</p>
+                                                    <h5>IDR {{number_format($pem->total_harga)}},-</h5>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4 col-xl-4 col-sm-4">
-                                            <p class="text-@if($pem->keterangan==1)waring
-                                                            @elseif($pem->keterangan==2)success
-                                                            @elseif($pem->keterangan==3)danger
-                                                            @elseif($pem->keterangan==4)info
-                                                            @elseif($pem->keterangan==5)primary
-                                                            @elseif($pem->keterangan==6)success
-                                                            @endif font-weight-bold">
-                                                @if($pem->keterangan==1) Menunggu Konfirmasi
-                                                @elseif($pem->keterangan==2)Diterima
-                                                @elseif($pem->keterangan==3)Ditolak
-                                                @elseif($pem->keterangan==4)Menunggu Pembayaran
-                                                @elseif($pem->keterangan==5)Pengerjaan
-                                                @elseif($pem->keterangan==6)Selesai
-                                                @endif</p>
-                                        </div>
-                                        <div class="col-md-5 col-xl-5 col-sm-5">
-                                            <p class="text-gray">INV\XXX\XXX\10\03\2021</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-sm-12 col-md-12 pt-4 pl-0 ">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4 col-sm-12">
-                                            <img src="http://dev.ipb.ac.id/media/images/lab-fmipa1.jpg"
-                                                 class="img-fluid">
-                                        </div>
-                                        <div class="col-xl-5 col-md-4 col-sm-12">
-                                            <h5>{{$pem->relasiPeminjamanToLayanan->relasiLayananToBidang->relasiBidangToLaboratorium->nama_lab}}</h5>
-                                            <p style="font-size: small;">{{$pem->relasiPeminjamanToLayanan->nama_layanan}}</p>
-                                            <p style="font-size: small;">{{$pem->jumlah}} {{$pem->satuan}} x
-                                                IDR {{number_format($pem->harga)}},-</p>
-                                        </div>
-                                        <div class="col-xl-3 col-md-4 col-sm-12 border-left text-center">
-                                            <p style="font-size: small;">Total</p>
-                                            <h5>IDR {{number_format($pem->total_harga)}},-</h5>
+                                        <div class="col-xl-12 col-sm-12 col-md-12 text-right pt-4 border-bottom pb-3">
+                                            <button class="text-success @if($pem->keterangan == 7) btn-danger text-light @endif btn" type="button" data-toggle="modal"
+                                                    data-target="#modalDetail{{$pem->id_peminjaman}}">Detail Transaksi
+                                            </button>
+                                            @if($pem->is_process != 1 && $pem->keterangan == 1 || $pem->keterangan == 7) <button class="btn btn-danger">Batalkan</button> @endif
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-12 col-sm-12 col-md-12 text-right pt-4 border-bottom pb-3">
-                                    <button class="text-success @if($pem->keterangan == 7) btn-danger text-light @endif btn" type="button" data-toggle="modal"
-                                            data-target="#modalDetail{{$pem->id_peminjaman}}">Detail Transaksi
-                                    </button>
-                                    @if($pem->is_process != 1 && $pem->keterangan == 1 || $pem->keterangan == 7) <button class="btn btn-danger">Batalkan</button> @endif
-                                </div>
+                                @endforeach
                             </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
@@ -414,5 +457,19 @@
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         })
+
+        function filterbutton(id){
+            jQuery.ajax({
+                url: "{{url('/filter')}}",
+                method: 'post',
+                data: {
+                    _token: $('#signup-token').val(),
+                    id: id,
+                },
+                success: function(result){
+                    $('.ganti').html(result.hasil);
+                }
+            });
+        }
     </script>
 @endsection

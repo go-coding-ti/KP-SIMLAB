@@ -58,4 +58,16 @@ class UserController extends Controller
         return redirect()->back()->with('errors','File peminjaman gagal diperbaiki');
     }
 
+    public function filter(Request $request){
+        
+        if($request->id == 0){
+            $penyewaan = tb_peminjaman::where('id_peminjam', Auth::user()->id)->with('relasiPeminjamanToLayanan','progress')->orderBy('tgl_order','DESC')->get();
+        }else{
+            $penyewaan = tb_peminjaman::where('id_peminjam', Auth::user()->id)->where('keterangan', $request->id)->with('relasiPeminjamanToLayanan','progress')->orderBy('tgl_order','DESC')->get();
+        }
+        $hasil = view('UserPage.filter', ['penyewaan' => $penyewaan])->render();
+        // $hasil = $kategori;
+        return response()->json(['success' => 'Produk berhasil dimasukkan dalam cart', 'hasil' => $hasil]);
+    }
+
 }
